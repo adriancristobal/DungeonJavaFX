@@ -38,7 +38,7 @@ public class Value {
 
     public void setMinimum(int min) { if (bounded) minimum = min; }
     public void decreaseMinimum(int min) {
-        if (bounded) minimum += min;
+        if (bounded) minimum -= min;
     }
 
     public void setMaximum(int max) {
@@ -58,7 +58,7 @@ public class Value {
             if (value - val < minimum)
                 throw new ValueUnderMinException();
             else
-                value += val;
+                value -= val;
         }
     }
 
