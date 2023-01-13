@@ -1,18 +1,22 @@
 package game.character;
 
+import game.actions.Attack;
+import game.Domain;
+import game.character.exceptions.WizardNoWeaponException;
+import game.object.Weapon;
+import game.objectContainer.exceptions.ContainerFullException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
+import game.spell.SpellUnknowableException;
+import game.object.Item;
+import game.objectContainer.Container;
+import game.objectContainer.CrystalCarrier;
+import game.objectContainer.JewelryBag;
+import game.objectContainer.Wearables;
+import game.spell.Spell;
 import game.character.exceptions.WizardTiredException;
-import game.dungeon.Attack;
-import game.dungeon.object.container.*;
-import game.dungeon.object.exceptions.ContainerFullException;
-import game.dungeon.object.exceptions.ContainerUnacceptedItemException;
-import game.dungeon.object.item.Item;
-import game.dungeon.spell.Spell;
-import game.dungeon.spell.SpellUnknowableException;
 import game.util.Value;
 import game.util.ValueOverMaxException;
 import game.util.ValueUnderMinException;
-
-import java.util.ArrayList;
 
 
 /**
@@ -22,17 +26,17 @@ import java.util.ArrayList;
 public class Wizard extends Character {
 
     private final Value energy;
+    private final Wearables wearables;
     private final CrystalCarrier crystalCarrier;
     private final JewelryBag jewelryBag;
-    private final Wearables wearables;
 
-    public Wizard(String n, int l, int lm, int e, int em, CrystalCarrier c, Wearables w, JewelryBag j) {
-        super(n, l, lm);
+    public Wizard(String n, int l, int lm, int e, int em, Wearables w, CrystalCarrier c, JewelryBag j) {
+        super(n, Domain.NONE, l, lm, 1);
 
         energy = new Value(em, 0, e);
 
-        crystalCarrier = c;
         wearables = w;
+        crystalCarrier = c;
         jewelryBag = j;
     }
 
@@ -40,6 +44,7 @@ public class Wizard extends Character {
     public int getEnergy() {
         return energy.getValue();
     }
+    public boolean hasEnoughEnergy(int checkValue) {return energy.availableToMinimum() > checkValue; }
 
     public void sleep(int maxRecovery) {
         recoverEnergy(maxRecovery);
@@ -71,7 +76,7 @@ public class Wizard extends Character {
     //Containers
     public Container getCrystalCarrier(){ return crystalCarrier;}
     public Container getJewelryBag() { return jewelryBag; }
-    public Container getWereables() { return wearables; }
+    public Container getWearables() { return wearables; }
 
 
     public void addItem(Item item) throws ContainerUnacceptedItemException, ContainerFullException {
@@ -80,27 +85,32 @@ public class Wizard extends Character {
         wearables.add(item);
     }
 
-
     public void addSpell(Spell spell) throws SpellUnknowableException {
         if(spell instanceof Attack)
             attacks.add((Attack) spell);
         memory.add(spell);
     }
 
+    public void checkWeapon(){
+        for (Attack a : attacks)
+            if (a instanceof Weapon)
+                attacks.remove(a);
 
-
-
-
-    public String toString() {
-        String exit = super.name;
-        exit = exit.concat("\n\tEnergy" + energy);
-        exit = exit.concat(" Life" + life);
-        exit = exit.concat(" Crystals" + crystalCarrier);
-        exit = exit.concat("\n\tItems" + wearables);
-        exit = exit.concat("\n\tSpells" + memory);
-        return exit;
+        Weapon w = wearables.getWeapon();
+        if(w != null)
+            attacks.add(w);
     }
 
+    public int protect(int damage, Domain domain){
+        int newDamage = damage - wearables.getRingProtection(domain);;
+        if(newDamage < 1)
+            newDamage = 1;
+        return  newDamage;
+    }
 
+    public String toString() {
+        return name + "\tEnergy" + energy + "\tLife" + life + "\n\t"
+                + crystalCarrier + "\n\t" + wearables + "\n\t" + jewelryBag + "\n\t" + memory;
+    }
 
 }

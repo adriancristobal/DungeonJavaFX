@@ -1,47 +1,41 @@
 package game.character;
 
-import game.character.exceptions.CreatureKilledException;
-import game.dungeon.Domain;
-import game.dungeon.PhysicalAttack;
-import game.dungeon.spell.Spell;
-import game.dungeon.spell.SpellUnknowableException;
-import game.util.ValueUnderMinException;
+import game.actions.Attack;
+import game.Domain;
+import game.spell.SpellUnknowableException;
+import game.spell.Spell;
 
-public class Creature extends Character{
+public class Creature extends Character {
 
-    private final Domain type;
-    PhysicalAttack punch;
+    private boolean viewed = false;
 
+    public Creature(String n, int life, int hit, Domain t) { super(n, t, life, life, hit); }
 
-    public Creature(String n, int l, int p, Domain t) {
-        super(n, l, l);
-        type = t;
-        punch = new PhysicalAttack(p);
-        attacks.add(punch);
-    }
+    public boolean isAlive() { return getLife() > 0;}
 
-    public boolean isAlive() { return getLife() <= 0;}
+    public boolean isViewed() { return viewed;}
+    public void view() { viewed = true; }
 
-    public int randomAttack() { return attacks.get((int) (Math.random() * attacks.size())).getAttackValue(); }
+    public Attack getRandomAttack() { return  getAttack((int) (Math.random() * attacks.size())); }
 
-    public void beat(int value) throws CreatureKilledException {
-        try {
-            life.decreaseValue(value);
-        } catch (ValueUnderMinException e) {
-            throw new CreatureKilledException();
-        }
+    public int protect(int damage, Domain d){
+        int protection = 1;
+        if (domain == d)
+            protection /= 2;
+        return damage * protection;
     }
 
     public void addSpell(Spell spell) throws SpellUnknowableException {
-        if(spell.getType() == type)
+        if(spell.getDomain() == domain)
             super.addSpell(spell);
         else
             throw new SpellUnknowableException();
     }
 
     public String toString() {
-        String exit = name + "Type(" + type + ") Life(" + life + ") Punch(" + punch.getAttackValue() + ")";
-        exit = exit.concat("\n\t\tSpells" + memory);
-        return exit;
+        return name + "\tType(" + domain + ")\tLife(" + life + ")\tPunch(" + attacks.get(0).getDamage() + ")"
+                + "\n\t" + memory;
+
     }
+
 }

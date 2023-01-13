@@ -1,120 +1,162 @@
 package game.demiurge;
 
 
+import game.actions.Attack;
 import game.character.Creature;
-import game.character.exceptions.CreatureKilledException;
 import game.character.Wizard;
-import game.character.exceptions.WizardDeathException;
-import game.character.exceptions.WizardNoWeaponException;
+import game.demiurge.exceptions.EndGameException;
+import game.objectContainer.exceptions.ContainerFullException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
+import game.demiurge.exceptions.GoHomekException;
+import game.spell.Spell;
+import game.dungeon.Door;
+import game.dungeon.Home;
+import game.dungeon.Room;
+import game.dungeon.Site;
+import game.character.exceptions.CharacterKilledException;
+import game.character.exceptions.WizardNotEnoughEnergyException;
 import game.character.exceptions.WizardTiredException;
-import game.dungeon.Attack;
-import game.dungeon.object.exceptions.ContainerFullException;
-import game.dungeon.object.exceptions.ContainerUnacceptedItemException;
-import game.dungeon.object.item.Weapon;
-import game.dungeon.spell.Knowledge;
-import game.dungeon.structure.*;
-import game.dungeon.structure.exceptions.HomeBackException;
-import game.dungeon.structure.exceptions.RoomCrystalEmptyException;
 
 import java.util.Iterator;
 
-import static wizardNightmare.DungeonConfigValues.*;
-
 public class DemiurgeDungeonManager {
-
-    private Site site;
+    private final DungeonConfiguration dc;
     private final Wizard wizard;
+    private Site site;
     private Creature creature;
     DemiurgeContainerManager containerManager;
+    DemiurgeEndChecker endChecker;
 
-    public DemiurgeDungeonManager(Wizard wizard, Site site, DemiurgeContainerManager dcm){
+    public DemiurgeDungeonManager(DungeonConfiguration dc, Wizard wizard, Site site, DemiurgeContainerManager dcm, DemiurgeEndChecker checker) {
+        this.dc = dc;
         this.wizard = wizard;
         this.site = site;
         containerManager = dcm;
+        endChecker = checker;
     }
 
-    public String getRoomInfo() { return site.toString(); }
-    public int getNumberOfDoors() { return site.getNumberOfDoors(); }
-    public Iterator getDoorsIterator() { return site.iterator(); }
-
-    public boolean hasCreature() { return creature != null; }
-    public boolean isAlive() { return ((Room)site).isAlive(); }
-
-    public void enterDungeon() throws WizardTiredException {
+    public void enterDungeon() throws WizardTiredException, EndGameException {
         try {
             openDoor(0);
-        } catch (HomeBackException ignored) {
+        } catch (GoHomekException ignored) {
         }
     }
 
-    public void openDoor(int index) throws WizardTiredException, HomeBackException {
+    public String getRoomInfo() {
+        return site.toString();
+    }
+    public String wizardInfo() {
+        return wizard.toString();
+    }
+    public String wizardLifeInfo() {
+        return wizard.lifeInfo();
+    }
+    public void checkWeapon() { wizard.checkWeapon(); }
+    public String creatureLifeInfo() {
+        return creature.lifeInfo();
+    }
 
+    public int getNumberOfDoors() {
+        return site.getNumberOfDoors();
+    }
+    public Iterator<Door> getDoorsIterator() { return site.iterator(); }
+    public String showOtherSite(Door door) {
+        Site other = door.showFrom(site);
+        return "(" + other.getID() + ") " + other.getDescription();
+    }
+
+    public void openDoor(int index) throws WizardTiredException, GoHomekException, EndGameException {
         site = site.openDoor(index);
 
-        wizard.drainEnergy(BASIC_ENERGY_CONSUMPTION);
+        wizard.drainEnergy(dc.getBasicEnergyConsumption());
+        site.visit();
         containerManager.setSite(site.getContainer());
+
+        if(site.isExit() && endChecker.check())
+            throw new EndGameException();
+
         if (site instanceof Home) {
-            throw new HomeBackException();
+            throw new GoHomekException();
         } else {
-            Room currentRoom = (Room)site;
+            Room currentRoom = (Room) site;
             creature = currentRoom.getCreature();
+            if (creature != null)
+                creature.view();
         }
     }
 
-    public void gatherCrystals() throws RoomCrystalEmptyException, ContainerFullException {
-        Room currentRoom = (Room)site;
-        while (currentRoom.numberOfCrystals() != 0) {
-            if (currentRoom.numberOfCrystals() == 0)
-                throw new RoomCrystalEmptyException();
-            else
-                try {
-                    wizard.getCrystalCarrier().add(currentRoom.gather());
-                } catch (ContainerUnacceptedItemException ignored) {
-                }
+    public void gatherCrystals()  {
+        Room currentRoom = (Room) site;
+        while (true) {
+            try {
+                if (currentRoom.isEmpty() || wizard.getCrystalCarrier().isFull())
+                    return;
+                wizard.getCrystalCarrier().add(currentRoom.gather());
+            } catch (ContainerUnacceptedItemException | ContainerFullException ignored) {
+            }
         }
     }
 
     //CREATURE methods
-    public boolean canRunAway() { return (int) (Math.random() * 100 + 1) > MINIMUM_FOR_RUN_AWAY; }
-    public boolean priority() { return wizard.getEnergy() >= creature.getLife(); }
+    public boolean hasCreature() {
+        return creature != null;
+    }
+    public boolean isAlive() {
+        return ((Room) site).isAlive();
+    }
 
-    public Iterator getAttacks() { return wizard.getAttacks(); }
-    public int getAttacksNumber() { return wizard.getAttacksNumber(); }
-    public Attack getAttack(int index) { return wizard.getAttack(index); }
+    public boolean canRunAway() {
+        return (int) (Math.random() * 100 + 1) > dc.getMinimumForRunAway();
+    }
+    public boolean priority() {
+        return wizard.getEnergy() >= creature.getLife();
+    }
 
-    public Knowledge getMemory() { return wizard.getMemory(); }
+    public int getNumberOfAttacks() {
+        return wizard.getNumberOfAttacks();
+    }
+    public Iterator<Attack> getAttacksIterator() { return wizard.getAttacksIterator(); }
+    public Attack getAttack(int index) {
+        return wizard.getAttack(index);
+    }
 
-    public boolean wizardAttack(Attack attack) throws CreatureKilledException, WizardNoWeaponException, WizardTiredException {
+    public boolean wizardAttack(Attack attack) throws CharacterKilledException, WizardTiredException, WizardNotEnoughEnergyException {
         boolean success = false;
-        int value = FIGHT_SUCCESS_LOW;
+        //Check energy
+        int energyConsumption = dc.getBasicEnergyConsumption();
+        if (attack instanceof Spell)
+            energyConsumption = ((Spell)attack).getLevel();
+        if(!wizard.hasEnoughEnergy(energyConsumption))
+            throw new WizardNotEnoughEnergyException();
 
+        //Successful value
+        int fightSuccessful = dc.getFightSuccessLow();
         if (wizard.getEnergy() > wizard.getEnergyMax() / 10 * 8)
-            value = FIGHT_SUCCESS_HIGHT;
+            fightSuccessful = dc.getFightSuccessHigh();
         else if (wizard.getEnergy() > wizard.getEnergyMax() / 10 * 4)
-            value = FIGHT_SUCCESS_MEDIUM;
+            fightSuccessful = dc.getFightSuccessMedium();
 
-        if ((int) (Math.random() * 100 + 1) > value) {
+
+        if ((int) (Math.random() * 100 + 1) > fightSuccessful) {
+            attack.attack(creature);
             success = true;
-            creature.beat(attack.getAttackValue());
-            wizard.drainEnergy(BASIC_ENERGY_CONSUMPTION);
         }
+        wizard.drainEnergy(energyConsumption);
         return success;
     }
 
-    public boolean creatureAttack() throws WizardDeathException {
-        boolean success = false;
-        int value = FIGHT_SUCCESS_LOW;
-
+    public boolean creatureAttack() throws CharacterKilledException {
+        int value = dc.getFightSuccessLow();
         if (creature.getLife() > wizard.getEnergy())
-            value = FIGHT_SUCCESS_HIGHT;
+            value = dc.getFightSuccessHigh();
         else if (creature.getLife() == wizard.getEnergy())
-            value = FIGHT_SUCCESS_MEDIUM;
+            value = dc.getFightSuccessMedium();
 
         if ((int) (Math.random() * 100 + 1) > value) {
-            wizard.drainLife(creature.randomAttack());
-            success = true;
+            creature.getRandomAttack().attack(wizard);
+            return true;
         }
-        return success;
+        return false;
     }
 
 }

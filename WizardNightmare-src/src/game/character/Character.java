@@ -1,10 +1,13 @@
 package game.character;
 
-import game.character.exceptions.WizardDeathException;
-import game.dungeon.Attack;
-import game.dungeon.spell.Knowledge;
-import game.dungeon.spell.Spell;
-import game.dungeon.spell.SpellUnknowableException;
+import game.actions.Attack;
+import game.actions.PhysicalAttack;
+import game.Domain;
+import game.spell.SpellUnknowableException;
+import game.spell.Spell;
+import game.spellContainer.Knowledge;
+import game.spellContainer.Memory;
+import game.character.exceptions.CharacterKilledException;
 import game.util.Value;
 import game.util.ValueOverMaxException;
 import game.util.ValueUnderMinException;
@@ -19,6 +22,7 @@ import java.util.Iterator;
 public abstract class Character {
 
     String name;
+    final Domain domain;
     final Value life;
     Knowledge memory;
     ArrayList<Attack> attacks;
@@ -26,16 +30,21 @@ public abstract class Character {
     /**
      * @param n name
      * @param l Initial life
-     * @param lm Maximun life
+     * @param lm Maximum life
      */
-    public Character(String n, int l, int lm) {
+    public Character(String n, Domain d, int l, int lm, int hit) {
         name = n;
+        domain = d;
         life = new Value(l, 0, lm);
-        memory = new Knowledge();
+        memory = new Memory();
         attacks = new ArrayList<>();
+        attacks.add(new PhysicalAttack(hit));
     }
 
+    public Domain getDomain() { return domain; }
+
     //Life
+    public String lifeInfo(){ return getClass().getSimpleName() + " -> " + life; }
     public int getLife() { return life.getValue(); }
     public int getLifeMax() {
         return life.getMaximum();
@@ -44,14 +53,16 @@ public abstract class Character {
         life.increaseMaximum(m);
     }
     public void recoverLife(int v) throws ValueOverMaxException { life.increaseValue(v); }
-    public void drainLife(int v) throws WizardDeathException {
+    public void drainLife(int v) throws CharacterKilledException {
         try {
             life.decreaseValue(v);
         } catch (ValueUnderMinException e) {
             life.setToMinimum();
-            throw new WizardDeathException();
+            throw new CharacterKilledException();
         }
     }
+
+    public abstract int protect(int damage, Domain domain);
 
 
     //Spells
@@ -66,8 +77,11 @@ public abstract class Character {
 
 
     //Attacks
-    public Iterator getAttacks() { return attacks.iterator(); }
-    public int getAttacksNumber() { return attacks.size(); }
+    public Iterator<Attack> getAttacksIterator() { return attacks.iterator(); }
+    public int getNumberOfAttacks() { return attacks.size(); }
     public Attack getAttack(int index) { return attacks.get(index); }
+
+
+
 
 }

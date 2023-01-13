@@ -1,10 +1,10 @@
 package game.demiurge;
 
-import game.dungeon.object.container.Container;
-import game.dungeon.object.exceptions.ContainerFullException;
-import game.dungeon.object.exceptions.ContainerInvalidExchangeException;
-import game.dungeon.object.exceptions.ContainerUnacceptedItemException;
-import game.dungeon.object.item.Item;
+import game.objectContainer.exceptions.ContainerFullException;
+import game.objectContainer.exceptions.ContainerInvalidExchangeException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
+import game.object.Item;
+import game.objectContainer.Container;
 
 public class DemiurgeContainerManager {
 
