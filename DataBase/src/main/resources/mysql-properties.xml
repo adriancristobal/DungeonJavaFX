@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!--Remote DataBase-->
+
+    <entry key="urlDB">jdbc:mysql://dam2.mysql.iesquevedo.es:3335/BeatrizBorrego_Newspaper</entry>
+    <entry key="user_name">root</entry>
+    <entry key="password">quevedo2dam</entry>
+    <entry key="driver">com.mysql.cj.jdbc.Driver</entry>
+
+
+    <!--Docker-->
+    <!--
+    <entry key="urlDB">jdbc:mysql://localhost:3306/NewspaperDB</entry>
+    <entry key="user_name">root</entry>
+    <entry key="password">root</entry>
+    <entry key="driver">com.mysql.cj.jdbc.Driver</entry>
+    -->
+</properties>
+
