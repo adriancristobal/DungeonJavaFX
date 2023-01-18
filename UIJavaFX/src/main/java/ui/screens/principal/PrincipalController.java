@@ -5,8 +5,8 @@ import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -15,33 +15,32 @@ import lombok.extern.log4j.Log4j2;
 import ui.common.BaseScreenController;
 import ui.screens.common.Pantallas;
 
-import java.awt.*;
 import java.io.IOException;
 
 @Log4j2
 public class PrincipalController {
     @FXML
-    public BorderPane rootPantallaPrincipal;
+    private Menu principalMenu;
     @FXML
-    private MenuBar menuPrincipal;
+    private MenuItem generateImportMenuItem;
     @FXML
-    private MenuItem menuLogout;
-    private Stage primaryStage;
+    private MenuItem saveGameMenuItem;
+    @FXML
+    private MenuItem exitToDesktopMenuItem;
 
     Instance<Object> instance;
-
-    private final Alert alert;
+    private Alert alert;
+    @FXML
+    private BorderPane root;
 
     @Inject
     public PrincipalController(Instance<Object> instance) {
         this.instance = instance;
-        alert= new Alert(Alert.AlertType.NONE);
+        alert = new Alert(Alert.AlertType.NONE);
     }
 
-
-
     private void cambioPantalla(Pane pantallaNueva) {
-        rootPantallaPrincipal.setCenter(pantallaNueva);
+        root.setCenter(pantallaNueva);
     }
 
     private void cargarPantalla(Pantallas pantalla) {
@@ -49,8 +48,9 @@ public class PrincipalController {
     }
 
     public void initialize() {
-        menuLogout.setVisible(false);
-        cargarPantalla(Pantallas.LOGIN);
+        generateImportMenuItem.setVisible(false);
+        saveGameMenuItem.setVisible(false);
+        cargarPantalla(Pantallas.MAIN_MENU);
     }
 
     private Pane cargarPantallaPane(String ruta) {
@@ -63,22 +63,30 @@ public class PrincipalController {
             BaseScreenController pantallaController = fxmlLoader.getController();
             pantallaController.setPrincipalController(this);
             pantallaController.principalLoaded();
-
-
         } catch (IOException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
         return panePantalla;
     }
 
-    public void onLoginHecho() {
-        menuLogout.setVisible(true);
-        cargarPantalla(Pantallas.WELCOME);
+    //if we are in mainMenuDungeon.xml hide generateImportMenuItem and saveGameMenuItem
+
+    public void showMenuItems() {
+        generateImportMenuItem.setVisible(true);
+        saveGameMenuItem.setVisible(true);
+        exitToDesktopMenuItem.setVisible(true);
     }
 
-    @FXML
+    public void hideMenuItems() {
+        generateImportMenuItem.setVisible(false);
+        saveGameMenuItem.setVisible(false);
+        exitToDesktopMenuItem.setVisible(true);
+    }
+
+
+    @Deprecated
     private void menuClick(ActionEvent actionEvent) {
-//        switch (((MenuItem) actionEvent.getSource()).getId()) {
+        switch (((MenuItem) actionEvent.getSource()).getId()) {
 //            case "menuLogin" -> cargarPantalla(Pantallas.LOGIN);
 //            case "menuLogout" -> cargarPantalla(Pantallas.LOGOUT);
 //            case "menuRegister" -> cargarPantalla(Pantallas.REGISTER);
@@ -94,19 +102,26 @@ public class PrincipalController {
 //            case "menuAddReader" -> cargarPantalla(Pantallas.PANTALLA_ADD_READER);
 //            case "menuDeleteReader" -> cargarPantalla(Pantallas.PANTALLA_DELETE_READER);
 //            case "menuUpdateReader" -> cargarPantalla(Pantallas.PANTALLA_UPDATE_READER);
-//        }
-//        /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_GET_ALL_NEWSPAPER);
-//        } else if ("menuGetAllArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_GET_ALL_ARTICLE);
-//        } else if ("menuAddArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_ADD_ARTICLE);
-//        }
-//         */
+        }
+        /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
+            cargarPantalla(Pantallas.PANTALLA_GET_ALL_NEWSPAPER);
+        } else if ("menuGetAllArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
+            cargarPantalla(Pantallas.PANTALLA_GET_ALL_ARTICLE);
+        } else if ("menuAddArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
+            cargarPantalla(Pantallas.PANTALLA_ADD_ARTICLE);
+        }
+         */
     }
 
-    public void setStage (Stage stage){
-        primaryStage = stage;
-        //primaryStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+    @FXML
+    public void generateImport(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void saveGame(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void exitToDesktop(ActionEvent actionEvent) {
     }
 }

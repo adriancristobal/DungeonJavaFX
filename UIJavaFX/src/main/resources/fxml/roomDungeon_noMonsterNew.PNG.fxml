@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Options">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Pane prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="573.0" fitWidth="803.0" layoutX="-5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Dungeon_Room.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="156.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <DropdownButton layoutX="10.0" layoutY="20.0" style="-fx-background-color: lightgrey;">
+                <items>
+                    <MenuItem text="Exit to desktop" />
+                    <MenuItem text="Choice 2" />
+                    <MenuItem text="Choice 3" />
+                </items>
+            </DropdownButton>
+            <DropdownButton layoutX="11.0" layoutY="39.0" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: lightgrey;">
+               <items>
+                  <MenuItem text="Save game" />
+                  <MenuItem text="Choice 2" />
+                  <MenuItem text="Choice 3" />
+               </items>
+            </DropdownButton>
+            <DropdownButton layoutX="10.0" layoutY="1.0" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: lightgrey;">
+               <items>
+                  <MenuItem text="Generate report" />
+                  <MenuItem text="Choice 2" />
+                  <MenuItem text="Choice 3" />
+               </items>
+            </DropdownButton>
+            <ScrollPane layoutX="421.0" layoutY="403.0" prefHeight="108.0" prefWidth="337.0" style="-fx-opacity: 90%;">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+            <Pane layoutX="352.0" prefHeight="48.0" prefWidth="406.0" style="-fx-background-color: lightgrey;" />
+            <Button layoutX="641.0" layoutY="57.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="103.0" text="Manage Items">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="28.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@left-arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@down-arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="91.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@right-arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@up-arrow.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="292.0" layoutY="469.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Look for items">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
