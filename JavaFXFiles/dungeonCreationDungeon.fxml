@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Options">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Pane prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="264.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE DUNGEON">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <Button layoutX="13.0" layoutY="407.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Connect Cell">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <DropdownButton layoutX="10.0" layoutY="2.0" style="-fx-background-color: lightgrey;">
+                <items>
+                    <MenuItem text="Exit to desktop" />
+                    <MenuItem text="Choice 2" />
+                    <MenuItem text="Choice 3" />
+                </items>
+            </DropdownButton>
+            <ComboBox layoutX="13.0" layoutY="34.0" prefHeight="25.0" prefWidth="152.0" />
+            <Button layoutX="324.0" layoutY="451.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="111.0" text="Create room">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Pane layoutX="570.0" layoutY="14.0" prefHeight="169.0" prefWidth="174.0" style="-fx-background-color: lightgrey;">
+               <children>
+                  <Pane layoutX="19.0" layoutY="23.0" prefHeight="124.0" prefWidth="136.0" style="-fx-background-color: grey;" />
+               </children></Pane>
+            <Button layoutX="13.0" layoutY="216.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Item">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="13.0" layoutY="93.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Creature">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <MFXListView layoutX="223.0" layoutY="90.0" prefHeight="350.0" prefWidth="312.0" />
+            <MFXListView layoutX="14.0" layoutY="279.0" prefHeight="119.0" prefWidth="154.0" />
+            <Button layoutX="47.0" layoutY="463.0" mnemonicParsing="false" prefHeight="9.0" prefWidth="84.0" text="Set Exit">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Text layoutX="599.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHARACTERISTICS" wrappingWidth="122.053466796875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="583.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATURE:" wrappingWidth="63.65350341796875" />
+            <Text layoutX="670.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="63.65350341796875" />
+            <MFXListView layoutX="583.0" layoutY="256.0" prefHeight="77.0" prefWidth="154.0" />
+            <Text layoutX="583.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ITEMS:" wrappingWidth="63.65350341796875" />
+            <Text layoutX="583.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXIT:" wrappingWidth="63.65350341796875" />
+            <Text layoutX="673.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x" wrappingWidth="63.65350341796875" />
+            <MFXListView layoutX="583.0" layoutY="384.0" prefHeight="108.0" prefWidth="154.0" />
+            <Text layoutX="583.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONNECTS WITH:" wrappingWidth="150.85345458984375" />
+            <ComboBox layoutX="40.0" layoutY="185.0" prefHeight="25.0" prefWidth="39.0" />
+            <Text layoutX="93.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VAL" wrappingWidth="23.653533935546875" />
+            <ComboBox layoutX="117.0" layoutY="186.0" prefHeight="25.0" prefWidth="31.0" />
+            <ComboBox layoutX="15.0" layoutY="154.0" prefHeight="25.0" prefWidth="152.0" />
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@remove.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="505.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@remove.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@remove.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@remove.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="17.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="18.853515625" />
+            <ComboBox layoutX="41.0" layoutY="63.0" prefHeight="25.0" prefWidth="31.0" />
+            <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYP" wrappingWidth="23.653533935546875" />
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
