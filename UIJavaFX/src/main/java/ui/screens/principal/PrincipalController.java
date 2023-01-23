@@ -95,14 +95,7 @@ public class PrincipalController {
 //            case "menuDeleteReader" -> cargarPantalla(Pantallas.PANTALLA_DELETE_READER);
 //            case "menuUpdateReader" -> cargarPantalla(Pantallas.PANTALLA_UPDATE_READER);
 //        }
-//        /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_GET_ALL_NEWSPAPER);
-//        } else if ("menuGetAllArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_GET_ALL_ARTICLE);
-//        } else if ("menuAddArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-//            cargarPantalla(Pantallas.PANTALLA_ADD_ARTICLE);
-//        }
-//         */
+
     }
 
     public void setStage (Stage stage){
