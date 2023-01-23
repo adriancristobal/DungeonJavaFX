@@ -3,7 +3,7 @@
 <properties>
     <!--Remote DataBase-->
 
-    <entry key="urlDB">jdbc:mysql://dam2.mysql.iesquevedo.es:3335/BeatrizBorrego_Newspaper</entry>
+    <entry key="urlDB">jdbc:mysql://dam2.mysql.iesquevedo.es:3335/dungeon</entry>
     <entry key="user_name">root</entry>
     <entry key="password">quevedo2dam</entry>
     <entry key="driver">com.mysql.cj.jdbc.Driver</entry>
