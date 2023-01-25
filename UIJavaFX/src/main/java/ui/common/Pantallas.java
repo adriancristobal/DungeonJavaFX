@@ -1,4 +1,4 @@
-package ui.screens.common;
+package ui.common;
 
 public enum Pantallas {
     MAIN_MENU("/fxml/mainMenuDungeon.fxml"),
