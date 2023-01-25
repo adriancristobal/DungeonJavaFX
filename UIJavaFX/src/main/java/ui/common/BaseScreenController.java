@@ -2,7 +2,9 @@ package ui.common;
 
 import ui.screens.principal.PrincipalController;
 
+
 public class BaseScreenController {
+
     private PrincipalController principalController;
 
     public PrincipalController getPrincipalController() {
@@ -13,5 +15,8 @@ public class BaseScreenController {
         this.principalController = principalController;
     }
 
-    public void principalLoaded() {}
+    public void principalCargado()
+    {
+
+    }
 }

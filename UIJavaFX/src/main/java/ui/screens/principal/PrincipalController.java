@@ -10,10 +10,9 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 import ui.common.BaseScreenController;
-import ui.screens.common.Pantallas;
+import ui.common.Pantallas;
 
 import java.io.IOException;
 
@@ -62,7 +61,7 @@ public class PrincipalController {
             panePantalla = fxmlLoader.load(getClass().getResourceAsStream(ruta));
             BaseScreenController pantallaController = fxmlLoader.getController();
             pantallaController.setPrincipalController(this);
-            pantallaController.principalLoaded();
+            pantallaController.principalCargado();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
