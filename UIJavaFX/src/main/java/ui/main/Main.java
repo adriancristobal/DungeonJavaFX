@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import ui.screens.principal.PrincipalController;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class Main {
     @Inject
@@ -19,10 +20,8 @@ public class Main {
             Parent fxmlParent = fxmlLoader.load(
                     getClass().getResourceAsStream("/fxml/principalScreen.fxml"));
 
-            PrincipalController controller = fxmlLoader.getController();
-            controller.setStage(stage);
-
             stage.setScene(new Scene(fxmlParent));
+            stage.setTitle("Dungeon");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Options">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Pane prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="156.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <ScrollPane fx:id="actionsLogScrollPane" layoutX="421.0" layoutY="311.0" prefHeight="200.0" prefWidth="337.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+            <Pane layoutX="352.0" prefHeight="48.0" prefWidth="406.0" style="-fx-background-color: lightgrey;" />
+            <Pane layoutY="311.0" prefHeight="200.0" prefWidth="422.0" style="-fx-background-color: lightgrey;">
+               <children>
+                  <Button layoutX="134.0" layoutY="14.0" mnemonicParsing="false" onAction="#fightAction" prefHeight="44.0" prefWidth="153.0" text="Fight">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="6.0" layoutY="162.0" mnemonicParsing="false" onAction="#runAction" prefHeight="33.0" prefWidth="44.0" text="Run">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="73.0" layoutY="87.0" mnemonicParsing="false" onAction="#physicalAttackAction" prefHeight="44.0" prefWidth="103.0" text="Physical Attack">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="spellSelectionComboBox" layoutX="250.0" layoutY="78.0" prefHeight="25.0" prefWidth="110.0" />
+                  <Button layoutX="250.0" layoutY="109.0" mnemonicParsing="false" onAction="#castSpellAction" prefHeight="44.0" prefWidth="110.0" text="Cast Spell">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <ImageView accessibleText="ImageView Creature" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.principal.PrincipalController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+            <Menu fx:id="principalMenu" mnemonicParsing="false" text="Options">
+                <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport" text="Generate Import" />
+                <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
+                <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop" text="Exit to Desktop" />
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

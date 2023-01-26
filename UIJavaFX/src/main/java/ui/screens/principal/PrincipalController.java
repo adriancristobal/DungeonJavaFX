@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -15,9 +16,11 @@ import ui.common.BaseScreenController;
 import ui.common.Pantallas;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Log4j2
-public class PrincipalController {
+public class PrincipalController implements Initializable {
     @FXML
     private Menu principalMenu;
     @FXML
@@ -46,16 +49,14 @@ public class PrincipalController {
         cambioPantalla(cargarPantallaPane(pantalla.getRutaPantalla()));
     }
 
-    public void initialize() {
-        generateImportMenuItem.setVisible(false);
-        saveGameMenuItem.setVisible(false);
-        cargarPantalla(Pantallas.MAIN_MENU);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        goMainMenu();
     }
 
     private Pane cargarPantallaPane(String ruta) {
         Pane panePantalla = null;
         try {
-
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setControllerFactory(controller -> instance.select(controller).get());
             panePantalla = fxmlLoader.load(getClass().getResourceAsStream(ruta));
@@ -68,7 +69,6 @@ public class PrincipalController {
         return panePantalla;
     }
 
-    //if we are in mainMenuDungeon.xml hide generateImportMenuItem and saveGameMenuItem
 
     public void showMenuItems() {
         generateImportMenuItem.setVisible(true);
@@ -82,36 +82,6 @@ public class PrincipalController {
         exitToDesktopMenuItem.setVisible(true);
     }
 
-
-    @Deprecated
-    private void menuClick(ActionEvent actionEvent) {
-        switch (((MenuItem) actionEvent.getSource()).getId()) {
-//            case "menuLogin" -> cargarPantalla(Pantallas.LOGIN);
-//            case "menuLogout" -> cargarPantalla(Pantallas.LOGOUT);
-//            case "menuRegister" -> cargarPantalla(Pantallas.REGISTER);
-//            case "menuGetAllNewspaper" -> cargarPantalla(Pantallas.PANTALLA_GET_ALL_NEWSPAPER);
-//            case "menuAddNewspaper" -> cargarPantalla(Pantallas.PANTALLA_ADD_NEWSPAPER);
-//            case "menuDeleteNewspaper" -> cargarPantalla(Pantallas.PANTALLA_DELETE_NEWSPAPER);
-//            case "menuUpdateNewspaper" -> cargarPantalla(Pantallas.PANTALLA_UPDATE_NEWSPAPER);
-//            case "menuGetAllArticle" -> cargarPantalla(Pantallas.PANTALLA_GET_ALL_ARTICLE);
-//            case "menuAddArticle" -> cargarPantalla(Pantallas.PANTALLA_ADD_ARTICLE);
-//            case "menuDeleteArticle" -> cargarPantalla(Pantallas.PANTALLA_DELETE_ARTICLE);
-//            case "menuUpdateArticle" -> cargarPantalla(Pantallas.PANTALLA_UPDATE_ARTICLE);
-//            case "menuGetAllReader" -> cargarPantalla(Pantallas.PANTALLA_GET_ALL_READER);
-//            case "menuAddReader" -> cargarPantalla(Pantallas.PANTALLA_ADD_READER);
-//            case "menuDeleteReader" -> cargarPantalla(Pantallas.PANTALLA_DELETE_READER);
-//            case "menuUpdateReader" -> cargarPantalla(Pantallas.PANTALLA_UPDATE_READER);
-        }
-        /*if ("menuGetAllNewspaper".equals(((MenuItem) actionEvent.getSource()).getId())) {
-            cargarPantalla(Pantallas.PANTALLA_GET_ALL_NEWSPAPER);
-        } else if ("menuGetAllArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-            cargarPantalla(Pantallas.PANTALLA_GET_ALL_ARTICLE);
-        } else if ("menuAddArticle".equals(((MenuItem) actionEvent.getSource()).getId())) {
-            cargarPantalla(Pantallas.PANTALLA_ADD_ARTICLE);
-        }
-         */
-    }
-
     @FXML
     public void generateImport(ActionEvent actionEvent) {
     }
@@ -122,5 +92,25 @@ public class PrincipalController {
 
     @FXML
     public void exitToDesktop(ActionEvent actionEvent) {
+    }
+
+    public void goMainMenu() {
+        cargarPantalla(Pantallas.MAIN_MENU);
+        hideMenuItems();
+    }
+
+    public void goHome() {
+        cargarPantalla(Pantallas.HOME);
+        showMenuItems();
+    }
+
+    public void goDungeon() {
+        cargarPantalla(Pantallas.DUNGEON);
+        showMenuItems();
+    }
+
+    public void goMonsterDungeon(){
+        cargarPantalla(Pantallas.MONSTER_DUNGEON);
+        showMenuItems();
     }
 }
