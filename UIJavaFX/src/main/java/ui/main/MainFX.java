@@ -6,20 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.screens.principal.PrincipalController;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
-public class Main {
+public class MainFX {
     @Inject
     FXMLLoader fxmlLoader;
 
     public void start(@Observes @StartupScene Stage stage) {
         try {
             Parent fxmlParent = fxmlLoader.load(
-                    getClass().getResourceAsStream("/fxml/principalScreen.fxml"));
-
+                    getClass().getResourceAsStream("/fxml/principal.fxml"));
             stage.setScene(new Scene(fxmlParent));
             stage.setTitle("Dungeon");
             stage.show();

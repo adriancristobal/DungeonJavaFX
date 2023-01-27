@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-@Log4j2
+//@Log4j2
 public class PrincipalController implements Initializable {
     @FXML
     private Menu principalMenu;
@@ -64,7 +64,8 @@ public class PrincipalController implements Initializable {
             pantallaController.setPrincipalController(this);
             pantallaController.principalCargado();
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            throw new RuntimeException(e);
+//            log.error("Error al cargar la pantalla: " + ruta, e);
         }
         return panePantalla;
     }

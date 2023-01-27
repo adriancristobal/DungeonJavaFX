@@ -14,7 +14,7 @@
             <children>
                 <ImageView fitHeight="573.0" fitWidth="803.0" layoutX="-5.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@Dungeon_Room.jpg"/>
+                        <Image url="@../images/dungeon_room.jpg"/>
                     </image>
                 </ImageView>
                 <Text fill="WHITE" layoutX="156.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">

@@ -7,14 +7,14 @@
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.principal.PrincipalController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-            <Menu fx:id="principalMenu" mnemonicParsing="false" text="Options">
-                <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport" text="Generate Import" />
-                <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
-                <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop" text="Exit to Desktop" />
-            </Menu>
-        </menus>
-      </MenuBar>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu fx:id="principalMenu" mnemonicParsing="false" text="Options">
+               <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport"
+                         text="Generate Import"/>
+               <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game"/>
+               <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop"
+                         text="Exit to Desktop"/>
+           </Menu>
+       </MenuBar>
    </top>
 </BorderPane>
