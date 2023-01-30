@@ -1,6 +1,7 @@
-package ui.screens.battleScreen;
+package ui.screens.dungeon;
 
-import jakarta.inject.Inject;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import ui.common.BaseScreenController;
@@ -8,12 +9,17 @@ import ui.common.BaseScreenController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BattleScreenController extends BaseScreenController implements Initializable {
+public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
     Alert alerta;
+    @FXML
+    private void manageItemsAction(ActionEvent actionEvent) {
 
-    @Inject
-    public BattleScreenController() {
+    }
+
+    @FXML
+    private void lookItemsAction(ActionEvent actionEvent) {
+
     }
 
     private void alert(String titulo, String texto, Alert.AlertType tipo){
