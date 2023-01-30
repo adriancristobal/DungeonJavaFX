@@ -36,7 +36,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <ComboBox layoutX="13.0" layoutY="34.0" prefHeight="25.0" prefWidth="152.0" />
+            <ComboBox layoutX="13.0" layoutY="26.0" prefHeight="25.0" prefWidth="152.0" />
             <Button layoutX="324.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" text="Create room">
                <font>
                   <Font size="16.0" />
@@ -63,7 +63,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="93.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Creature">
+            <Button layoutX="13.0" layoutY="80.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Creature">
                <font>
                   <Font size="16.0" />
                </font>
@@ -112,10 +112,19 @@
                   <Image url="@../images/remove.png" />
                </image>
             </ImageView>
-            <Text layoutX="22.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="32.853515625" />
-            <ComboBox layoutX="64.0" layoutY="60.0" prefHeight="25.0" prefWidth="31.0" />
+            <Text layoutX="22.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="32.853515625" />
+            <ComboBox layoutX="64.0" layoutY="53.0" prefHeight="25.0" prefWidth="31.0" />
             <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYP" wrappingWidth="23.653533935546875" />
-            <Button layoutX="13.0" layoutY="5.0" mnemonicParsing="false" text="EXIT TO DESKTOP" />
+            <Text layoutX="15.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose creature:" wrappingWidth="99.2535400390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose item:" wrappingWidth="99.2535400390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </left>
