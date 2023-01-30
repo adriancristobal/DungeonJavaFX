@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 //@Log4j2
-public class PrincipalController implements Initializable {
+public class PrincipalController extends BaseScreenController implements Initializable {
     @FXML
     private Menu principalMenu;
     @FXML

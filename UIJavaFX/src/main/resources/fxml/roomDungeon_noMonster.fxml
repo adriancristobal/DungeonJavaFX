@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0"
             prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ui.screens.dungeon.DungeonController">
+            fx:controller="ui.screens.dungeon.RoomNoMonsterDungeonController">
     <left>
         <Pane prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
             <children>
