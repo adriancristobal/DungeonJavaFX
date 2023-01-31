@@ -89,7 +89,7 @@
             </Pane>
             <ImageView accessibleText="ImageView Creature" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@5c97c21687b24c025789948a.png" />
+                  <Image url="/images/monster.png" />
                </image>
             </ImageView>
          </children>

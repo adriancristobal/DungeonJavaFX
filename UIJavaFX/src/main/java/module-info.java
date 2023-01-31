@@ -11,6 +11,7 @@ module UIJavaFX {
     exports ui.main;
     exports ui.screens.principal;
     exports ui.screens.dungeon;
+    exports ui.screens.createDungeon;
     exports ui.screens.roomMonsterDungeonScreen;
     exports ui.screens.battleScreen;
     exports ui.screens.home;

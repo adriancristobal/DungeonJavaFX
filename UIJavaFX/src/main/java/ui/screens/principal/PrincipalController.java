@@ -7,20 +7,28 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import lombok.extern.log4j.Log4j2;
 import ui.common.BaseScreenController;
 import ui.common.Pantallas;
+import ui.common.ScreenConstants;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 //@Log4j2
 public class PrincipalController extends BaseScreenController implements Initializable {
+
+    @FXML
+    public Pane characterBotHud;
     @FXML
     private Menu principalMenu;
     @FXML
@@ -31,6 +39,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     private MenuItem exitToDesktopMenuItem;
 
     Instance<Object> instance;
+    private Stage primaryStage;
     private Alert alert;
     @FXML
     private BorderPane root;
@@ -39,6 +48,11 @@ public class PrincipalController extends BaseScreenController implements Initial
     public PrincipalController(Instance<Object> instance) {
         this.instance = instance;
         alert = new Alert(Alert.AlertType.NONE);
+    }
+
+    public void setStage(Stage stage) {
+        primaryStage = stage;
+        primaryStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
     }
 
     private void cambioPantalla(Pane pantallaNueva) {
@@ -70,7 +84,7 @@ public class PrincipalController extends BaseScreenController implements Initial
         return panePantalla;
     }
 
-
+    //TOP OPTIONS MENU
     public void showMenuItems() {
         generateImportMenuItem.setVisible(true);
         saveGameMenuItem.setVisible(true);
@@ -93,11 +107,13 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     @FXML
     public void exitToDesktop(ActionEvent actionEvent) {
+        closeWindowEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
     public void goMainMenu() {
         cargarPantalla(Pantallas.MAIN_MENU);
         hideMenuItems();
+        hideHud();
     }
 
     public void goHome() {
@@ -114,4 +130,32 @@ public class PrincipalController extends BaseScreenController implements Initial
         cargarPantalla(Pantallas.MONSTER_DUNGEON);
         showMenuItems();
     }
+
+    private void closeWindowEvent(WindowEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getButtonTypes().remove(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        alert.getButtonTypes().add(ButtonType.YES);
+        alert.setTitle(ScreenConstants.QUIT_GAME);
+        alert.setContentText(ScreenConstants.CLOSE_GAME);
+        alert.initOwner(primaryStage.getOwner());
+        Optional<ButtonType> res = alert.showAndWait();
+
+
+        res.ifPresent(buttonType -> {
+            if (buttonType == ButtonType.CANCEL) {
+                event.consume();
+            }
+        });
+    }
+
+    //BOTTOM CHARACTER HUD
+    public void hideHud(){
+        characterBotHud.setVisible(false);
+    }
+
+    public void revealHud(){
+        characterBotHud.setVisible(true);
+    }
+
 }

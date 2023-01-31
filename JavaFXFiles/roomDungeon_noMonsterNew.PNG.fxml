@@ -31,7 +31,7 @@
          <children>
             <ImageView fitHeight="573.0" fitWidth="803.0" layoutX="-5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Dungeon_Room.jpg" />
+                  <Image url="images/dungeon_room.jpg" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="156.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">
@@ -39,27 +39,6 @@
                   <Font size="27.0" />
                </font>
             </Text>
-            <DropdownButton layoutX="10.0" layoutY="20.0" style="-fx-background-color: lightgrey;">
-                <items>
-                    <MenuItem text="Exit to desktop" />
-                    <MenuItem text="Choice 2" />
-                    <MenuItem text="Choice 3" />
-                </items>
-            </DropdownButton>
-            <DropdownButton layoutX="11.0" layoutY="39.0" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: lightgrey;">
-               <items>
-                  <MenuItem text="Save game" />
-                  <MenuItem text="Choice 2" />
-                  <MenuItem text="Choice 3" />
-               </items>
-            </DropdownButton>
-            <DropdownButton layoutX="10.0" layoutY="1.0" prefHeight="18.0" prefWidth="100.0" style="-fx-background-color: lightgrey;">
-               <items>
-                  <MenuItem text="Generate report" />
-                  <MenuItem text="Choice 2" />
-                  <MenuItem text="Choice 3" />
-               </items>
-            </DropdownButton>
             <ScrollPane layoutX="421.0" layoutY="403.0" prefHeight="108.0" prefWidth="337.0" style="-fx-opacity: 90%;">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
@@ -73,22 +52,22 @@
             </Button>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="28.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@left-arrow.png" />
+                  <Image url="/images/left-arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@down-arrow.png" />
+                  <Image url="/images/down-arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="91.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@right-arrow.png" />
+                  <Image url="/images/right-arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@up-arrow.png" />
+                  <Image url="/images/up-arrow.png" />
                </image>
             </ImageView>
             <Button layoutX="292.0" layoutY="469.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="Look for items">

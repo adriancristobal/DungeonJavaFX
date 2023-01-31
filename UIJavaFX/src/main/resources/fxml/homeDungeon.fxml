@@ -51,23 +51,23 @@
                <Text fx:id="singaStorageHomeHud1" fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/singa.png" />
+                     <Image url="/images/singa.png" />
                   </image>
                </ImageView>
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="121.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/sofa.png" />
+                     <Image url="/images/sofa.png" />
                   </image>
                </ImageView>
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="283.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/open-box.png" />
+                     <Image url="/images/open-box.png" />
                   </image>
                </ImageView>
                <Text fx:id="singaStorageHomeHud2" fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@../images/treasure.png" />
+                     <Image url="/images/treasure.png" />
                   </image>
                </ImageView>
                <Text fx:id="chestHomeHudLabel" fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />

@@ -13,13 +13,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0"
-            prefWidth="758.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.dungeonCreation.DungeonCreationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.createDungeon.CreateDungeonController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <Menu mnemonicParsing="false" text="Options">
            <items>
-              <MenuItem mnemonicParsing="false" text="Close"/>
+              <MenuItem mnemonicParsing="false" text="Close" />
            </items>
          </Menu>
       </MenuBar>
@@ -37,7 +36,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <ComboBox layoutX="13.0" layoutY="34.0" prefHeight="25.0" prefWidth="152.0" />
+            <ComboBox layoutX="13.0" layoutY="26.0" prefHeight="25.0" prefWidth="152.0" />
             <Button layoutX="324.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" text="Create room">
                <font>
                   <Font size="16.0" />
@@ -45,14 +44,26 @@
             </Button>
             <Pane layoutX="570.0" layoutY="14.0" prefHeight="169.0" prefWidth="174.0" style="-fx-background-color: lightgrey;">
                <children>
-                  <Pane layoutX="19.0" layoutY="23.0" prefHeight="124.0" prefWidth="136.0" style="-fx-background-color: grey;" />
+                  <Pane layoutX="19.0" layoutY="23.0" prefHeight="124.0" prefWidth="136.0" style="-fx-background-color: grey;">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="24.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/images/monster.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="44.0" fitWidth="40.0" layoutX="71.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="/images/sword.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
                </children></Pane>
             <Button layoutX="13.0" layoutY="216.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Item">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="93.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Creature">
+            <Button layoutX="13.0" layoutY="80.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Insert Creature">
                <font>
                   <Font size="16.0" />
                </font>
@@ -83,28 +94,37 @@
             <ComboBox layoutX="15.0" layoutY="154.0" prefHeight="25.0" prefWidth="152.0" />
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="505.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
-            <Text layoutX="22.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="32.853515625" />
-            <ComboBox layoutX="64.0" layoutY="60.0" prefHeight="25.0" prefWidth="31.0" />
+            <Text layoutX="22.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="32.853515625" />
+            <ComboBox layoutX="64.0" layoutY="53.0" prefHeight="25.0" prefWidth="31.0" />
             <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYP" wrappingWidth="23.653533935546875" />
-            <Button layoutX="13.0" layoutY="5.0" mnemonicParsing="false" text="EXIT TO DESKTOP" />
+            <Text layoutX="15.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose creature:" wrappingWidth="99.2535400390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose item:" wrappingWidth="99.2535400390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </left>

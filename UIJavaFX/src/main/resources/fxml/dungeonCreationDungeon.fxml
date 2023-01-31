@@ -48,12 +48,12 @@
                      <children>
                         <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="24.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/monster.png" />
+                              <Image url="/images/monster.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="44.0" fitWidth="40.0" layoutX="71.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/sword.png" />
+                              <Image url="/images/sword.png" />
                            </image>
                         </ImageView>
                      </children></Pane>
@@ -94,22 +94,22 @@
             <ComboBox layoutX="15.0" layoutY="154.0" prefHeight="25.0" prefWidth="152.0" />
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="505.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="721.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/remove.png" />
+                  <Image url="/images/remove.png" />
                </image>
             </ImageView>
             <Text layoutX="22.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LVL" wrappingWidth="32.853515625" />

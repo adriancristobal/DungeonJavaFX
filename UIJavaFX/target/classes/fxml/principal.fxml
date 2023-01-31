@@ -3,18 +3,77 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.principal.PrincipalController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.principal.PrincipalController">
    <top>
        <MenuBar BorderPane.alignment="CENTER">
            <Menu fx:id="principalMenu" mnemonicParsing="false" text="Options">
-               <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport"
-                         text="Generate Import"/>
-               <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game"/>
-               <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop"
-                         text="Exit to Desktop"/>
+               <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport" text="Generate Import" />
+               <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
+               <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop" text="Exit to Desktop" />
            </Menu>
        </MenuBar>
    </top>
+    <Pane>
+
+    </Pane>
+   <bottom>
+      <Pane fx:id="characterBotHud" prefHeight="50.0" prefWidth="854.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="singaBotHudLabel" fill="WHITE" layoutX="43.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA:" wrappingWidth="45.717559814453125" />
+            <Text fx:id="crystalsBotHudLabel" fill="WHITE" layoutX="165.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRYSTALS:" wrappingWidth="58.517547607421875" />
+            <Text fx:id="lifeBotHudLabel" fill="WHITE" layoutX="321.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE:" wrappingWidth="30.517547607421875" />
+            <Text fx:id="energyBotHudLabel" fill="WHITE" layoutX="445.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENERGY:" wrappingWidth="51.317535400390625" />
+            <Text fx:id="weaponBotHudLabel" fill="WHITE" layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEAPON:" wrappingWidth="61.717559814453125" />
+            <Text fx:id="necklaceBotHudLabel" fill="WHITE" layoutX="723.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NECKLACE:" wrappingWidth="61.717559814453125" />
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="16.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/singa.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="138.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/crystal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="293.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/life.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="417.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/energy.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="555.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/sword.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="696.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/images/necklace.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="singaAmountBotHud" fill="#afff71" layoutX="100.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="crystalsAmountBotHud" fill="#afff71" layoutX="233.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="weaponInfoBotHud" fill="#afff71" layoutX="651.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fx:id="necklaceInfoBotHud" fill="#afff71" layoutX="797.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fill="#afff71" layoutX="243.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxCrystalsAmountBotHud" fill="#afff71" layoutX="251.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+            <Text fill="#afff71" layoutX="367.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="lifeAmountBotHud" fill="#afff71" layoutX="357.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="maxLifeAmountBotHud" fill="#afff71" layoutX="374.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="energyAmountBotHud" fill="#afff71" layoutX="499.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fill="#afff71" layoutX="509.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxEnergyAmountBotHud" fill="#afff71" layoutX="515.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

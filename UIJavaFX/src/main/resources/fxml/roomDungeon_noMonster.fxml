@@ -14,7 +14,7 @@
             <children>
                 <ImageView fitHeight="573.0" fitWidth="803.0" layoutX="-5.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/dungeon_room.jpg"/>
+                        <Image url="/images/dungeon_room.jpg"/>
                     </image>
                 </ImageView>
                 <Text fill="WHITE" layoutX="156.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">
@@ -39,25 +39,25 @@
                 <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="28.0" layoutY="428.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../images/left-arrow.png"/>
+                        <Image url="/images/left-arrow.png"/>
                     </image>
                 </ImageView>
                 <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="452.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../images/down-arrow.png"/>
+                        <Image url="/images/down-arrow.png"/>
                     </image>
                 </ImageView>
                 <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="91.0" layoutY="428.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../images/right-arrow.png"/>
+                        <Image url="/images/right-arrow.png"/>
                     </image>
                 </ImageView>
                 <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="59.0" layoutY="403.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../images/up-arrow.png"/>
+                        <Image url="/images/up-arrow.png"/>
                     </image>
                 </ImageView>
                 <Button layoutX="292.0" layoutY="469.0" mnemonicParsing="false" onAction="#lookItemsAction"
