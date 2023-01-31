@@ -12,6 +12,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import lombok.extern.log4j.Log4j2;
@@ -30,6 +31,24 @@ public class PrincipalController extends BaseScreenController implements Initial
     @FXML
     public Pane characterBotHud;
     @FXML
+    public Text singaAmountBotHud;
+    @FXML
+    public Text crystalsAmountBotHud;
+    @FXML
+    public Text weaponInfoBotHud;
+    @FXML
+    public Text necklaceInfoBotHud;
+    @FXML
+    public Text maxCrystalsAmountBotHud;
+    @FXML
+    public Text lifeAmountBotHud;
+    @FXML
+    public Text maxLifeAmountBotHud;
+    @FXML
+    public Text energyAmountBotHud;
+    @FXML
+    public Text maxEnergyAmountBotHud;
+    @FXML
     private Menu principalMenu;
     @FXML
     private MenuItem generateImportMenuItem;
@@ -37,7 +56,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     private MenuItem saveGameMenuItem;
     @FXML
     private MenuItem exitToDesktopMenuItem;
-
+    //private Wizard actualWizard;
     Instance<Object> instance;
     private Stage primaryStage;
     private Alert alert;
@@ -126,7 +145,7 @@ public class PrincipalController extends BaseScreenController implements Initial
         showMenuItems();
     }
 
-    public void goMonsterDungeon(){
+    public void goMonsterDungeon() {
         cargarPantalla(Pantallas.MONSTER_DUNGEON);
         showMenuItems();
     }
@@ -150,12 +169,25 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     //BOTTOM CHARACTER HUD
-    public void hideHud(){
+    public void hideHud() {
         characterBotHud.setVisible(false);
     }
 
-    public void revealHud(){
+    public void revealHud() {
         characterBotHud.setVisible(true);
     }
+
+    //FILL + REFRESH HUD
+    public void fillHud() {
+        //singaAmountBotHud.setText(actualwizard.getCarriedSinga().toString());
+        //crystalsAmountBotHud.setText(actualWizard.getCrystalCarrier().toString());
+        //maxCrystalsAmountBotHud.setText(actualWizard.getCrystalCarrier().getMaxCapacity().toString());
+        //lifeAmountBotHud.setText(actualWizard.getLife().toString());
+        //maxLifeAmountBotHud.setText(actualWizard.getLifeMax().toString());
+        //energyAmountBotHud.setText(actualWizard.getEnergy().toString());
+        //maxEnergyAmountBotHud.setText(actualWizard.getEnergyMax().toString());
+    }
+
+
 
 }
