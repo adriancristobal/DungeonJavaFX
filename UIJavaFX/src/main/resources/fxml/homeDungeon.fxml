@@ -41,14 +41,14 @@
                <Font size="16.0" />
             </font>
          </Button>
-         <ScrollPane fx:id="actionsLogScrollPane" layoutX="421.0" layoutY="277.0" prefHeight="188.0" prefWidth="337.0">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+         <ScrollPane fx:id="actionsLogScrollPane" layoutX="445.0" layoutY="277.0" prefHeight="186.0" prefWidth="313.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="200.0" />
          </ScrollPane>
-         <Pane layoutX="188.0" prefHeight="48.0" prefWidth="570.0" style="-fx-background-color: black; -fx-opacity: 50%;">
+         <Pane fx:id="homeHud" layoutX="188.0" prefHeight="48.0" prefWidth="570.0" style="-fx-background-color: grey;">
             <children>
-               <Text fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
-               <Text fill="WHITE" layoutX="149.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
-               <Text fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
+               <Text fx:id="singaHomeHudLabel" fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
+               <Text fx:id="comfortHomeHudLabel" fill="WHITE" layoutX="149.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
+               <Text fx:id="singaStorageHomeHud1" fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../images/singa.png" />
@@ -64,13 +64,21 @@
                      <Image url="@../images/open-box.png" />
                   </image>
                </ImageView>
-               <Text fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
+               <Text fx:id="singaStorageHomeHud2" fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
                <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../images/treasure.png" />
                   </image>
                </ImageView>
-               <Text fill="WHITE" layoutX="474.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
+               <Text fx:id="chestHomeHudLabel" fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
+               <Text fx:id="singaAmountHomeHud" fill="#7df262" layoutX="75.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+               <Text fill="#7df262" layoutX="85.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+               <Text fx:id="totalSingaAmountHomeHud" fill="#7df262" layoutX="93.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+               <Text fx:id="comfortAmountHomeHud" fill="#7df262" layoutX="243.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+               <Text fx:id="singaStorageAmountHomeHud" fill="#7df262" layoutX="402.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+               <Text fx:id="chestAmountHomeHud" fill="#7df262" layoutX="525.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+               <Text fill="#7df262" layoutX="534.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+               <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="543.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             </children></Pane>
          <Button layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
             <font>
@@ -82,7 +90,7 @@
                <Font size="16.0" />
             </font>
          </Button>
-         <TextField fx:id="numberOfCristalsTextView" layoutX="195.0" layoutY="164.0" prefHeight="50.0" prefWidth="130.0" promptText="Number of Crystals" />
+         <TextField fx:id="numberOfCristalsTextView" layoutX="188.0" layoutY="154.0" prefHeight="44.0" prefWidth="130.0" promptText="Number of Crystals" />
          <Button layoutX="13.0" layoutY="276.0" mnemonicParsing="false" onAction="#manageStorageAction" prefHeight="44.0" prefWidth="153.0" text="Manage storage">
             <font>
                <Font size="16.0" />

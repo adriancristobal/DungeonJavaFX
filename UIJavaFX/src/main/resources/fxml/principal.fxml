@@ -23,14 +23,14 @@
 
     </Pane>
    <bottom>
-      <Pane prefHeight="50.0" prefWidth="854.0" style="-fx-background-color: black; -fx-opacity: 50%;" BorderPane.alignment="CENTER">
+      <Pane fx:id="characterBotHud" prefHeight="50.0" prefWidth="854.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="43.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA:" wrappingWidth="45.717559814453125" />
-            <Text fill="WHITE" layoutX="165.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRYSTALS:" wrappingWidth="58.517547607421875" />
-            <Text fill="WHITE" layoutX="321.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE:" wrappingWidth="30.517547607421875" />
-            <Text fill="WHITE" layoutX="445.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENERGY:" wrappingWidth="51.317535400390625" />
-            <Text fill="WHITE" layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEAPON:" wrappingWidth="61.717559814453125" />
-            <Text fill="WHITE" layoutX="723.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NECKLACE:" wrappingWidth="61.717559814453125" />
+            <Text fx:id="singaBotHudLabel" fill="WHITE" layoutX="43.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA:" wrappingWidth="45.717559814453125" />
+            <Text fx:id="crystalsBotHudLabel" fill="WHITE" layoutX="165.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRYSTALS:" wrappingWidth="58.517547607421875" />
+            <Text fx:id="lifeBotHudLabel" fill="WHITE" layoutX="321.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE:" wrappingWidth="30.517547607421875" />
+            <Text fx:id="energyBotHudLabel" fill="WHITE" layoutX="445.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENERGY:" wrappingWidth="51.317535400390625" />
+            <Text fx:id="weaponBotHudLabel" fill="WHITE" layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEAPON:" wrappingWidth="61.717559814453125" />
+            <Text fx:id="necklaceBotHudLabel" fill="WHITE" layoutX="723.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NECKLACE:" wrappingWidth="61.717559814453125" />
             <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="16.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/singa.png" />
@@ -61,18 +61,18 @@
                   <Image url="@../images/necklace.png" />
                </image>
             </ImageView>
-            <Text fill="#afff71" layoutX="100.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fill="#afff71" layoutX="236.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fill="#afff71" layoutX="653.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
-            <Text fill="#afff71" layoutX="797.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
-            <Text fill="#afff71" layoutX="244.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fill="#afff71" layoutX="249.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
-            <Text fill="#afff71" layoutX="368.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fill="#afff71" layoutX="360.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fill="#afff71" layoutX="373.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
-            <Text fill="#afff71" layoutX="496.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fill="#afff71" layoutX="504.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fill="#afff71" layoutX="509.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="singaAmountBotHud" fill="#afff71" layoutX="100.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="crystalsAmountBotHud" fill="#afff71" layoutX="233.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="weaponInfoBotHud" fill="#afff71" layoutX="651.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fx:id="necklaceInfoBotHud" fill="#afff71" layoutX="797.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fill="#afff71" layoutX="243.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxCrystalsAmountBotHud" fill="#afff71" layoutX="251.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+            <Text fill="#afff71" layoutX="367.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="lifeAmountBotHud" fill="#afff71" layoutX="357.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="maxLifeAmountBotHud" fill="#afff71" layoutX="374.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="energyAmountBotHud" fill="#afff71" layoutX="499.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fill="#afff71" layoutX="509.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxEnergyAmountBotHud" fill="#afff71" layoutX="515.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
          </children>
       </Pane>
    </bottom>
