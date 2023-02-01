@@ -3,18 +3,29 @@ package ui.screens.home;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
-import java.util.Objects;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
+    @FXML
+    private Text chestAmountHomeHud;
+    @FXML
+    private Text singaStorageAmountHomeHud;
+    @FXML
+    private Text comfortAmountHomeHud;
+    @FXML
+    private Text singaAmountHomeHud;
+    @FXML
+    private Text totalSingaAmountHomeHud;
+    @FXML
+    private TextField numberOfCristalsTextView;
     @FXML
     private ImageView imgChestHomeHud;
 
