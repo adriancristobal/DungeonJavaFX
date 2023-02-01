@@ -10,11 +10,22 @@ import javafx.scene.control.TextField;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
-    Alert alerta;
+    @FXML
+    private ImageView imgChestHomeHud;
+
+    @FXML
+    private ImageView imgComfortHomeHud;
+
+    @FXML
+    private ImageView imgSingaHomeHud;
+
+    @FXML
+    private ImageView imgSingaStorageHomeHud;
     @FXML
     private ComboBox homeSelectionFilterComboBox;
     @FXML
@@ -38,12 +49,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     void improveHomeAction(ActionEvent actionEvent) {
     }
 
-    private void alert(String titulo, String texto, Alert.AlertType tipo){
-        alerta.setTitle(titulo);
-        alerta.setContentText(texto);
-        alerta.setAlertType(tipo);
-        alerta.showAndWait();
-    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);

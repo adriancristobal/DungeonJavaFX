@@ -38,11 +38,6 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="303.0" layoutY="292.0" mnemonicParsing="false" onAction="#createDungeonAction" prefHeight="44.0" prefWidth="153.0" text="Create Dungeon">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
             <ComboBox fx:id="dropDownSavedGames" layoutX="597.0" layoutY="176.0" prefHeight="25.0" prefWidth="74.0" />
          </children>
       </Pane>

@@ -37,8 +37,6 @@ module UIJavaFX {
     opens ui.screens.menu;
     opens ui.screens.principal;
     opens ui.screens.dungeon;
-    opens ui.screens.roomMonsterDungeonScreen;
-    opens ui.screens.battleScreen;
     opens ui.screens.home;
 
 

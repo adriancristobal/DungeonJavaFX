@@ -18,11 +18,6 @@ public class MenuController extends BaseScreenController implements Initializabl
     private ComboBox<String> dropDownSavedGames;
 
     @FXML
-    private void createDungeonAction(ActionEvent event) {
-
-    }
-
-    @FXML
     private void loadGameAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load Game (.xml)");
@@ -34,6 +29,7 @@ public class MenuController extends BaseScreenController implements Initializabl
     @FXML
     private void newGameAction(ActionEvent event) {
 
+        getPrincipalController().goHome();
     }
 
     private void alert(String titulo, String texto, Alert.AlertType tipo){

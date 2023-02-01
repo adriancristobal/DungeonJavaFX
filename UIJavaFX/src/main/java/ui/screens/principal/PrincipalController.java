@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -23,13 +25,15 @@ import game.demiurge.Demiurge;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 //@Log4j2
 public class PrincipalController extends BaseScreenController implements Initializable {
     private Demiurge demiurge;
-    public Demiurge getDemiurge(){
+
+    public Demiurge getDemiurge() {
         return demiurge;
     }
 
@@ -53,6 +57,23 @@ public class PrincipalController extends BaseScreenController implements Initial
     public Text energyAmountBotHud;
     @FXML
     public Text maxEnergyAmountBotHud;
+    @FXML
+    private ImageView imgCrystalBotHud;
+
+    @FXML
+    private ImageView imgEnergyBotHud;
+
+    @FXML
+    private ImageView imgLifeBotHud;
+
+    @FXML
+    private ImageView imgNecklaceBotHud;
+
+    @FXML
+    private ImageView imgSingaBotHud;
+
+    @FXML
+    private ImageView imgWeaponBotHud;
     @FXML
     private Menu principalMenu;
     @FXML
@@ -89,6 +110,7 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fillHud();
         goMainMenu();
     }
 
@@ -150,10 +172,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         showMenuItems();
     }
 
-    public void goMonsterDungeon() {
-        cargarPantalla(Pantallas.MONSTER_DUNGEON);
-        showMenuItems();
-    }
 
     private void closeWindowEvent(WindowEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -184,6 +202,8 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     //FILL + REFRESH HUD
     public void fillHud() {
+        //TEXT
+
         //singaAmountBotHud.setText(actualwizard.getCarriedSinga().toString());
         //crystalsAmountBotHud.setText(actualWizard.getCrystalCarrier().toString());
         //maxCrystalsAmountBotHud.setText(actualWizard.getCrystalCarrier().getMaxCapacity().toString());
@@ -191,8 +211,15 @@ public class PrincipalController extends BaseScreenController implements Initial
         //maxLifeAmountBotHud.setText(actualWizard.getLifeMax().toString());
         //energyAmountBotHud.setText(actualWizard.getEnergy().toString());
         //maxEnergyAmountBotHud.setText(actualWizard.getEnergyMax().toString());
-    }
 
+        //IMAGES
+        imgCrystalBotHud.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
+        imgEnergyBotHud.setImage(new Image(getClass().getResource("/images/energy.png").toExternalForm()));
+        imgLifeBotHud.setImage(new Image(getClass().getResource("/images/life.png").toExternalForm()));
+        imgNecklaceBotHud.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
+        imgSingaBotHud.setImage(new Image(getClass().getResource("/images/singa.png").toExternalForm()));
+        imgWeaponBotHud.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
+    }
 
 
 }

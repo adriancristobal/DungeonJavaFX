@@ -3,8 +3,8 @@ package ui.common;
 public enum Pantallas {
     MAIN_MENU("/fxml/mainMenuDungeon.fxml"),
     HOME("/fxml/homeDungeon.fxml"),
-    DUNGEON("/fxml/roomDungeon_noMonster.fxml"),
-    MONSTER_DUNGEON("/fxml/roomMonsterDungeon.fxml");
+    DUNGEON("/fxml/roomDungeon_noMonster.fxml");
+
 
     private final String rutaPantalla;
     Pantallas(String ruta) {

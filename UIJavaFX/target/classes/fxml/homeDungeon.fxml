@@ -49,26 +49,14 @@
                <Text fx:id="singaHomeHudLabel" fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
                <Text fx:id="comfortHomeHudLabel" fill="WHITE" layoutX="149.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
                <Text fx:id="singaStorageHomeHud1" fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
-               <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="/images/singa.png" />
-                  </image>
+               <ImageView fx:id="imgSingaHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
-               <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="121.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="/images/sofa.png" />
-                  </image>
+               <ImageView fx:id="imgComfortHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="121.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
-               <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="283.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="/images/open-box.png" />
-                  </image>
+               <ImageView fx:id="imgSingaStorageHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="283.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <Text fx:id="singaStorageHomeHud2" fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
-               <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="/images/treasure.png" />
-                  </image>
+               <ImageView fx:id="imgChestHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <Text fx:id="chestHomeHudLabel" fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
                <Text fx:id="singaAmountHomeHud" fill="#7df262" layoutX="75.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
@@ -79,7 +67,8 @@
                <Text fx:id="chestAmountHomeHud" fill="#7df262" layoutX="525.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                <Text fill="#7df262" layoutX="534.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="543.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            </children></Pane>
+            </children>
+         </Pane>
          <Button layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
             <font>
                <Font size="16.0" />

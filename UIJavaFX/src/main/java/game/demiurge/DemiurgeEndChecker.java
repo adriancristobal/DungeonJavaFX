@@ -12,6 +12,12 @@ public class DemiurgeEndChecker {
 
     public void addCondition(Condition condition){ conditions.add(condition); }
 
+    //TODO: INICIO CAMBIO
+    public List<Condition> getConditions() {
+        return conditions;
+    }
+    //TODO: FIN CAMBIO
+
     public boolean check(){
 
         for(Condition condition: conditions) {
