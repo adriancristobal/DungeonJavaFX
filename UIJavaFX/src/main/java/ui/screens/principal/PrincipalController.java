@@ -18,7 +18,8 @@ import javafx.stage.WindowEvent;
 import lombok.extern.log4j.Log4j2;
 import ui.common.BaseScreenController;
 import ui.common.Pantallas;
-import ui.common.ScreenConstants;
+//import ui.common.ScreenConstants;
+import game.demiurge.Demiurge;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,10 @@ import java.util.ResourceBundle;
 
 //@Log4j2
 public class PrincipalController extends BaseScreenController implements Initializable {
+    private Demiurge demiurge;
+    public Demiurge getDemiurge(){
+        return demiurge;
+    }
 
     @FXML
     public Pane characterBotHud;
@@ -155,8 +160,8 @@ public class PrincipalController extends BaseScreenController implements Initial
         alert.getButtonTypes().remove(ButtonType.OK);
         alert.getButtonTypes().add(ButtonType.CANCEL);
         alert.getButtonTypes().add(ButtonType.YES);
-        alert.setTitle(ScreenConstants.QUIT_GAME);
-        alert.setContentText(ScreenConstants.CLOSE_GAME);
+//        alert.setTitle(ScreenConstants.QUIT_GAME);
+//        alert.setContentText(ScreenConstants.CLOSE_GAME);
         alert.initOwner(primaryStage.getOwner());
         Optional<ButtonType> res = alert.showAndWait();
 

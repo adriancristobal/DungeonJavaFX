@@ -15,6 +15,22 @@ module UIJavaFX {
     exports ui.screens.roomMonsterDungeonScreen;
     exports ui.screens.battleScreen;
     exports ui.screens.home;
+    exports game;
+    exports game.demiurge;
+    exports game.demiurge.exceptions;
+    exports game.actions;
+    exports game.character;
+    exports game.character.exceptions;
+    exports game.conditions;
+    exports game.dungeon;
+    exports game.object;
+    exports game.objectContainer;
+    exports game.objectContainer.exceptions;
+    exports game.spell;
+    exports game.spellContainer;
+    exports game.util;
+    exports console;
+    exports loaderManual;
 
     opens ui.main;
     opens ui.common;

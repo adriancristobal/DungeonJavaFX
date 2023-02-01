@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainFX {
     @Inject
@@ -15,6 +16,7 @@ public class MainFX {
 
     public void start(@Observes @StartupScene Stage stage) {
         try {
+            InputStream is = getClass().getResourceAsStream("/fxml/principal.fxml");
             Parent fxmlParent = fxmlLoader.load(
                     getClass().getResourceAsStream("/fxml/principal.fxml"));
             stage.setScene(new Scene(fxmlParent));
