@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
@@ -14,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
+    @FXML
+    public AnchorPane actionsLogScrollPane;
     private Room room;
 
     @Override
@@ -42,5 +45,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     private void lookItemsAction(ActionEvent actionEvent) {
 
     }
+
+    //TODO: en el initialize poner que si hay criatura cargue el menú de batalla else cargue el menú dungeon
 
 }
