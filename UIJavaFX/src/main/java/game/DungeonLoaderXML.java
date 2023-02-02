@@ -9,7 +9,6 @@ import game.spell.SpellUnknowableException;
 import game.util.ValueOverMaxException;
 
 import java.io.File;
-import java.io.IOException;
 
 public interface DungeonLoaderXML {
     void load(Demiurge demiurge, DungeonConfiguration dungeonConfiguration, File xmlFile) throws Exception, ValueOverMaxException, ContainerFullException, ContainerUnacceptedItemException, ItemCreationErrorException, SpellUnknowableException;

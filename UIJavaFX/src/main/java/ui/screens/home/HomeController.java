@@ -73,7 +73,9 @@ public class HomeController extends BaseScreenController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fillHud();
+        alerta = new Alert(Alert.AlertType.NONE);
+        loadComboBoxesUpgrade();
+        loadCrystalForMergeComboBox();
     }
 
     @Override
@@ -82,6 +84,7 @@ public class HomeController extends BaseScreenController implements Initializabl
             demiurge = this.getPrincipalController().getDemiurge();
             home = demiurge.getHome();
             wizard = demiurge.getWizard();
+            fillHud();
         }
 //        if (this.getPrincipalController().getDemiurge() != null) {
 //            home = this.getPrincipalController().getDemiurge().getHome();
@@ -109,6 +112,7 @@ public class HomeController extends BaseScreenController implements Initializabl
             singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
             //esto ultimo no creo que este bien
             chestAmountHomeHud.setText(String.valueOf(home.getContainer().getValue()));
+            totalChestAmountHomeHud.setText(String.valueOf(home.getContainer().size()));
         }
 
 

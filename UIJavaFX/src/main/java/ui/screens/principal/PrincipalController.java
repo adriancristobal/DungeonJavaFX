@@ -227,11 +227,11 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     public void goToRoom(int roomId) {
-        cargarPantalla(Pantallas.DUNGEON);
         currentRoomId = roomId;
         showMenuItems();
         fillHud();
         revealHud();
+        cargarPantalla(Pantallas.DUNGEON);
     }
 
 

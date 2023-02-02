@@ -47,24 +47,23 @@ public class MenuController extends BaseScreenController implements Initializabl
             demiurge = new Demiurge();
             loader.load(demiurge, config, file);
             this.getPrincipalController().setDemiurge(demiurge);
-        } catch(Exception e){
-            e.printStackTrace();
-            this.getPrincipalController().showErrorAlert("Error reading file");
-        } catch (ValueOverMaxException valueMaxEx){
+        } catch (ValueOverMaxException valueMaxEx) {
             valueMaxEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Value is too high");
-        } catch (ContainerFullException fullEx){
+        } catch (ContainerFullException fullEx) {
             fullEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Container is full");
-        } catch (ContainerUnacceptedItemException itemContEx){
+        } catch (ContainerUnacceptedItemException itemContEx) {
             itemContEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Container can't keep this item");
-        } catch (ItemCreationErrorException itemCreationEx){
+        } catch (ItemCreationErrorException itemCreationEx) {
             itemCreationEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Error creating item");
-        } catch (SpellUnknowableException spellEx){
+        } catch (SpellUnknowableException spellEx) {
             spellEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Unkown spell");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -74,19 +73,20 @@ public class MenuController extends BaseScreenController implements Initializabl
         getPrincipalController().goHome();
     }
 
-    private void alert(String titulo, String texto, Alert.AlertType tipo){
+    private void alert(String titulo, String texto, Alert.AlertType tipo) {
         alerta.setTitle(titulo);
         alerta.setContentText(texto);
         alerta.setAlertType(tipo);
         alerta.showAndWait();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
     }
 
     @Override
-    public void principalCargado(){
+    public void principalCargado() {
         demiurge = this.getPrincipalController().getDemiurge();
     }
 }

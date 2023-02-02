@@ -12,16 +12,27 @@ public class DemiurgeContainerManager {
     Container bag;
     Container site;
 
-    DemiurgeContainerManager(Container w, Container b, Container s){
+    DemiurgeContainerManager(Container w, Container b, Container s) {
         wearables = w;
         bag = b;
         site = s;
     }
 
-    public Container getWearables() { return wearables; }
-    public Container getBag() { return bag; }
-    public Container getSite() { return site; }
-    public void setSite(Container site) { this.site = site; }
+    public Container getWearables() {
+        return wearables;
+    }
+
+    public Container getBag() {
+        return bag;
+    }
+
+    public Container getSite() {
+        return site;
+    }
+
+    public void setSite(Container site) {
+        this.site = site;
+    }
 
     public void deleteItem(Container c, int aIndex) {
         c.remove(aIndex);
@@ -37,7 +48,7 @@ public class DemiurgeContainerManager {
         Item aItem = a.get(aIndex);
         Item bItem = a.get(bIndex);
 
-        if (aItem.getClass().equals(bItem.getClass())){
+        if (aItem.getClass().equals(bItem.getClass())) {
             a.remove(aIndex);
             b.remove(bIndex);
 
@@ -46,7 +57,7 @@ public class DemiurgeContainerManager {
                 b.add(aItem);
             } catch (ContainerFullException | ContainerUnacceptedItemException ignored) {
             }
-        }else{
+        } else {
             throw new ContainerInvalidExchangeException();
         }
     }
