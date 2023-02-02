@@ -3,6 +3,7 @@ package game.demiurge;
 import game.conditions.Condition;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DemiurgeEndChecker {
 

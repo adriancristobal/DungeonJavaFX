@@ -19,6 +19,15 @@ public class Demiurge {
     DemiurgeDungeonManager dungeonManager;
     DemiurgeEndChecker endChecker;
 
+    //TODO: INICIO CAMBIO
+    public Home getHome(){return home;}
+    public Wizard getWizard(){return wizard;}
+    public Dungeon getDungeon(){return dungeon;}
+    public DemiurgeEndChecker getEndChecker() {
+        return endChecker;
+    }
+    //TODO: FIN CAMBIO
+
     public Demiurge() {
         endChecker = new DemiurgeEndChecker();
         endChecker.addCondition(new SimpleCondition());

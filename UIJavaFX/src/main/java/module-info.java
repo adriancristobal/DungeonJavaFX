@@ -5,15 +5,13 @@ module UIJavaFX {
     requires javafx.fxml;
     requires javafx.controls;
     requires lombok;
+    requires java.xml;
 
     exports ui.screens.menu;
     exports ui.common;
     exports ui.main;
     exports ui.screens.principal;
     exports ui.screens.dungeon;
-    exports ui.screens.createDungeon;
-    exports ui.screens.roomMonsterDungeonScreen;
-    exports ui.screens.battleScreen;
     exports ui.screens.home;
     exports game;
     exports game.demiurge;

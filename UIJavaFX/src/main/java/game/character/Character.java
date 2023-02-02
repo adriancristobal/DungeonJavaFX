@@ -41,6 +41,10 @@ public abstract class Character {
         attacks.add(new PhysicalAttack(hit));
     }
 
+    //TODO: CAMBIO
+    public String getName() { return name; }
+    //TODO: CAMBIO
+
     public Domain getDomain() { return domain; }
 
     //Life

@@ -1,9 +1,12 @@
 package ui.screens.dungeon;
 
+import game.demiurge.Demiurge;
+import game.dungeon.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
@@ -11,7 +14,25 @@ import java.util.ResourceBundle;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
-    Alert alerta;
+    private Room room;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    //HUD solo hay en Home y Principal
+
+    @Override
+    public void principalCargado(){
+        Demiurge demiurge = this.getPrincipalController().getDemiurge();
+        if (demiurge != null) {
+            int roomId = this.getPrincipalController().getRoomId();
+            room = demiurge.getDungeon().getRoom(roomId);
+        }
+    }
+
+
     @FXML
     private void manageItemsAction(ActionEvent actionEvent) {
 
@@ -22,14 +43,4 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     }
 
-    private void alert(String titulo, String texto, Alert.AlertType tipo){
-        alerta.setTitle(titulo);
-        alerta.setContentText(texto);
-        alerta.setAlertType(tipo);
-        alerta.showAndWait();
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        alerta = new Alert(Alert.AlertType.NONE);
-    }
 }
