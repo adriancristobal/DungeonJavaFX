@@ -5,9 +5,11 @@ import game.demiurge.Demiurge;
 import game.dungeon.Home;
 import game.dungeon.Room;
 import game.objectContainer.Chest;
+import game.objectContainer.CrystalCarrier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -17,11 +19,21 @@ import javafx.scene.text.Text;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
+
+    @FXML
+    private ComboBox crystalSelectionHomeComboBox;
+    @FXML
+    private ComboBox<String> characterSelectionFilterComboBox;
+    @FXML
+    private ComboBox<String> homeSelectionFilterComboBox;
+    @FXML
+    private Text totalChestAmountHomeHud;
     @FXML
     private Text chestAmountHomeHud;
     @FXML
@@ -33,8 +45,6 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private Text totalSingaAmountHomeHud;
     @FXML
-    private TextField numberOfCristalsTextView;
-    @FXML
     private ImageView imgChestHomeHud;
     @FXML
     private ImageView imgComfortHomeHud;
@@ -42,15 +52,12 @@ public class HomeController extends BaseScreenController implements Initializabl
     private ImageView imgSingaHomeHud;
     @FXML
     private ImageView imgSingaStorageHomeHud;
-    @FXML
-    private ComboBox homeSelectionFilterComboBox;
-    @FXML
-    private ScrollPane actionsLogScrollPane;
+
     private Demiurge demiurge;
     private Home home;
     private Wizard wizard;
 
-    private Chest chest;
+    Alert alerta;
 
 
     @FXML
@@ -76,6 +83,13 @@ public class HomeController extends BaseScreenController implements Initializabl
         alerta = new Alert(Alert.AlertType.NONE);
         loadComboBoxesUpgrade();
         loadCrystalForMergeComboBox();
+    }
+
+    private void alert(String titulo, String texto, Alert.AlertType tipo){
+        alerta.setTitle(titulo);
+        alerta.setContentText(texto);
+        alerta.setAlertType(tipo);
+        alerta.showAndWait();
     }
 
     @Override
@@ -119,6 +133,27 @@ public class HomeController extends BaseScreenController implements Initializabl
         //el numberofcristals es del mago.
         //numberOfCristalsTextView.setText(String.valueOf(wizard.getCrystalCarrier().getValue()));
 
+    }
+
+    private void loadComboBoxesUpgrade() {
+        homeSelectionFilterComboBox.getItems().clear();
+        characterSelectionFilterComboBox.getItems().clear();
+        try {
+            homeSelectionFilterComboBox.getItems().addAll("Comfort", "Stone capacity");
+            characterSelectionFilterComboBox.getItems().addAll("Max life", "Max capacity");
+        } catch (Exception e) {
+            alert("Error", "Error to load the home or wizard upgrades", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void loadCrystalForMergeComboBox() {
+        crystalSelectionHomeComboBox.getItems().clear();
+        try {
+            //List<String> kl = wizard.getCrystalCarrier().toString();
+            //crystalSelectionHomeComboBox.getItems().addAll()
+        } catch (Exception e) {
+            alert("Error", "Error to load the home or wizard upgrades", Alert.AlertType.ERROR);
+        }
     }
 
     private void saveAll() {

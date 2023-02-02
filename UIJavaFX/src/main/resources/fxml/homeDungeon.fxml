@@ -26,24 +26,21 @@
                <Font size="16.0" />
             </font>
          </Button>
-         <ScrollPane fx:id="actionsLogScrollPane" layoutX="445.0" layoutY="277.0" prefHeight="186.0" prefWidth="313.0">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="200.0" />
-         </ScrollPane>
          <Pane fx:id="homeHud" layoutX="188.0" prefHeight="48.0" prefWidth="570.0" style="-fx-background-color: grey;">
             <children>
-               <Text fx:id="singaHomeHudLabel" fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
-               <Text fx:id="comfortHomeHudLabel" fill="WHITE" layoutX="149.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
-               <Text fx:id="singaStorageHomeHud1" fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
+               <Text fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
+               <Text fill="WHITE" layoutX="149.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
+               <Text fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
                <ImageView fx:id="imgSingaHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <ImageView fx:id="imgComfortHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="121.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <ImageView fx:id="imgSingaStorageHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="283.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
-               <Text fx:id="singaStorageHomeHud2" fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
+               <Text fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
                <ImageView fx:id="imgChestHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
-               <Text fx:id="chestHomeHudLabel" fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
+               <Text fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
                <Text fx:id="singaAmountHomeHud" fill="#7df262" layoutX="75.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                <Text fill="#7df262" layoutX="85.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
                <Text fx:id="totalSingaAmountHomeHud" fill="#7df262" layoutX="93.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
@@ -70,7 +67,7 @@
             </font>
          </Button>
          <ComboBox fx:id="characterSelectionFilterComboBox" layoutX="587.0" layoutY="75.0" prefHeight="25.0" prefWidth="144.0" />
-   <Button fx:id="goDungeonBuutton" layoutX="13.0" layoutY="348.0" mnemonicParsing="false" onAction="#goDungeonAction" prefHeight="16.0" prefWidth="154.0" text="Go to dungeon">
+   <Button layoutX="13.0" layoutY="348.0" mnemonicParsing="false" onAction="#goDungeonAction" prefHeight="16.0" prefWidth="154.0" text="Go to dungeon">
       <font>
          <Font size="16.0" />
       </font>
