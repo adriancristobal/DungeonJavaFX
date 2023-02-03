@@ -24,9 +24,6 @@ import java.util.ResourceBundle;
 public class MenuController extends BaseScreenController implements Initializable {
 
     private final DungeonLoaderXML loader;
-    private Demiurge demiurge;
-
-    private Alert alerta;
 
     @Inject
     public MenuController(DungeonLoaderXML loader) {
@@ -36,6 +33,11 @@ public class MenuController extends BaseScreenController implements Initializabl
     @FXML
     private ComboBox<String> dropDownSavedGames;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+
     @FXML
     private void loadGameAction(ActionEvent event) {
         try {
@@ -44,7 +46,7 @@ public class MenuController extends BaseScreenController implements Initializabl
             fileChooser.setTitle("Load Game (.xml)");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
             File file = fileChooser.showOpenDialog(null);
-            demiurge = new Demiurge();
+            Demiurge demiurge = new Demiurge();
             loader.load(demiurge, config, file);
             this.getPrincipalController().setDemiurge(demiurge);
         } catch (ValueOverMaxException valueMaxEx) {
@@ -68,25 +70,7 @@ public class MenuController extends BaseScreenController implements Initializabl
     }
 
     @FXML
-    private void newGameAction(ActionEvent event) {
-
+    private void newGameAction() {
         getPrincipalController().goHome();
-    }
-
-    private void alert(String titulo, String texto, Alert.AlertType tipo) {
-        alerta.setTitle(titulo);
-        alerta.setContentText(texto);
-        alerta.setAlertType(tipo);
-        alerta.showAndWait();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        alerta = new Alert(Alert.AlertType.NONE);
-    }
-
-    @Override
-    public void principalCargado() {
-        demiurge = this.getPrincipalController().getDemiurge();
     }
 }
