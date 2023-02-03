@@ -45,6 +45,11 @@ public abstract class Character {
 
     //Life
     public String lifeInfo(){ return getClass().getSimpleName() + " -> " + life; }
+
+    public String getName() {
+        return name;
+    }
+
     public int getLife() { return life.getValue(); }
     public int getLifeMax() {
         return life.getMaximum();

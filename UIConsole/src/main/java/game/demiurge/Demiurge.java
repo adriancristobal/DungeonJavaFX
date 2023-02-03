@@ -31,6 +31,19 @@ public class Demiurge {
     public void setWizard(Wizard wizard) {
         this.wizard = wizard;
     }
+
+    public Dungeon getDungeon() {
+        return dungeon;
+    }
+
+    public Home getHome() {
+        return home;
+    }
+
+    public Wizard getWizard() {
+        return wizard;
+    }
+
     public void addCondition(Condition condition){ endChecker.addCondition(condition); }
 
     public DemiurgeHomeManager getHomeManager() { return homeManager; }

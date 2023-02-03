@@ -15,9 +15,41 @@ import java.util.ResourceBundle;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
-    @FXML
-    public AnchorPane actionsLogScrollPane;
     private Room room;
+
+    private boolean hasMonster;
+    private Demiurge demiurge;
+    private Wizard wizard;
+    @FXML
+    private Pane battleMenuPane;
+    @FXML
+    private Button runBtn;
+    @FXML
+    private Button castSpellBtn;
+    @FXML
+    private Button physicalAttackBtn;
+    @FXML
+    private ComboBox spellComboBox;
+    @FXML
+    private ImageView imgCrystal;
+    @FXML
+    private ImageView imgWearable;
+    @FXML
+    private ImageView imgMonster;
+    @FXML
+    private Pane explorersMenuPane;
+    @FXML
+    private Button lookForItemsBtn;
+    @FXML
+    private ComboBox roomMoveComboBox;
+    @FXML
+    private Button moveThereBtn;
+    @FXML
+    private ListView wizardItemsListView;
+    @FXML
+    private Button removeBtn;
+    @FXML
+    private ImageView exchangeItemRoomBagBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

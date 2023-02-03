@@ -29,7 +29,9 @@ module UIJavaFX {
     exports game.util;
     exports console;
     exports loaderManual;
+    exports ui.screens.homestorage;
 
+    opens ui.screens.homestorage;
     opens ui.main;
     opens ui.common;
     opens ui.screens.menu;

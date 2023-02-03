@@ -5,94 +5,94 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Options">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <bottom>
-      <Pane fx:id="removeJewelryBagBtn" prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text layoutX="322.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Text>
-            <ScrollPane fx:id="actionLogScrollPane" layoutX="1.0" layoutY="405.0" prefHeight="106.0" prefWidth="431.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
-            </ScrollPane>
-            <ListView fx:id="listViewChest" layoutX="21.0" layoutY="99.0" prefHeight="254.0" prefWidth="379.0" />
-            <Text layoutX="187.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <ListView fx:id="listViewWearing" layoutX="463.0" layoutY="67.0" prefHeight="116.0" prefWidth="271.0" />
-            <ListView fx:id="listViewJewelryBag" layoutX="463.0" layoutY="266.0" prefHeight="116.0" prefWidth="271.0" />
-            <Text layoutX="565.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEARING">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="550.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JEWELRY BAG">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <ImageView fx:id="exchangeChestWearingImg" fitHeight="55.0" fitWidth="55.0" layoutX="405.0" layoutY="97.0" onMouseClicked="#exchangeChestWearing" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@transfer.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="exchangeJewelryWearingImg" fitHeight="58.0" fitWidth="58.0" layoutX="467.0" layoutY="195.0" onMouseClicked="#exchangeJewelryWearing" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 90;">
-               <image>
-                  <Image url="@transfer.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="exchangeJewelryChestImg" fitHeight="55.0" fitWidth="55.0" layoutX="405.0" layoutY="297.0" onMouseClicked="#exchangeJewelryChest" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@transfer.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="closeChestBtn" layoutX="622.0" layoutY="458.0" mnemonicParsing="false" onAction="#closeChest" prefHeight="40.0" prefWidth="112.0" text="CLOSE CHEST">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="removeChestItemBtn" layoutX="377.0" layoutY="77.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0" style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Button>
-            <Button fx:id="removeWearingItemBtn" layoutX="711.0" layoutY="45.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0" style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Button>
-            <Button layoutX="711.0" layoutY="245.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0" style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0"
+            prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.screens.homestorage.HomeStorageController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <Pane fx:id="removeJewelryBagBtn" prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
+            <children>
+                <Text layoutX="322.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE">
+                    <font>
+                        <Font size="27.0"/>
+                    </font>
+                </Text>
+                <ListView fx:id="listViewChest" layoutX="21.0" layoutY="99.0" prefHeight="254.0" prefWidth="379.0"/>
+                <Text layoutX="187.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Text>
+                <ListView fx:id="listViewWearing" layoutX="463.0" layoutY="67.0" prefHeight="116.0" prefWidth="271.0"/>
+                <ListView fx:id="listViewJewelryBag" layoutX="463.0" layoutY="266.0" prefHeight="116.0"
+                          prefWidth="271.0"/>
+                <Text layoutX="565.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEARING">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Text>
+                <Text layoutX="550.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JEWELRY BAG">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Text>
+                <ImageView fx:id="exchangeChestWearingImg" fitHeight="55.0" fitWidth="55.0" layoutX="405.0"
+                           layoutY="97.0" onMouseClicked="#exchangeChestWearing" pickOnBounds="true"
+                           preserveRatio="true">
+                </ImageView>
+                <ImageView fx:id="exchangeJewelryWearingImg" fitHeight="58.0" fitWidth="58.0" layoutX="467.0"
+                           layoutY="195.0" onMouseClicked="#exchangeJewelryWearing" pickOnBounds="true"
+                           preserveRatio="true" style="-fx-rotate: 90;">
+                </ImageView>
+                <ImageView fx:id="exchangeJewelryChestImg" fitHeight="55.0" fitWidth="55.0" layoutX="405.0"
+                           layoutY="297.0" onMouseClicked="#exchangeJewelryChest" pickOnBounds="true"
+                           preserveRatio="true">
+                </ImageView>
+                <Button fx:id="closeChestBtn" layoutX="622.0" layoutY="458.0" mnemonicParsing="false"
+                        onAction="#closeChest" prefHeight="40.0" prefWidth="112.0" text="CLOSE CHEST">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="removeChestItemBtn" onMouseClicked="#removeFromChest" layoutX="377.0" layoutY="77.0" minHeight="-Infinity"
+                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0"
+                        style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="removeWearingItemBtn" onMouseClicked="#removeFromWearables" layoutX="711.0" layoutY="45.0" minHeight="-Infinity"
+                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0"
+                        style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Button>
+                <Button onMouseClicked="#removeFromJewelryBag" layoutX="711.0" layoutY="245.0" minHeight="-Infinity" minWidth="-Infinity"
+                        mnemonicParsing="false" prefHeight="22.0" prefWidth="23.0"
+                        style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+    </bottom>
 </BorderPane>

@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.home.HomeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.home.HomeController">
          <Text layoutX="51.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
             <font>
                <Font size="27.0" />
             </font>
          </Text>
-         <Button layoutX="582.0" layoutY="211.0" mnemonicParsing="false" onAction="#improveHomeAction" prefHeight="44.0" prefWidth="153.0" text="Improve home">
+         <Button fx:id="improveHomeButton" layoutX="582.0" layoutY="211.0" mnemonicParsing="false" onAction="#improveHomeAction" prefHeight="44.0" prefWidth="153.0" text="Improve home">
             <font>
                <Font size="16.0" />
             </font>
          </Button>
-         <ComboBox fx:id="homeSelectionFilterComboBox" layoutX="587.0" layoutY="177.0" prefHeight="25.0" prefWidth="144.0" />
-         <Button layoutX="582.0" layoutY="107.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="153.0" text="Improve character">
+         <ComboBox fx:id="homeSelectionFilterComboBox" layoutX="587.0" layoutY="177.0" onAction="#enableButtonImproveHomeAction" prefHeight="25.0" prefWidth="144.0" />
+         <Button fx:id="improveCharacterButton" layoutX="582.0" layoutY="107.0" mnemonicParsing="false" onAction="#improveCharacter" prefHeight="44.0" prefWidth="153.0" text="Improve character">
             <font>
                <Font size="16.0" />
             </font>
@@ -51,7 +47,7 @@
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="543.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             </children>
          </Pane>
-         <Button layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
+         <Button fx:id="sleepButton" layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
             <font>
                <Font size="16.0" />
             </font>
@@ -66,14 +62,14 @@
                <Font size="16.0" />
             </font>
          </Button>
-         <ComboBox fx:id="characterSelectionFilterComboBox" layoutX="587.0" layoutY="75.0" prefHeight="25.0" prefWidth="144.0" />
+         <ComboBox fx:id="characterSelectionFilterComboBox" layoutX="587.0" layoutY="75.0" onAction="#enableButtonImproveCharacterAction" prefHeight="25.0" prefWidth="144.0" />
    <Button layoutX="13.0" layoutY="348.0" mnemonicParsing="false" onAction="#goDungeonAction" prefHeight="16.0" prefWidth="154.0" text="Go to dungeon">
       <font>
          <Font size="16.0" />
       </font>
    </Button>
-   <ComboBox fx:id="crystalSelectionHomeComboBox" layoutX="180.0" layoutY="163.0" prefHeight="26.0" prefWidth="73.0" />
+   <ComboBox fx:id="crystalSelectionHomeComboBox" disable="true" layoutX="180.0" layoutY="163.0" prefHeight="26.0" prefWidth="73.0" onAction="#enableButtonMerge"/>
    <Text layoutX="182.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose crystal" />
    <Text layoutX="192.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to merge" />
-   <Button fx:id="mergeAllButton" layoutX="273.0" layoutY="156.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="39.0" prefWidth="74.0" text="Merge all" />
+   <Button fx:id="mergeButton" disable="true" layoutX="273.0" layoutY="156.0" mnemonicParsing="false" onAction="#mergeAction" prefHeight="39.0" prefWidth="74.0" text="Merge" />
 </AnchorPane>

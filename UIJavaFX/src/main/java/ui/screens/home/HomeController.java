@@ -2,32 +2,38 @@ package ui.screens.home;
 
 import game.character.Wizard;
 import game.demiurge.Demiurge;
+import game.demiurge.DungeonConfiguration;
 import game.dungeon.Home;
 import game.dungeon.Room;
-import game.objectContainer.Chest;
-import game.objectContainer.CrystalCarrier;
+import game.object.SingaCrystal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
 
     @FXML
-    private ComboBox crystalSelectionHomeComboBox;
+    private Button improveHomeButton;
+    @FXML
+    private Button improveCharacterButton;
+    @FXML
+    private Button sleepButton;
+    @FXML
+    private Button mergeButton;
+    @FXML
+    private ComboBox<SingaCrystal> crystalSelectionHomeComboBox;
     @FXML
     private ComboBox<String> characterSelectionFilterComboBox;
     @FXML
@@ -53,6 +59,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private ImageView imgSingaStorageHomeHud;
 
+    private DungeonConfiguration dc;
     private Demiurge demiurge;
     private Home home;
     private Wizard wizard;
@@ -61,20 +68,76 @@ public class HomeController extends BaseScreenController implements Initializabl
 
 
     @FXML
-    void sleepAction(ActionEvent actionEvent) {
+    private void sleepAction(ActionEvent actionEvent) {
     }
 
     @FXML
-    void manageStorageAction(ActionEvent actionEvent) {
+    private void manageStorageAction(ActionEvent actionEvent) {
+        getPrincipalController().goStorage();
     }
 
     @FXML
-    void mergeCrystalsAction(ActionEvent actionEvent) {
-
+    private void mergeCrystalsAction(ActionEvent actionEvent) {
+        crystalSelectionHomeComboBox.setDisable(false);
+        loadCrystalForMergeComboBox();
     }
 
+    @FXML
+    private void mergeAction(ActionEvent actionEvent) {
+        try {
+            SingaCrystal cristalToMerge = crystalSelectionHomeComboBox.getValue();
+            try {
+                home.mergeCrystal(cristalToMerge);
+            } catch (Exception e) {
+                alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            alert("Error", "Value is wrong", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void improveCharacter(ActionEvent actionEvent) {
+        try {
+            String itemWizardToImprove = characterSelectionFilterComboBox.getValue();
+            if (itemWizardToImprove.equals("Max Life")) {
+                try {
+                    wizard.upgradeLifeMax(dc.getBasicIncrease());
+                } catch (Exception e){
+                    alert("Error","You don't have enough life to upgrade your life", Alert.AlertType.ERROR);
+                }
+            } else if (itemWizardToImprove.equals("Max Capacity")) {
+                try {
+                    wizard.upgradeEnergyMax(dc.getBasicIncrease());
+                } catch (Exception e) {
+                    alert("Error","You don't have enough energy to upgrade your energy", Alert.AlertType.ERROR);
+                }
+            }
+        } catch (Exception e) {
+            alert("Warning", "Value incorrect", Alert.AlertType.WARNING);
+        }
+    }
     @FXML
     void improveHomeAction(ActionEvent actionEvent) {
+        try {
+            String itemHomeToImprove = homeSelectionFilterComboBox.getValue();
+            if (itemHomeToImprove.equals("Comfort")) {
+                try {
+                    home.upgradeComfort();
+                } catch (Exception e){
+                    alert("Error","You don't have enough Singa to improve your Comfort", Alert.AlertType.ERROR);
+                }
+            } else if (itemHomeToImprove.equals("Stone Capacity")) {
+                try {
+                    //singaStorageAmountHomeHud.getSelectionEnd();
+                    home.upgradeMaxSinga(dc.getStoneIncrease());
+                } catch (Exception e) {
+                    alert("Error","You don't have enough Singa to improve your Stone Capacity", Alert.AlertType.ERROR);
+                }
+            }
+        } catch (Exception e) {
+            alert("Warning", "Value incorrect", Alert.AlertType.WARNING);
+        }
     }
 
 
@@ -82,7 +145,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
         loadComboBoxesUpgrade();
-        loadCrystalForMergeComboBox();
+        //loadCrystalForMergeComboBox();
     }
 
     private void alert(String titulo, String texto, Alert.AlertType tipo){
@@ -149,8 +212,10 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void loadCrystalForMergeComboBox() {
         crystalSelectionHomeComboBox.getItems().clear();
         try {
-            //List<String> kl = wizard.getCrystalCarrier().toString();
-            //crystalSelectionHomeComboBox.getItems().addAll()
+            for (Iterator it = wizard.getCrystalCarrier().iterator(); it.hasNext(); ) {
+                SingaCrystal singaCrystal = (SingaCrystal) it.next();
+                crystalSelectionHomeComboBox.getItems().add(singaCrystal);
+            }
         } catch (Exception e) {
             alert("Error", "Error to load the home or wizard upgrades", Alert.AlertType.ERROR);
         }
@@ -167,4 +232,26 @@ public class HomeController extends BaseScreenController implements Initializabl
         Room room = demiurge.getDungeon().iterator().next();
         getPrincipalController().goToRoom(room.getID());
     }
+
+    @FXML
+    private void enableButtonImproveCharacterAction(ActionEvent actionEvent) {
+        if (characterSelectionFilterComboBox != null) {
+            improveCharacterButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void enableButtonImproveHomeAction(ActionEvent actionEvent) {
+        if (homeSelectionFilterComboBox != null) {
+            improveHomeButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void enableButtonMerge(ActionEvent actionEvent) {
+        if (crystalSelectionHomeComboBox != null) {
+            mergeButton.setDisable(false);
+        }
+    }
+
 }
