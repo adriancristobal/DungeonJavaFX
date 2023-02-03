@@ -1,5 +1,7 @@
 package ui.screens.dungeon;
 
+import game.actions.Attack;
+import game.character.Wizard;
 import game.demiurge.Demiurge;
 import game.dungeon.Room;
 import javafx.event.ActionEvent;
@@ -53,7 +55,13 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TODO: cargar el menu batalla si es true
+        hasMonster = room.isAlive();
+        if (hasMonster){
 
+        }else {
+
+        }
     }
 
     //HUD solo hay en Home y Principal
@@ -64,6 +72,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         if (demiurge != null) {
             int roomId = this.getPrincipalController().getRoomId();
             room = demiurge.getDungeon().getRoom(roomId);
+            wizard = demiurge.getWizard();
         }
     }
 

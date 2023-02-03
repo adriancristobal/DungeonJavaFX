@@ -226,6 +226,12 @@ public class PrincipalController extends BaseScreenController implements Initial
         revealHud();
     }
 
+    public void goStorage() {
+        cargarPantalla(Pantallas.STORAGE);
+        showMenuItems();
+        hideHud();
+    }
+
     public void goToRoom(int roomId) {
         currentRoomId = roomId;
         showMenuItems();
