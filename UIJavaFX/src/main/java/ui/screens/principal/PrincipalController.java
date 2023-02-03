@@ -105,10 +105,15 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     //ESTE SET SOLO SE USA AL CARGAR LA MAZMORRA DEL XML O LA BASE DE DATOS
-    public void setDemiurge(Demiurge loadedDemiurge){
+    public void setDemiurgeFromLoad(Demiurge loadedDemiurge){
         demiurge = loadedDemiurge;
         getWizard();
         this.goHome();
+    }
+
+    public void setDemiurge(Demiurge demiurge) {
+        this.demiurge = demiurge;
+        getWizard();
     }
 
     public void getWizard() {

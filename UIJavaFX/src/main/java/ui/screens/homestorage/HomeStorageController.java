@@ -61,10 +61,10 @@ public class HomeStorageController extends BaseScreenController implements Initi
     public void principalCargado() {
         Demiurge demiurge = this.getPrincipalController().getDemiurge();
         if (demiurge != null) {
-            manager = demiurge.getContainerManager();
             chest = (Chest) demiurge.getHome().getContainer();
             wearables = (Wearables) demiurge.getWizard().getWearables();
             bag = (JewelryBag) demiurge.getWizard().getJewelryBag();
+            manager = new DemiurgeContainerManager(chest, wearables, bag);
 
             chest.iterator().forEachRemaining(item -> chestList.add((Item) item));
             listViewChest.getItems().addAll(chestList);

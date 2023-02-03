@@ -4,19 +4,22 @@ import game.actions.Attack;
 import game.character.Wizard;
 import game.demiurge.Demiurge;
 import game.dungeon.Room;
-import game.spell.Spell;
+import game.object.Item;
+import game.objectContainer.exceptions.ContainerFullException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
@@ -26,7 +29,7 @@ import java.util.ResourceBundle;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
-    private Room room;
+    private int roomId;
 
     private boolean hasMonster;
     private Demiurge demiurge;
@@ -56,21 +59,21 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     @FXML
     private Button moveThereBtn;
     @FXML
-    private ListView wizardItemsListView;
+    private ListView<String> wizardItemsListView;
     @FXML
     private Button removeBtn;
     @FXML
     private ImageView exchangeItemRoomBagBtn;
+    @FXML
+    private Text crystalLabel;
+    @FXML
+    private Text werableLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO: cargar el menu batalla si es true
-        hasMonster = room.isAlive();
-        if (hasMonster){
-
-        }else {
-
-        }
+        //TODO:comprobar los wearables
+        crystalLabel.setVisible(false);
+        werableLabel.setVisible(false);
     }
 
     //HUD solo hay en Home y Principal
@@ -79,15 +82,28 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     public void principalCargado() {
         demiurge = this.getPrincipalController().getDemiurge();
         if (demiurge != null) {
-            int roomId = this.getPrincipalController().getRoomId();
-            room = demiurge.getDungeon().getRoom(roomId);
+            roomId = this.getPrincipalController().getRoomId();
             wizard = demiurge.getWizard();
+        }
+        List<String> items = new ArrayList<>();
+        wizard.getCrystalCarrier().iterator().forEachRemaining(crystal -> items.add(crystal.toString()));
+        wizard.getWearables().iterator().forEachRemaining(wearable -> items.add(wearable.toString()));
+        wizard.getJewelryBag().iterator().forEachRemaining(jewelry -> items.add(jewelry.toString()));
+        wizardItemsListView.setItems(FXCollections.observableArrayList(items));
+
+        hasMonster = demiurge.getDungeon().getRoom(roomId).isAlive();
+        if (hasMonster) {
+            explorersMenuPane.setVisible(false);
+            battleMenuPane.setVisible(true);
+            imgMonster.setImage(new Image(getClass().getResource("/images/monster.png").toExternalForm()));
+        } else {
+            explorersMenuPane.setVisible(true);
+            battleMenuPane.setVisible(false);
         }
     }
 
     @FXML
     void exchangeItemRoomBag(MouseEvent mouseEvent) {
-
     }
 
     @FXML
@@ -96,24 +112,62 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void moveThere(ActionEvent actionEvent) {
+
     }
 
     @FXML
     void lookForItems(ActionEvent actionEvent) {
+        crystalLabel.setVisible(true);
+        if (demiurge.getDungeon().getRoom(roomId).isEmpty()) {
+            imgCrystal.setVisible(false);
+            crystalLabel.setText("No crystals" + roomId);
+        } else {
+            imgCrystal.setVisible(true);
+            crystalLabel.setText("Crystal" );
+            imgCrystal.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
+        }
+
+        if (demiurge.getDungeon().getRoom(roomId).getContainer().isEmpty()) {
+            imgWearable.setVisible(false);
+            werableLabel.setVisible(false);
+        } else {
+            imgWearable.setVisible(true);
+            werableLabel.setVisible(true);
+            Item item = demiurge.getDungeon().getRoom(roomId).getContainer().get(0);
+            item.getClass().getSimpleName();
+            if (item.getClass().getSimpleName().equals("Necklace")) {
+                imgWearable.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
+            } else if (item.getClass().getSimpleName().equals("Sword")) {
+                imgWearable.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
+            }
+            werableLabel.setText(item.toString());
+        }
+        List<Room> rooms = new ArrayList<>();
+        demiurge.getDungeon().iterator().forEachRemaining(room -> rooms.add(room));
+        roomMoveComboBox.setItems(FXCollections.observableArrayList(rooms));
     }
 
     @FXML
     void pickWearable(MouseEvent mouseEvent) {
+        try {
+            Item item = demiurge.getDungeon().getRoom(roomId).getContainer().get(0);
+            wizard.getWearables().add(item);
+            demiurge.getDungeon().getRoom(roomId).getContainer().remove(0);
+            imgWearable.setVisible(false);
+        } catch (ContainerUnacceptedItemException | ContainerFullException e) {
+            throw new RuntimeException(e);
+        }
+        saveAll();
     }
 
     @FXML
     void pickCrystal(MouseEvent mouseEvent) {
-            room.gather();
+        demiurge.getDungeon().getRoom(roomId).gather();
+        saveAll();
     }
 
     @FXML
     void performPhysicalAttack(ActionEvent actionEvent) {
-
     }
 
     @FXML
@@ -131,5 +185,10 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     }
 
+    private void saveAll() {
+        demiurge.setWizard(wizard);
+        this.getPrincipalController().setDemiurge(demiurge);
+        this.getPrincipalController().goToRoom(roomId);
+    }
 
 }

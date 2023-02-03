@@ -12,7 +12,6 @@ import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
 import ui.common.BaseScreenController;
@@ -48,7 +47,7 @@ public class MenuController extends BaseScreenController implements Initializabl
             File file = fileChooser.showOpenDialog(null);
             Demiurge demiurge = new Demiurge();
             loader.load(demiurge, config, file);
-            this.getPrincipalController().setDemiurge(demiurge);
+            this.getPrincipalController().setDemiurgeFromLoad(demiurge);
         } catch (ValueOverMaxException valueMaxEx) {
             valueMaxEx.printStackTrace();
             this.getPrincipalController().showErrorAlert("Value is too high");
