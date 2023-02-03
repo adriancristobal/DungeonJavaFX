@@ -1,0 +1,124 @@
+<demiurge>
+    <dungeon>
+        <home>
+            <description>Home</description>
+            <comfort>1</comfort>
+            <singa>
+                <currentValue>10</currentValue>
+                <maxValue>50</maxValue>
+            </singa>
+            <chest>
+                <capacity>4</capacity>
+                <items>
+                    <item type="weapon">
+                        <domain element="NONE"/>
+                        <level value="2"/>
+                    </item>
+                </items>
+            </chest>
+            <library>
+                <spells>
+                    <spell>
+                        <domain element="ELECTRICITY"/>
+                        <level value="1"/>
+                    </spell>
+                    <spell>
+                        <domain element="FIRE"/>
+                        <level value="1"/>
+                    </spell>
+                    <spell>
+                        <domain element="AIR"/>
+                        <level value="1"/>
+                    </spell>
+                </spells>
+            </library>
+        </home>
+        <rooms>
+            <room>
+                <id>0</id>
+                <exit value="false"/>
+                <description>Common room connected with HOME</description>
+                <visited>false</visited>
+                <items>
+                    <item type="necklace">
+                        <domain element="LIFE"/>
+                        <level value="5"/>
+                    </item>
+                </items>
+                <creatures></creatures>
+            </room>
+            <room>
+                <id>1</id>
+                <exit value="false"/>
+                <description>Common room in the middle</description>
+                <visited>false</visited>
+                <items></items>
+                <creatures>
+                    <creature type="ELECTRICITY">
+                        <name>Big Monster</name>
+                        <life>5</life>
+                        <punch>1</punch>
+                        <spells>
+                            <spell>
+                                <domain element="ELECTRICITY"/>
+                                <level value="1"/>
+                            </spell>
+                        </spells>
+                    </creature>
+                </creatures>
+            </room>
+            <room>
+                <id>2</id>
+                <exit value="true"/>
+                <description>Common room and Exit</description>
+                <visited>false</visited>
+                <items></items>
+                <creatures></creatures>
+            </room>
+        </rooms>
+    </dungeon>
+    <wizard>
+        <name>Merlin</name>
+        <life>
+            <currentValue>10</currentValue>
+            <maxValue>10</maxValue>
+        </life>
+        <energy>
+            <currentValue>10</currentValue>
+            <maxValue>10</maxValue>
+        </energy>
+        <crystalCarrier>
+            <capacity>3</capacity>
+            <crystals>
+                <crystal>
+                    <singa>3</singa>
+                </crystal>
+            </crystals>
+        </crystalCarrier>
+        <weareables>
+            <weaponsMAX>1</weaponsMAX>
+            <necklacesMAX>1</necklacesMAX>
+            <ringsMAX>2</ringsMAX>
+            <items>
+                <item type="weapon">
+                    <domain element="NONE"/>
+                    <level value="1"/>
+                </item>
+            </items>
+        </weareables>
+        <jewelryBag>
+            <capacity>2</capacity>
+            <items>
+                <item type="necklace">
+                    <domain element="LIFE"/>
+                    <level value="5"/>
+                </item>
+            </items>
+        </jewelryBag>
+    </wizard>
+    <conditions>
+        <condition type="VisitAllRooms"/>
+        <condition type="KillAllCreatures"/>
+    </conditions>
+    <day value="0"/>
+</demiurge>
