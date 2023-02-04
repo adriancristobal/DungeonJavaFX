@@ -15,7 +15,7 @@
                <MenuItem fx:id="generateImportMenuItem" mnemonicParsing="false" onAction="#generateImport" text="Generate Import" />
                <MenuItem fx:id="saveGameMenuItem" mnemonicParsing="false" onAction="#saveGame" text="Save Game" />
                <MenuItem fx:id="exitToDesktopMenuItem" mnemonicParsing="false" onAction="#exitToDesktop" text="Exit to Desktop" />
-              <MenuItem fx:id="goToMainMenu" mnemonicParsing="false" onAction="#goToHome" text="Go to Home" />
+              <MenuItem fx:id="goToMainMenu" mnemonicParsing="false" onAction="#goToHome" text="Go to Main Menu" />
            </Menu>
        </MenuBar>
    </top>

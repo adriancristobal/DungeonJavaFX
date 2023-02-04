@@ -4,6 +4,7 @@ import game.actions.Attack;
 import game.character.Wizard;
 import game.demiurge.Demiurge;
 import game.dungeon.Room;
+import game.dungeon.Site;
 import game.object.Item;
 import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerUnacceptedItemException;
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
@@ -84,6 +86,10 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         if (demiurge != null) {
             roomId = this.getPrincipalController().getRoomId();
             wizard = demiurge.getWizard();
+            List<Room> rooms = new ArrayList<>();
+            demiurge.getDungeon().iterator().forEachRemaining(room -> rooms.add(room));
+            List<Integer> roomIds = rooms.stream().map(Site::getID).toList();
+            roomMoveComboBox.setItems(FXCollections.observableArrayList(roomIds));
         }
         List<String> items = new ArrayList<>();
         wizard.getCrystalCarrier().iterator().forEachRemaining(crystal -> items.add(crystal.toString()));
@@ -120,7 +126,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         crystalLabel.setVisible(true);
         if (demiurge.getDungeon().getRoom(roomId).isEmpty()) {
             imgCrystal.setVisible(false);
-            crystalLabel.setText("No crystals" + roomId);
+            crystalLabel.setText("No crystals in Room " + roomId);
         } else {
             imgCrystal.setVisible(true);
             crystalLabel.setText("Crystal" );
@@ -137,14 +143,11 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             item.getClass().getSimpleName();
             if (item.getClass().getSimpleName().equals("Necklace")) {
                 imgWearable.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
-            } else if (item.getClass().getSimpleName().equals("Sword")) {
+            } else if (item.getClass().getSimpleName().equals("Weapon")) {
                 imgWearable.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
             }
             werableLabel.setText(item.toString());
         }
-        List<Room> rooms = new ArrayList<>();
-        demiurge.getDungeon().iterator().forEachRemaining(room -> rooms.add(room));
-        roomMoveComboBox.setItems(FXCollections.observableArrayList(rooms));
     }
 
     @FXML

@@ -67,9 +67,4 @@ public class MenuController extends BaseScreenController implements Initializabl
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private void newGameAction() {
-        getPrincipalController().goHome();
-    }
 }

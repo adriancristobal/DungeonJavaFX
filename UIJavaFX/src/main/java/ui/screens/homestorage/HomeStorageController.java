@@ -1,5 +1,7 @@
 package ui.screens.homestorage;
 
+import game.DungeonLoader;
+import game.DungeonLoaderXML;
 import game.demiurge.Demiurge;
 import game.demiurge.DemiurgeContainerManager;
 import game.object.Item;
@@ -7,16 +9,12 @@ import game.objectContainer.Chest;
 import game.objectContainer.JewelryBag;
 import game.objectContainer.Wearables;
 import game.objectContainer.exceptions.ContainerInvalidExchangeException;
-import javafx.event.ActionEvent;
+import jakarta.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
@@ -25,14 +23,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeStorageController extends BaseScreenController implements Initializable {
+    private final DungeonLoader loader;
+
+    @Inject
+    public HomeStorageController(DungeonLoader loader) {
+        this.loader = loader;
+    }
+
     private Chest chest;
     private Wearables wearables;
     private JewelryBag bag;
     private DemiurgeContainerManager manager;
     private List<Item> chestList;
     private List<Item> wearableList;
-    private List<Item> bagList;
 
+    private List<Item> bagList;
     @FXML
     private ListView<Item> listViewChest;
     @FXML
@@ -43,6 +48,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
     private ImageView exchangeChestWearingImg;
     @FXML
     private ImageView exchangeJewelryWearingImg;
+
     @FXML
     private ImageView exchangeJewelryChestImg;
 
@@ -61,10 +67,13 @@ public class HomeStorageController extends BaseScreenController implements Initi
     public void principalCargado() {
         Demiurge demiurge = this.getPrincipalController().getDemiurge();
         if (demiurge != null) {
+            demiurge.loadEnvironment(loader);
+            manager = demiurge.getContainerManager();
             chest = (Chest) demiurge.getHome().getContainer();
             wearables = (Wearables) demiurge.getWizard().getWearables();
             bag = (JewelryBag) demiurge.getWizard().getJewelryBag();
-            manager = new DemiurgeContainerManager(chest, wearables, bag);
+
+            manager = demiurge.getContainerManager();
 
             chest.iterator().forEachRemaining(item -> chestList.add((Item) item));
             listViewChest.getItems().addAll(chestList);

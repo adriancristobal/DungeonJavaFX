@@ -188,8 +188,8 @@ public class HomeController extends BaseScreenController implements Initializabl
             totalSingaAmountHomeHud.setText(String.valueOf(home.getMaxSinga()));
             singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
             //esto ultimo no creo que este bien
-            chestAmountHomeHud.setText(String.valueOf(home.getContainer().getValue()));
-            totalChestAmountHomeHud.setText(String.valueOf(home.getContainer().size()));
+            chestAmountHomeHud.setText(String.valueOf(home.getContainer().size()));
+            totalChestAmountHomeHud.setText(String.valueOf(home.getContainer().getValue()));
         }
 
 

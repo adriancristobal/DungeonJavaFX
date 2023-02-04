@@ -25,13 +25,7 @@
                 <Font size="15.0"/>
             </font>
         </Text>
-        <Button layoutX="302.0" layoutY="154.0" mnemonicParsing="false" onAction="#newGameAction" prefHeight="44.0"
-                prefWidth="153.0" text="New Game">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Button>
-        <Button layoutX="302.0" layoutY="220.0" mnemonicParsing="false" onAction="#loadGameAction" prefHeight="44.0"
+        <Button layoutX="302.0" layoutY="154.0" mnemonicParsing="false" onAction="#loadGameAction" prefHeight="44.0"
                 prefWidth="153.0" text="Load Game">
             <font>
                 <Font size="18.0"/>
