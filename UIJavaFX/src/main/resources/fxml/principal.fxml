@@ -23,36 +23,39 @@
 
     </Pane>
    <bottom>
-      <Pane fx:id="characterBotHud" prefHeight="50.0" prefWidth="854.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+      <Pane fx:id="characterBotHud" prefHeight="53.0" prefWidth="600.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
          <children>
-            <Text fx:id="crystalsBotHudLabel" fill="WHITE" layoutX="165.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRYSTALS:" wrappingWidth="58.517547607421875" />
-            <Text fx:id="lifeBotHudLabel" fill="WHITE" layoutX="321.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE:" wrappingWidth="30.517547607421875" />
-            <Text fx:id="energyBotHudLabel" fill="WHITE" layoutX="445.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENERGY:" wrappingWidth="51.317535400390625" />
-            <Text fx:id="weaponBotHudLabel" fill="WHITE" layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEAPON:" wrappingWidth="61.717559814453125" />
-            <Text fx:id="necklaceBotHudLabel" fill="WHITE" layoutX="723.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NECKLACE:" wrappingWidth="61.717559814453125" />
-            <ImageView fx:id="imgSingaBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="16.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <Text fx:id="crystalsBotHudLabel" fill="WHITE" layoutX="41.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CRYSTALS:" wrappingWidth="58.517547607421875" />
+            <Text fx:id="lifeBotHudLabel" fill="WHITE" layoutX="201.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFE:" wrappingWidth="30.517547607421875" />
+            <Text fx:id="energyBotHudLabel" fill="WHITE" layoutX="332.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENERGY:" wrappingWidth="51.317535400390625" />
+            <Text fx:id="weaponBotHudLabel" fill="WHITE" layoutX="486.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEAPON:" wrappingWidth="61.717559814453125" />
+            <Text fx:id="necklaceBotHudLabel" fill="WHITE" layoutX="333.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NECKLACE:" wrappingWidth="61.717559814453125" />
+            <ImageView fx:id="imgSingaBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="16.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="imgCrystalBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="138.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgCrystalBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="imgLifeBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="293.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLifeBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="172.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="imgEnergyBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="417.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgEnergyBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="304.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="imgWeaponBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="555.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgWeaponBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="458.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="imgNecklaceBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="696.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgNecklaceBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="305.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <Text fx:id="crystalsAmountBotHud" fill="#afff71" layoutX="233.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="weaponInfoBotHud" fill="#afff71" layoutX="651.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
-            <Text fx:id="necklaceInfoBotHud" fill="#afff71" layoutX="797.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
-            <Text fill="#afff71" layoutX="243.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fx:id="maxCrystalsAmountBotHud" fill="#afff71" layoutX="251.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
-            <Text fill="#afff71" layoutX="367.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fx:id="lifeAmountBotHud" fill="#afff71" layoutX="357.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="maxLifeAmountBotHud" fill="#afff71" layoutX="374.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
-            <Text fx:id="energyAmountBotHud" fill="#afff71" layoutX="499.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fill="#afff71" layoutX="509.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-            <Text fx:id="maxEnergyAmountBotHud" fill="#afff71" layoutX="515.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="crystalsAmountBotHud" fill="#afff71" layoutX="109.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="weaponInfoBotHud" fill="#afff71" layoutX="554.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fx:id="necklaceInfoBotHud" fill="#afff71" layoutX="407.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
+            <Text fill="#afff71" layoutX="252.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxCrystalsAmountBotHud" fill="#afff71" layoutX="136.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+            <Text fill="#afff71" layoutX="408.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="lifeAmountBotHud" fill="#afff71" layoutX="237.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="maxLifeAmountBotHud" fill="#afff71" layoutX="263.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="energyAmountBotHud" fill="#afff71" layoutX="391.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fill="#afff71" layoutX="123.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+            <Text fx:id="maxEnergyAmountBotHud" fill="#afff71" layoutX="421.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+            <Text fx:id="ringBotHudLabel" fill="WHITE" layoutX="200.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RING:" wrappingWidth="36.917510986328125" />
+            <ImageView fx:id="imgRingBotHud" fitHeight="22.0" fitWidth="23.0" layoutX="173.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="ringInfoBotHud" fill="#afff71" layoutX="242.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="none" />
          </children>
       </Pane>
    </bottom>

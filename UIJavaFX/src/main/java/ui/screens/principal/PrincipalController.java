@@ -40,9 +40,10 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     private Demiurge demiurge;
     private int currentRoomId;
-    public int getRoomId(){
+    public int getRoomId() {
         return currentRoomId;
     }
+
 
     @FXML
     public MenuItem goToMainMenu;
@@ -52,6 +53,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     public Text singaAmountBotHud;
     @FXML
     public Text crystalsAmountBotHud;
+    @FXML
+    public Text ringInfoBotHud;
     @FXML
     public Text weaponInfoBotHud;
     @FXML
@@ -70,7 +73,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     private ImageView imgCrystalBotHud;
     @FXML
     private ImageView imgEnergyBotHud;
-
+    @FXML
+    public ImageView imgRingBotHud;
     @FXML
     private ImageView imgLifeBotHud;
 
@@ -105,7 +109,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     //ESTE SET SOLO SE USA AL CARGAR LA MAZMORRA DEL XML O LA BASE DE DATOS
-    public void setDemiurgeFromLoad(Demiurge loadedDemiurge){
+    public void setDemiurgeFromLoad(Demiurge loadedDemiurge) {
         demiurge = loadedDemiurge;
         getWizard();
         this.goHome();
@@ -202,7 +206,7 @@ public class PrincipalController extends BaseScreenController implements Initial
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
             File file = fileChooser.showOpenDialog(null);
             loader.save(this.demiurge, config, file);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             showErrorAlert("Error reading file");
         }
@@ -277,13 +281,15 @@ public class PrincipalController extends BaseScreenController implements Initial
     public void fillHud() {
         //TEXT
 
-        if(actualWizard!=null) {
+        if (actualWizard != null) {
             crystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getValue()));
             maxCrystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getMaximum()));
             lifeAmountBotHud.setText(String.valueOf(actualWizard.getLife()));
             maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
             energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
             maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
+
+            //WEARABLES
         }
 
         //IMAGES
@@ -292,5 +298,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         imgLifeBotHud.setImage(new Image(getClass().getResource("/images/life.png").toExternalForm()));
         imgNecklaceBotHud.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
         imgWeaponBotHud.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
+        imgRingBotHud.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
     }
 }
