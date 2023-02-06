@@ -22,6 +22,8 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import lombok.Getter;
+import lombok.Setter;
 import ui.common.BaseScreenController;
 import ui.common.Pantallas;
 //import ui.common.ScreenConstants;
@@ -34,6 +36,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 //@Log4j2
+@Getter
+@Setter
 public class PrincipalController extends BaseScreenController implements Initializable {
 
     private final DungeonLoaderXML loader;
