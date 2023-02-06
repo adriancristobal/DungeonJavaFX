@@ -46,7 +46,7 @@ public class DemiurgeContainerManager {
 
     public void exchangeItem(Container a, int aIndex, Container b, int bIndex) throws ContainerInvalidExchangeException {
         Item aItem = a.get(aIndex);
-        Item bItem = a.get(bIndex);
+        Item bItem = b.get(bIndex);
 
         if (aItem.getClass().equals(bItem.getClass())) {
             a.remove(aIndex);

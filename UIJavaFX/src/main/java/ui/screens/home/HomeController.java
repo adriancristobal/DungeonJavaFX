@@ -69,6 +69,13 @@ public class HomeController extends BaseScreenController implements Initializabl
 
     @FXML
     private void sleepAction(ActionEvent actionEvent) {
+        try {
+            demiurge.nextDay();
+            alert("Shhh...", "You slept successfully", Alert.AlertType.INFORMATION);
+        } catch (Exception e) {
+            alert("Error", "Error to sleep", Alert.AlertType.ERROR);
+        }
+
     }
 
     @FXML
@@ -88,6 +95,11 @@ public class HomeController extends BaseScreenController implements Initializabl
             SingaCrystal cristalToMerge = crystalSelectionHomeComboBox.getValue();
             try {
                 home.mergeCrystal(cristalToMerge);
+                singaAmountHomeHud.setText(String.valueOf(home.getSinga()));
+                crystalSelectionHomeComboBox.setValue(null);
+                crystalSelectionHomeComboBox.setDisable(true);
+                mergeButton.setDisable(true);
+                alert("Info", "You have updated the life successfully", Alert.AlertType.INFORMATION);
             } catch (Exception e) {
                 alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
             }
@@ -103,12 +115,20 @@ public class HomeController extends BaseScreenController implements Initializabl
             if (itemWizardToImprove.equals("Max Life")) {
                 try {
                     wizard.upgradeLifeMax(dc.getBasicIncrease());
+                    //upgrade maxLife of wizard
+                    getPrincipalController().setMaxLifeAmountBotHud(getPrincipalController().getMaxLifeAmountBotHud());
+                    characterSelectionFilterComboBox.setValue(null);
+                    alert("Info", "You have updated the life successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
                     alert("Error","You don't have enough life to upgrade your life", Alert.AlertType.ERROR);
                 }
             } else if (itemWizardToImprove.equals("Max Capacity")) {
                 try {
                     wizard.upgradeEnergyMax(dc.getBasicIncrease());
+                    //upgrade maxLife of wizard
+                    getPrincipalController().setMaxEnergyAmountBotHud(getPrincipalController().getMaxEnergyAmountBotHud());
+                    characterSelectionFilterComboBox.setValue(null);
+                    alert("Info", "You have updated the max capacity successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     alert("Error","You don't have enough energy to upgrade your energy", Alert.AlertType.ERROR);
                 }
@@ -124,6 +144,10 @@ public class HomeController extends BaseScreenController implements Initializabl
             if (itemHomeToImprove.equals("Comfort")) {
                 try {
                     home.upgradeComfort();
+                    //upgrade maxLife of wizard
+                    comfortAmountHomeHud.setText(String.valueOf(home.getComfort()));
+                    homeSelectionFilterComboBox.setValue(null);
+                    alert("Info", "You have updated comfort successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
                     alert("Error","You don't have enough Singa to improve your Comfort", Alert.AlertType.ERROR);
                 }
@@ -131,6 +155,10 @@ public class HomeController extends BaseScreenController implements Initializabl
                 try {
                     //singaStorageAmountHomeHud.getSelectionEnd();
                     home.upgradeMaxSinga(dc.getStoneIncrease());
+                    //upgrade maxLife of wizard
+                    singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
+                    homeSelectionFilterComboBox.setValue(null);
+                    alert("Info", "You have updated the stone capacity successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     alert("Error","You don't have enough Singa to improve your Stone Capacity", Alert.AlertType.ERROR);
                 }
@@ -187,9 +215,9 @@ public class HomeController extends BaseScreenController implements Initializabl
             singaAmountHomeHud.setText(String.valueOf(home.getSinga()));
             totalSingaAmountHomeHud.setText(String.valueOf(home.getMaxSinga()));
             singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
-            //esto ultimo no creo que este bien
             chestAmountHomeHud.setText(String.valueOf(home.getContainer().size()));
             totalChestAmountHomeHud.setText(String.valueOf(home.getContainer().getValue()));
+
         }
 
 

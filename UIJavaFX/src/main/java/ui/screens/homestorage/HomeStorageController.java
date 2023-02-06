@@ -8,8 +8,11 @@ import game.object.Item;
 import game.objectContainer.Chest;
 import game.objectContainer.JewelryBag;
 import game.objectContainer.Wearables;
+import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerInvalidExchangeException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 import jakarta.inject.Inject;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -156,7 +159,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             this.getPrincipalController().showErrorAlert("Select an item from the jewelry bag\nand another from the chest");
         } else {
             try {
-                int bagItemIndex = chestList.indexOf(jewel);
+                int bagItemIndex = bagList.indexOf(jewel);
                 int chestItemIndex = chestList.indexOf(chestItem);
                 manager.exchangeItem(bag, bagItemIndex, wearables, chestItemIndex);
                 showChestList();
@@ -203,5 +206,92 @@ public class HomeStorageController extends BaseScreenController implements Initi
             bag.remove(jewelItemIndex);
             showChestList();
         }
+    }
+
+    public void saveInChest(ActionEvent actionEvent) {
+        Item wearable = listViewWearing.getSelectionModel().getSelectedItem();
+        Item jewel = listViewJewelryBag.getSelectionModel().getSelectedItem();
+
+        if (wearable != null && jewel != null) {
+            this.getPrincipalController().showErrorAlert("Select only one object");
+        } else if (wearable != null) {
+            try {
+                int wearableItemIndex = wearableList.indexOf(wearable);
+                manager.addItem(wearables, wearableItemIndex, chest);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Chest is full");
+            }
+        } else if (jewel != null) {
+            try {
+                int jewelItemIndex = bagList.indexOf(jewel);
+                manager.addItem(wearables, jewelItemIndex, chest);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Chest is full");
+            }
+        }
+    }
+
+    public void saveInBag() {
+        Item wearable = listViewWearing.getSelectionModel().getSelectedItem();
+        Item chestItem = listViewChest.getSelectionModel().getSelectedItem();
+
+        if (wearable != null && chestItem != null) {
+            this.getPrincipalController().showErrorAlert("Select only one object");
+        } else if (wearable != null) {
+            try {
+                int wearableItemIndex = wearableList.indexOf(wearable);
+                manager.addItem(wearables, wearableItemIndex, bag);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Jewelry bag is full");
+            }
+        }else if (chestItem != null) {
+            try {
+                int chestItemIndex = bagList.indexOf(chestItem);
+                manager.addItem(chest, chestItemIndex, bag);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Chest is full");
+            }
+        }
+    }
+
+    public void saveAsWearable() {
+        Item wearable = listViewWearing.getSelectionModel().getSelectedItem();
+        Item chestItem = listViewChest.getSelectionModel().getSelectedItem();
+
+        if (wearable != null && chestItem != null) {
+            this.getPrincipalController().showErrorAlert("Select only one object");
+        } else if (wearable != null) {
+            try {
+                int wearableItemIndex = wearableList.indexOf(wearable);
+                manager.addItem(wearables, wearableItemIndex, bag);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Jewelry bag is full");
+            }
+        }else if (chestItem != null) {
+            try {
+                int chestItemIndex = bagList.indexOf(chestItem);
+                manager.addItem(chest, chestItemIndex, bag);
+            } catch (ContainerUnacceptedItemException e) {
+                this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
+            } catch (ContainerFullException e) {
+                this.getPrincipalController().showErrorAlert("Chest is full");
+            }
+        }
+    }
+
+    public void clearSelection(ActionEvent actionEvent) {
+        listViewChest.getSelectionModel().clearSelection();
+        listViewJewelryBag.getSelectionModel().clearSelection();
+        listViewWearing.getSelectionModel().clearSelection();
     }
 }

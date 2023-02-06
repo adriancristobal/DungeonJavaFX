@@ -114,6 +114,17 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void removeAction(ActionEvent actionEvent) {
+        if (wizardItemsListView.getSelectionModel().getSelectedItem() != null) {
+            String itemName = wizardItemsListView.getSelectionModel().getSelectedItem();
+            Item item;
+            wizard.getCrystalCarrier().iterator().forEachRemaining(o -> {
+                if (o.toString().equals(itemName)) {}});
+            wizard.getWearables().iterator().forEachRemaining(o -> {
+                if (o.toString().equals(itemName)){}});
+            wizard.getJewelryBag().iterator().forEachRemaining(o ->{
+                if (o.toString().equals(itemName)) {}});
+
+        }
     }
 
     @FXML
@@ -129,13 +140,14 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             crystalLabel.setText("No crystals in Room " + roomId);
         } else {
             imgCrystal.setVisible(true);
-            crystalLabel.setText("Crystal" );
+            crystalLabel.setText("Crystal");
             imgCrystal.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
         }
-
+        werableLabel.setVisible(true);
         if (demiurge.getDungeon().getRoom(roomId).getContainer().isEmpty()) {
             imgWearable.setVisible(false);
             werableLabel.setVisible(false);
+            werableLabel.setText("No objects in Room " + roomId);
         } else {
             imgWearable.setVisible(true);
             werableLabel.setVisible(true);
@@ -145,6 +157,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
                 imgWearable.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
             } else if (item.getClass().getSimpleName().equals("Weapon")) {
                 imgWearable.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
+            } else if (item.getClass().getSimpleName().equals("ring")) {
+                imgWearable.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
             }
             werableLabel.setText(item.toString());
         }
@@ -185,7 +199,9 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void runAway(ActionEvent actionEvent) {
-
+        explorersMenuPane.setVisible(true);
+        battleMenuPane.setVisible(false);
+        imgMonster.setVisible(false);
     }
 
     private void saveAll() {
