@@ -71,6 +71,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void sleepAction(ActionEvent actionEvent) {
         try {
             demiurge.nextDay();
+            getPrincipalController().refreshDay();
             alert("Shhh...", "You slept successfully", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
             alert("Error", "Error to sleep", Alert.AlertType.ERROR);

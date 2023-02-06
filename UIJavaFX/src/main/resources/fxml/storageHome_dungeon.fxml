@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.homestorage.HomeStorageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.homestorage.HomeStorageController">
     <bottom>
         <Pane fx:id="removeJewelryBagBtn" prefHeight="512.0" prefWidth="762.0" BorderPane.alignment="CENTER">
             <children>
@@ -31,7 +34,7 @@
                 </ImageView>
                 <ImageView fx:id="exchangeJewelryWearingImg" fitHeight="58.0" fitWidth="58.0" layoutX="321.0" layoutY="348.0" onMouseClicked="#exchangeJewelryWearing" pickOnBounds="true" preserveRatio="true">
                 </ImageView>
-                <ImageView fx:id="exchangeJewelryChestImg" fitHeight="49.0" fitWidth="49.0" layoutX="190.0" layoutY="274.0" onMouseClicked="#exchangeJewelryChest" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 45;">
+                <ImageView fx:id="exchangeJewelryChestImg" fitHeight="49.0" fitWidth="49.0" layoutX="190.0" layoutY="274.0" onMouseClicked="#exchangeJewelryChest" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 135;">
                 </ImageView>
                 <Button fx:id="closeChestBtn" layoutX="607.0" layoutY="89.0" mnemonicParsing="false" onAction="#closeChest" prefHeight="40.0" prefWidth="133.0" text="CLOSE CHEST">
                     <font>

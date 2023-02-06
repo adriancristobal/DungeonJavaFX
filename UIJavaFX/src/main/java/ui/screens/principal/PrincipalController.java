@@ -54,6 +54,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     @FXML
     public Pane characterBotHud;
     @FXML
+    public Text dayInfoBotHud;
+    @FXML
     public Text singaAmountBotHud;
     @FXML
     public Text crystalsAmountBotHud;
@@ -75,6 +77,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     public Text energyAmountBotHud;
     @FXML
     public Text maxEnergyAmountBotHud;
+    @FXML
+    public ImageView imgDayBotHud;
     @FXML
     private ImageView imgCrystalBotHud;
     @FXML
@@ -290,6 +294,7 @@ public class PrincipalController extends BaseScreenController implements Initial
         //TEXT
 
         if (actualWizard != null) {
+            dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
             crystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getValue()));
             maxCrystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getMaximum()));
             lifeAmountBotHud.setText(String.valueOf(actualWizard.getLife()));
@@ -298,6 +303,7 @@ public class PrincipalController extends BaseScreenController implements Initial
             maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
 
             //TODO: WEARABLES
+
         }
 
         //IMAGES
@@ -308,5 +314,10 @@ public class PrincipalController extends BaseScreenController implements Initial
         imgWeaponBotHud.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
         imgRingBotHud.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
         imgRingBotHudTwo.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
+        imgDayBotHud.setImage(new Image(getClass().getResource("/images/calendar.png").toExternalForm()));
+    }
+
+    public void refreshDay() {
+        dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
     }
 }
