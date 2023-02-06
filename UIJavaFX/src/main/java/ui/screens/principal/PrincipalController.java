@@ -56,6 +56,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     @FXML
     public Text ringInfoBotHud;
     @FXML
+    public Text ringInfoBotHudTwo;
+    @FXML
     public Text weaponInfoBotHud;
     @FXML
     public Text necklaceInfoBotHud;
@@ -75,6 +77,8 @@ public class PrincipalController extends BaseScreenController implements Initial
     private ImageView imgEnergyBotHud;
     @FXML
     public ImageView imgRingBotHud;
+    @FXML
+    public ImageView imgRingBotHudTwo;
     @FXML
     private ImageView imgLifeBotHud;
 
@@ -289,7 +293,7 @@ public class PrincipalController extends BaseScreenController implements Initial
             energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
             maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
 
-            //WEARABLES
+            //TODO: WEARABLES
         }
 
         //IMAGES
@@ -299,5 +303,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         imgNecklaceBotHud.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
         imgWeaponBotHud.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
         imgRingBotHud.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
+        imgRingBotHudTwo.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
     }
 }
