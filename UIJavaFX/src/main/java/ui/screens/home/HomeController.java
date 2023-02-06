@@ -121,21 +121,21 @@ public class HomeController extends BaseScreenController implements Initializabl
                     characterSelectionFilterComboBox.setValue(null);
                     alert("Info", "You have updated the life successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
-                    alert("Error","You don't have enough life to upgrade your life", Alert.AlertType.ERROR);
+                    alert("Error","You don't have enough singa/energy to upgrade your life", Alert.AlertType.ERROR);
                 }
-            } else if (itemWizardToImprove.equals("Max Capacity")) {
+            } else if (itemWizardToImprove.equals("Max Energy")) {
                 try {
                     wizard.upgradeEnergyMax(dc.getBasicIncrease());
-                    //upgrade maxLife of wizard
+                    //upgrade maxEnergy of wizard
                     getPrincipalController().setMaxEnergyAmountBotHud(getPrincipalController().getMaxEnergyAmountBotHud());
                     characterSelectionFilterComboBox.setValue(null);
-                    alert("Info", "You have updated the max capacity successfully", Alert.AlertType.INFORMATION);
+                    alert("Info", "You have updated the max energy successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
-                    alert("Error","You don't have enough energy to upgrade your energy", Alert.AlertType.ERROR);
+                    alert("Error","You don't have enough singa/energy to upgrade your energy", Alert.AlertType.ERROR);
                 }
             }
         } catch (Exception e) {
-            alert("Warning", "Value incorrect", Alert.AlertType.WARNING);
+            alert("Warning", "Please select a value", Alert.AlertType.WARNING);
         }
     }
     @FXML
@@ -144,28 +144,30 @@ public class HomeController extends BaseScreenController implements Initializabl
             String itemHomeToImprove = homeSelectionFilterComboBox.getValue();
             if (itemHomeToImprove.equals("Comfort")) {
                 try {
+                    //TODO: averiguar si esto gasta singa/energy
                     home.upgradeComfort();
                     //upgrade maxLife of wizard
                     comfortAmountHomeHud.setText(String.valueOf(home.getComfort()));
+
                     homeSelectionFilterComboBox.setValue(null);
-                    alert("Info", "You have updated comfort successfully", Alert.AlertType.INFORMATION);
+                    alert("Info", "You have successfully updated the comfort level", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
-                    alert("Error","You don't have enough Singa to improve your Comfort", Alert.AlertType.ERROR);
+                    alert("Error","You don't have enough singa to improve your maximum comfort lebeñ", Alert.AlertType.ERROR);
                 }
-            } else if (itemHomeToImprove.equals("Stone Capacity")) {
+            } else if (itemHomeToImprove.equals("Singa Capacity")) {
                 try {
                     //singaStorageAmountHomeHud.getSelectionEnd();
                     home.upgradeMaxSinga(dc.getStoneIncrease());
                     //upgrade maxLife of wizard
                     singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
                     homeSelectionFilterComboBox.setValue(null);
-                    alert("Info", "You have updated the stone capacity successfully", Alert.AlertType.INFORMATION);
+                    alert("Info", "You have successfully updated the maximum singa capacity", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     alert("Error","You don't have enough Singa to improve your Stone Capacity", Alert.AlertType.ERROR);
                 }
             }
         } catch (Exception e) {
-            alert("Warning", "Value incorrect", Alert.AlertType.WARNING);
+            alert("Warning", "Please select a value", Alert.AlertType.WARNING);
         }
     }
 
@@ -231,8 +233,8 @@ public class HomeController extends BaseScreenController implements Initializabl
         homeSelectionFilterComboBox.getItems().clear();
         characterSelectionFilterComboBox.getItems().clear();
         try {
-            homeSelectionFilterComboBox.getItems().addAll("Comfort", "Stone capacity");
-            characterSelectionFilterComboBox.getItems().addAll("Max life", "Max capacity");
+            homeSelectionFilterComboBox.getItems().addAll("Comfort", "Singa capacity");
+            characterSelectionFilterComboBox.getItems().addAll("Max life", "Max Energy");
         } catch (Exception e) {
             alert("Error", "Error to load the home or wizard upgrades", Alert.AlertType.ERROR);
         }
