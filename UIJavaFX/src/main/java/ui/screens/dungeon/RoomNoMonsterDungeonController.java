@@ -110,6 +110,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void exchangeItemRoomBag(MouseEvent mouseEvent) {
+
     }
 
     @FXML
@@ -117,11 +118,16 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         if (wizardItemsListView.getSelectionModel().getSelectedItem() != null) {
             String itemName = wizardItemsListView.getSelectionModel().getSelectedItem();
             Item item;
+
             wizard.getCrystalCarrier().iterator().forEachRemaining(o -> {
-                if (o.toString().equals(itemName)) {}});
+                if (o.toString().equals(itemName)) {
+
+                }});
             wizard.getWearables().iterator().forEachRemaining(o -> {
+
                 if (o.toString().equals(itemName)){}});
             wizard.getJewelryBag().iterator().forEachRemaining(o ->{
+
                 if (o.toString().equals(itemName)) {}});
 
         }
