@@ -295,20 +295,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     //FILL + REFRESH HUD
     public void fillHud() {
         //TEXT
-
-        if (actualWizard != null) {
-            dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
-            crystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getValue()));
-            maxCrystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getMaximum()));
-            lifeAmountBotHud.setText(String.valueOf(actualWizard.getLife()));
-            maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
-            energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
-            maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
-            setHUDWeapon();
-            setHUDNecklace();
-            //TODO: WEARABLES
-
-        }
+        fillTexts();
 
         //IMAGES
         imgCrystalBotHud.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
@@ -323,6 +310,23 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     public void refreshDay() {
         dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
+    }
+
+    public void fillTexts(){
+
+        if (actualWizard != null) {
+            dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
+            crystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getValue()));
+            maxCrystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getMaximum()));
+            lifeAmountBotHud.setText(String.valueOf(actualWizard.getLife()));
+            maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
+            energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
+            maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
+            setHUDWeapon();
+            setHUDNecklace();
+            //TODO: WEARABLES
+
+        }
     }
 
     public void setHUDWeapon(){
