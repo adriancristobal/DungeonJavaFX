@@ -257,34 +257,34 @@ public class HomeStorageController extends BaseScreenController implements Initi
             } catch (ContainerUnacceptedItemException e) {
                 this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
             } catch (ContainerFullException e) {
-                this.getPrincipalController().showErrorAlert("Chest is full");
+                this.getPrincipalController().showErrorAlert("Jewelry bag is full");
             }
         }
     }
 
     public void saveAsWearable() {
-        Item wearable = listViewWearing.getSelectionModel().getSelectedItem();
+        Item bagItem = listViewJewelryBag.getSelectionModel().getSelectedItem();
         Item chestItem = listViewChest.getSelectionModel().getSelectedItem();
 
-        if (wearable != null && chestItem != null) {
+        if (bagItem != null && chestItem != null) {
             this.getPrincipalController().showErrorAlert("Select only one object");
-        } else if (wearable != null) {
+        } else if (bagItem != null) {
             try {
-                int wearableItemIndex = wearableList.indexOf(wearable);
-                manager.addItem(wearables, wearableItemIndex, bag);
+                int bagItemIndex = bagList.indexOf(bagItem);
+                manager.addItem(wearables, bagItemIndex, wearables);
             } catch (ContainerUnacceptedItemException e) {
                 this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
             } catch (ContainerFullException e) {
-                this.getPrincipalController().showErrorAlert("Jewelry bag is full");
+                this.getPrincipalController().showErrorAlert("Wearable is full");
             }
         }else if (chestItem != null) {
             try {
                 int chestItemIndex = bagList.indexOf(chestItem);
-                manager.addItem(chest, chestItemIndex, bag);
+                manager.addItem(chest, chestItemIndex, wearables);
             } catch (ContainerUnacceptedItemException e) {
                 this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
             } catch (ContainerFullException e) {
-                this.getPrincipalController().showErrorAlert("Chest is full");
+                this.getPrincipalController().showErrorAlert("Wearable is full");
             }
         }
     }

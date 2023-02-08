@@ -16,7 +16,7 @@ public class DIJavaFX extends Application {
         SeContainerInitializer initializer = SeContainerInitializer.newInstance();
         final SeContainer container = initializer.initialize();
         primaryStage.setMinWidth(1000);
-        primaryStage.setMinHeight(700);
+//        primaryStage.setMinHeight(700);
         primaryStage.setResizable(true);
         container.getBeanManager().fireEvent(primaryStage, new AnnotationLiteral<StartupScene>() {});
     }

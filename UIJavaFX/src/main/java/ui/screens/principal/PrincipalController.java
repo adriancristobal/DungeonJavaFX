@@ -4,6 +4,9 @@ import game.DungeonLoaderXML;
 import game.character.Wizard;
 import game.demiurge.DungeonConfiguration;
 import game.dungeon.Room;
+import game.object.Necklace;
+import game.object.Ring;
+import game.object.Weapon;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
@@ -301,7 +304,8 @@ public class PrincipalController extends BaseScreenController implements Initial
             maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
             energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
             maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
-
+            setHUDWeapon();
+            setHUDNecklace();
             //TODO: WEARABLES
 
         }
@@ -319,5 +323,36 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     public void refreshDay() {
         dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
+    }
+
+    public void setHUDWeapon(){
+        if (demiurge != null && actualWizard != null){
+            actualWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Weapon){
+                    weaponInfoBotHud.setText("Level " + ((Weapon) item).getValue());
+                }
+            });
+        }
+    }
+
+    public void setHUDNecklace(){
+        if (demiurge != null && actualWizard != null){
+            actualWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Necklace){
+                    //TODO: añadir tipo de collar
+                    necklaceInfoBotHud.setText("Level " + ((Necklace) item).getValue());
+                }
+            });
+        }
+    }
+
+    public void setHUDRing1(){
+        if (demiurge != null && actualWizard != null){
+            actualWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Ring){
+                    ringInfoBotHud.setText("Level " + ((Ring) item).getValue());
+                }
+            });
+        }
     }
 }

@@ -1,9 +1,14 @@
 package ui.screens.home;
 
 import game.character.Wizard;
+import game.character.exceptions.WizardNotEnoughEnergyException;
+import game.character.exceptions.WizardTiredException;
 import game.demiurge.Demiurge;
+import game.demiurge.DemiurgeContainerManager;
+import game.demiurge.DemiurgeHomeManager;
 import game.demiurge.DungeonConfiguration;
 import game.dungeon.Home;
+import game.dungeon.HomeNotEnoughSingaException;
 import game.dungeon.Room;
 import game.object.SingaCrystal;
 import game.objectContainer.Container;
@@ -44,8 +49,6 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private Text chestAmountHomeHud;
     @FXML
-    private Text singaStorageAmountHomeHud;
-    @FXML
     private Text comfortAmountHomeHud;
     @FXML
     private Text singaAmountHomeHud;
@@ -62,6 +65,8 @@ public class HomeController extends BaseScreenController implements Initializabl
     private Demiurge demiurge;
     private Home home;
     private Wizard wizard;
+    private DemiurgeHomeManager demiurgeHomeManager;
+
 
     Alert alerta;
 
@@ -114,7 +119,8 @@ public class HomeController extends BaseScreenController implements Initializabl
             String itemWizardToImprove = characterSelectionFilterComboBox.getValue();
             if (itemWizardToImprove.equalsIgnoreCase("Max Life")) {
                 try {
-                    wizard.upgradeLifeMax(dc.getBasicIncrease());
+                    //wizard.upgradeLifeMax(dc.getBasicIncrease());
+                    demiurgeHomeManager.upgradeLifeMax();
                     //upgrade maxLife of wizard
                     getPrincipalController().setMaxLifeAmountBotHud(getPrincipalController().getMaxLifeAmountBotHud());
                     characterSelectionFilterComboBox.setValue(null);
@@ -130,13 +136,20 @@ public class HomeController extends BaseScreenController implements Initializabl
                 }
             } else if (itemWizardToImprove.equalsIgnoreCase("Max Energy")) {
                 try {
-                    wizard.upgradeEnergyMax(dc.getBasicIncrease());
+                    //wizard.upgradeEnergyMax(dc.getBasicIncrease());
+                    demiurgeHomeManager.upgradeEnergyMax();
                     //upgrade maxEnergy of wizard
                     getPrincipalController().setMaxEnergyAmountBotHud(getPrincipalController().getMaxEnergyAmountBotHud());
                     characterSelectionFilterComboBox.setValue(null);
                     alert("Info", "You have updated the max energy successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     alert("Error","You don't have enough singa/energy to upgrade your energy", Alert.AlertType.ERROR);
+                } catch (WizardTiredException e) {
+                    throw new RuntimeException(e);
+                } catch (WizardNotEnoughEnergyException e) {
+                    throw new RuntimeException(e);
+                } catch (HomeNotEnoughSingaException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } catch (Exception e) {
@@ -156,18 +169,31 @@ public class HomeController extends BaseScreenController implements Initializabl
                     homeSelectionFilterComboBox.setValue(null);
                     alert("Info", "You have successfully updated the comfort level", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
-                    alert("Error","You don't have enough singa to improve your maximum comfort lebeñ", Alert.AlertType.ERROR);
+                    alert("Error","You don't have enough singa to improve your maximum comfort level", Alert.AlertType.ERROR);
+                } catch (WizardTiredException e) {
+                    throw new RuntimeException(e);
+                } catch (WizardNotEnoughEnergyException e) {
+                    alert("Error","You don't have enough energy to improve your maximum comfort level", Alert.AlertType.ERROR);
+                    throw new RuntimeException(e);
+                } catch (HomeNotEnoughSingaException e) {
+                    throw new RuntimeException(e);
                 }
             } else if (itemHomeToImprove.equals("Singa Capacity")) {
                 try {
                     //singaStorageAmountHomeHud.getSelectionEnd();
-                    home.upgradeMaxSinga(dc.getStoneIncrease());
+                    demiurgeHomeManager.upgradeSingaMax();
                     //upgrade maxLife of wizard
-                    singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
+                    singaAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
                     homeSelectionFilterComboBox.setValue(null);
                     alert("Info", "You have successfully updated the maximum singa capacity", Alert.AlertType.INFORMATION);
                 } catch (Exception e) {
                     alert("Error","You don't have enough Singa to improve your Stone Capacity", Alert.AlertType.ERROR);
+                } catch (WizardTiredException e) {
+                    throw new RuntimeException(e);
+                } catch (WizardNotEnoughEnergyException e) {
+                    throw new RuntimeException(e);
+                } catch (HomeNotEnoughSingaException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } catch (Exception e) {
@@ -196,6 +222,10 @@ public class HomeController extends BaseScreenController implements Initializabl
             demiurge = this.getPrincipalController().getDemiurge();
             home = demiurge.getHome();
             wizard = demiurge.getWizard();
+            dc = new DungeonConfiguration();
+            //demiurgeContainerManager = new DemiurgeContainerManager(null, null, null);
+
+            demiurgeHomeManager = new DemiurgeHomeManager(dc, wizard, home, null);
             fillHud();
         }
 //        if (this.getPrincipalController().getDemiurge() != null) {
