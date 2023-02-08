@@ -6,6 +6,7 @@ import game.demiurge.DungeonConfiguration;
 import game.dungeon.Home;
 import game.dungeon.Room;
 import game.object.SingaCrystal;
+import game.objectContainer.Container;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,8 +57,6 @@ public class HomeController extends BaseScreenController implements Initializabl
     private ImageView imgComfortHomeHud;
     @FXML
     private ImageView imgSingaHomeHud;
-    @FXML
-    private ImageView imgSingaStorageHomeHud;
 
     private DungeonConfiguration dc;
     private Demiurge demiurge;
@@ -100,7 +99,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                 crystalSelectionHomeComboBox.setValue(null);
                 crystalSelectionHomeComboBox.setDisable(true);
                 mergeButton.setDisable(true);
-                alert("Info", "You have updated the life successfully", Alert.AlertType.INFORMATION);
+                alert("Info", "You have successfully merged the crystal", Alert.AlertType.INFORMATION);
             } catch (Exception e) {
                 alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
             }
@@ -113,7 +112,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void improveCharacter(ActionEvent actionEvent) {
         try {
             String itemWizardToImprove = characterSelectionFilterComboBox.getValue();
-            if (itemWizardToImprove.equals("Max Life")) {
+            if (itemWizardToImprove.equalsIgnoreCase("Max Life")) {
                 try {
                     wizard.upgradeLifeMax(dc.getBasicIncrease());
                     //upgrade maxLife of wizard
@@ -122,8 +121,14 @@ public class HomeController extends BaseScreenController implements Initializabl
                     alert("Info", "You have updated the life successfully", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
                     alert("Error","You don't have enough singa/energy to upgrade your life", Alert.AlertType.ERROR);
+                } catch (WizardTiredException e) {
+                    throw new RuntimeException(e);
+                } catch (WizardNotEnoughEnergyException e) {
+                    throw new RuntimeException(e);
+                } catch (HomeNotEnoughSingaException e) {
+                    throw new RuntimeException(e);
                 }
-            } else if (itemWizardToImprove.equals("Max Energy")) {
+            } else if (itemWizardToImprove.equalsIgnoreCase("Max Energy")) {
                 try {
                     wizard.upgradeEnergyMax(dc.getBasicIncrease());
                     //upgrade maxEnergy of wizard
@@ -145,10 +150,9 @@ public class HomeController extends BaseScreenController implements Initializabl
             if (itemHomeToImprove.equals("Comfort")) {
                 try {
                     //TODO: averiguar si esto gasta singa/energy
-                    home.upgradeComfort();
-                    //upgrade maxLife of wizard
-                    comfortAmountHomeHud.setText(String.valueOf(home.getComfort()));
-
+                    demiurgeHomeManager.upgradeComfort();
+                    //comfortAmountHomeHud.setText(String.valueOf(home.getComfort()));
+                    setTextViews();
                     homeSelectionFilterComboBox.setValue(null);
                     alert("Info", "You have successfully updated the comfort level", Alert.AlertType.INFORMATION);
                 } catch (Exception e){
@@ -209,7 +213,6 @@ public class HomeController extends BaseScreenController implements Initializabl
         imgChestHomeHud.setImage(new Image(getClass().getResource("/images/treasure.png").toExternalForm()));
         imgComfortHomeHud.setImage(new Image(getClass().getResource("/images/sofa.png").toExternalForm()));
         imgSingaHomeHud.setImage(new Image(getClass().getResource("/images/singa.png").toExternalForm()));
-        imgSingaStorageHomeHud.setImage(new Image(getClass().getResource("/images/open-box.png").toExternalForm()));
     }
 
     private void setTextViews() {
@@ -217,7 +220,6 @@ public class HomeController extends BaseScreenController implements Initializabl
             comfortAmountHomeHud.setText(String.valueOf(home.getComfort()));
             singaAmountHomeHud.setText(String.valueOf(home.getSinga()));
             totalSingaAmountHomeHud.setText(String.valueOf(home.getMaxSinga()));
-            singaStorageAmountHomeHud.setText(String.valueOf(home.getSingaSpace()));
             chestAmountHomeHud.setText(String.valueOf(home.getContainer().size()));
             totalChestAmountHomeHud.setText(String.valueOf(home.getContainer().getValue()));
 
@@ -234,7 +236,7 @@ public class HomeController extends BaseScreenController implements Initializabl
         characterSelectionFilterComboBox.getItems().clear();
         try {
             homeSelectionFilterComboBox.getItems().addAll("Comfort", "Singa capacity");
-            characterSelectionFilterComboBox.getItems().addAll("Max life", "Max Energy");
+            characterSelectionFilterComboBox.getItems().addAll("Max Life", "Max Energy");
         } catch (Exception e) {
             alert("Error", "Error to load the home or wizard upgrades", Alert.AlertType.ERROR);
         }

@@ -29,14 +29,10 @@
             <children>
                <Text fill="WHITE" layoutX="29.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA" />
                <Text fill="WHITE" layoutX="154.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMFORT LVL" />
-               <Text fill="WHITE" layoutX="327.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SINGA " />
                <ImageView fx:id="imgSingaHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="5.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <ImageView fx:id="imgComfortHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="126.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
-               <ImageView fx:id="imgSingaStorageHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="283.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-               </ImageView>
-               <Text fill="WHITE" layoutX="310.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STORAGE LVL" />
                <ImageView fx:id="imgChestHomeHud" fitHeight="24.0" fitWidth="26.0" layoutX="444.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                </ImageView>
                <Text fill="WHITE" layoutX="474.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHEST" />
@@ -44,7 +40,6 @@
                <Text fill="#7df262" layoutX="90.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
                <Text fx:id="totalSingaAmountHomeHud" fill="#7df262" layoutX="99.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                <Text fx:id="comfortAmountHomeHud" fill="#7df262" layoutX="248.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
-               <Text fx:id="singaStorageAmountHomeHud" fill="#7df262" layoutX="402.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
                <Text fx:id="chestAmountHomeHud" fill="#7df262" layoutX="524.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                <Text fill="#7df262" layoutX="537.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="546.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
