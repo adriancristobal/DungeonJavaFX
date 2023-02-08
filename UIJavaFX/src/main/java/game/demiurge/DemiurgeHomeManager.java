@@ -86,6 +86,12 @@ public class DemiurgeHomeManager {
     }
 
     public void upgradeComfort() throws HomeNotEnoughSingaException, WizardNotEnoughEnergyException, WizardTiredException {
+        /** Prueba **/
+        int homeSinga = home.getSinga();
+        int homeComfort = home.getComfort();
+        System.out.println("Singa: " + homeSinga);
+        System.out.println("Comfort: " + homeComfort);
+        //////////////////////////
         if (home.getComfort() * dc.getComfortUpgradeCost() > home.getSinga()) {
             throw new HomeNotEnoughSingaException();
         } else if (home.getComfort() > wizard.getEnergy()) {

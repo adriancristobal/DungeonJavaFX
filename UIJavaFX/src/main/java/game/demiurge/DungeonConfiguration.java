@@ -8,7 +8,7 @@ public class DungeonConfiguration {
     private int basicIncrease = 1;
     private int stoneIncrease = 50;
 
-    private int basicUpgradeCost = 10;
+    private int basicUpgradeCost = 1;
     private int comfortUpgradeCost = 100;
 
     private int singaPerLifePointCost = 3;
