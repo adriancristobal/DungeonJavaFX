@@ -42,11 +42,6 @@
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="546.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             </children>
          </Pane>
-         <Button fx:id="sleepButton" layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Button>
          <Button layoutX="13.0" layoutY="154.0" mnemonicParsing="false" onAction="#mergeCrystalsAction" prefHeight="44.0" prefWidth="153.0" text="Merge crystals">
             <font>
                <Font size="16.0" />

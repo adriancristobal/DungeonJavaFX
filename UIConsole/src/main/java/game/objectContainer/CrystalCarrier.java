@@ -12,13 +12,6 @@ import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 public class CrystalCarrier extends ContainerSinga {
 
     public CrystalCarrier(int c) { super(c); }
-
-    /**
-     * Adds just a crystal
-     * @param i the crystal to be added
-     * @throws ContainerFullException the container is full
-     * @throws ContainerUnacceptedItemException the container don't accept that item
-     */
     public void add(Item i) throws ContainerUnacceptedItemException, ContainerFullException {
         if(isFull())
             throw new ContainerFullException();

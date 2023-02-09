@@ -4,14 +4,12 @@ import game.character.Wizard;
 import game.character.exceptions.WizardNotEnoughEnergyException;
 import game.character.exceptions.WizardTiredException;
 import game.demiurge.Demiurge;
-import game.demiurge.DemiurgeContainerManager;
 import game.demiurge.DemiurgeHomeManager;
 import game.demiurge.DungeonConfiguration;
 import game.dungeon.Home;
 import game.dungeon.HomeNotEnoughSingaException;
 import game.dungeon.Room;
 import game.object.SingaCrystal;
-import game.objectContainer.Container;
 import game.objectContainer.exceptions.ContainerEmptyException;
 import game.objectContainer.exceptions.ContainerErrorException;
 import game.util.ValueOverMaxException;
@@ -79,7 +77,7 @@ public class HomeController extends BaseScreenController implements Initializabl
 
 
     @FXML
-    private void sleepAction(ActionEvent actionEvent) {
+    private void sleepAction(MouseEvent actionEvent) {
         try {
             demiurge.nextDay();
             getPrincipalController().refreshDay();
@@ -107,27 +105,26 @@ public class HomeController extends BaseScreenController implements Initializabl
         try {
            // crystalSelectionHomeComboBox.getSelectionModel().select();
             SingaCrystal cristalToMerge = crystalSelectionHomeComboBox.getValue();
-            try {
-                demiurgeHomeManager.mergeCrystal(cristalToMerge.getValue());
-                singaAmountHomeHud.setText(String.valueOf(home.getSinga()));
-                crystalSelectionHomeComboBox.setValue(null);
-                crystalSelectionHomeComboBox.setDisable(true);
-                mergeButton.setDisable(true);
-                alert("Info", "You have successfully merged the crystal", Alert.AlertType.INFORMATION);
-            } catch (Exception e) {
-                alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
-            } catch (WizardTiredException e) {
-                alert("Ups...","You are tired, you need to sleep", Alert.AlertType.INFORMATION);
-                throw new RuntimeException(e);
-            } catch (ContainerErrorException e) {
-                alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
-                throw new RuntimeException(e);
-            } catch (ContainerEmptyException e) {
-                alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
-                throw new RuntimeException(e);
+            for (int i = 0; i < crystalSelectionHomeComboBox.getItems().size(); i++) {
+                if (crystalSelectionHomeComboBox.getItems().get(i).equals(cristalToMerge)) {
+
+                    demiurgeHomeManager.mergeCrystal(i);
+                    alert("Success", "You merged the crystals successfully", Alert.AlertType.INFORMATION);
+                    //crystalSelectionHomeComboBox.getItems().remove(i);
+                    crystalSelectionHomeComboBox.getSelectionModel().clearSelection();
+                    crystalSelectionHomeComboBox.setDisable(true);
+                    mergeButton.setDisable(true);
+                    setTextViews();
+                }
             }
         } catch (Exception e) {
             alert("Error", "Value is wrong", Alert.AlertType.ERROR);
+        } catch (WizardTiredException e) {
+            alert("Ups...","You are tired, you need to sleep", Alert.AlertType.INFORMATION);
+            throw new RuntimeException(e);
+        } catch (ContainerErrorException | ContainerEmptyException e) {
+            alert("Error", "Error to merge crystal", Alert.AlertType.ERROR);
+            throw new RuntimeException(e);
         }
     }
 
@@ -140,11 +137,11 @@ public class HomeController extends BaseScreenController implements Initializabl
                 try {
                     demiurgeHomeManager.upgradeLifeMax();
                 } catch (WizardTiredException e) {
-                    getPrincipalController().fillTexts();
                     characterSelectionFilterComboBox.setValue(null);
                     demiurge.nextDay();
                     getPrincipalController().refreshDay();
                     getPrincipalController().fillTexts();
+                    setTextViews();
                     alert("Ups...","You are tired, you need to sleep", Alert.AlertType.INFORMATION);
                     throw new RuntimeException(e);
                 } catch (WizardNotEnoughEnergyException e) {
@@ -163,6 +160,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                     demiurge.nextDay();
                     getPrincipalController().refreshDay();
                     getPrincipalController().fillTexts();
+                    setTextViews();
                     alert("Ups...","You are tired, you need to sleep", Alert.AlertType.INFORMATION);
                     throw new RuntimeException(e);
                 } catch (WizardNotEnoughEnergyException e) {
@@ -358,6 +356,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                 demiurgeHomeManager.recover(Integer.parseInt(tfLifePointsToRecover.getText()));
                 setTextViews();
                 getPrincipalController().fillTexts();
+                tfLifePointsToRecover.clear();
             } else {
                 alert("Warning", "Please, enter a valid number", Alert.AlertType.WARNING);
             }
@@ -368,10 +367,10 @@ public class HomeController extends BaseScreenController implements Initializabl
             alert("Ups...","You are tired, you need to sleep", Alert.AlertType.INFORMATION);
             throw new RuntimeException(e);
         } catch (ValueOverMaxException e) {
-            alert("Ups...","You are trying to recover more than your max life", Alert.AlertType.INFORMATION);
+            alert("Error","You are trying to recover more than your max life", Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         } catch (HomeNotEnoughSingaException e) {
-            alert("Ups...","You don't have enough Singa", Alert.AlertType.INFORMATION);
+            alert("Error","You don't have enough Singa", Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         }
     }
