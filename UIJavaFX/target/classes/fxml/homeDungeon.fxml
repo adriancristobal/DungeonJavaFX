@@ -42,11 +42,6 @@
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="546.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             </children>
          </Pane>
-         <Button fx:id="sleepButton" layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#sleepAction" prefHeight="44.0" prefWidth="153.0" text="Sleep">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Button>
          <Button layoutX="13.0" layoutY="154.0" mnemonicParsing="false" onAction="#mergeCrystalsAction" prefHeight="44.0" prefWidth="153.0" text="Merge crystals">
             <font>
                <Font size="16.0" />
@@ -75,8 +70,8 @@
         </font>
     </Text>
    <TextField fx:id="tfLifePointsToRecover" layoutX="584.0" layoutY="336.0" prefHeight="25.0" prefWidth="26.0" />
-    <ImageView fx:id="imgBedHome" fitHeight="132.0" fitWidth="132.0" layoutX="219.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true" />
-    <ImageView fx:id="imgSpellBookHome" fitHeight="86.0" fitWidth="90.0" layoutX="436.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imgBedHome" fitHeight="132.0" fitWidth="132.0" layoutX="219.0" layoutY="223.0" onMouseClicked="#sleepAction" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imgSpellBookHome" fitHeight="86.0" fitWidth="90.0" layoutX="436.0" layoutY="75.0" onMouseClicked="#seeLearntSpells" pickOnBounds="true" preserveRatio="true" />
     <Text layoutX="440.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learned spells" wrappingWidth="90.0">
         <font>
             <Font size="13.0" />

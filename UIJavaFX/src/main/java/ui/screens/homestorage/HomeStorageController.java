@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class HomeStorageController extends BaseScreenController implements Initializable {
     private final DungeonLoader loader;
+    //TODO: Añadir nuestro loader a la carga de Mario
 
     @Inject
     public HomeStorageController(DungeonLoader loader) {
