@@ -1,7 +1,6 @@
 package ui.screens.homestorage;
 
 import game.DungeonLoader;
-import game.DungeonLoaderXML;
 import game.demiurge.Demiurge;
 import game.demiurge.DemiurgeContainerManager;
 import game.object.Item;
@@ -12,7 +11,6 @@ import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerInvalidExchangeException;
 import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 import jakarta.inject.Inject;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -125,6 +123,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 manager.exchangeItem(chest, chestItemIndex, wearables, wearableItemIndex);
                 showJewelryBagList();
                 showWearableList();
+                this.getPrincipalController().setWearables();
             } catch (ContainerInvalidExchangeException e) {
                 this.getPrincipalController().showErrorAlert("These items can't be exchange");
             }
@@ -145,6 +144,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 manager.exchangeItem(bag, bagItemIndex, wearables, wearableItemIndex);
                 showChestList();
                 showJewelryBagList();
+                this.getPrincipalController().setWearables();
             } catch (ContainerInvalidExchangeException e) {
                 this.getPrincipalController().showErrorAlert("These items can't be exchange");
             }
@@ -194,6 +194,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             int wearableItemIndex = wearableList.indexOf(item);
             wearables.remove(wearableItemIndex);
             showChestList();
+            this.getPrincipalController().setWearables();
         }
     }
 
@@ -208,7 +209,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
         }
     }
 
-    public void saveInChest(ActionEvent actionEvent) {
+    public void saveInChest() {
         Item wearable = listViewWearing.getSelectionModel().getSelectedItem();
         Item jewel = listViewJewelryBag.getSelectionModel().getSelectedItem();
 
@@ -218,6 +219,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             try {
                 int wearableItemIndex = wearableList.indexOf(wearable);
                 manager.addItem(wearables, wearableItemIndex, chest);
+                this.getPrincipalController().setWearables();
             } catch (ContainerUnacceptedItemException e) {
                 this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
             } catch (ContainerFullException e) {
@@ -245,6 +247,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             try {
                 int wearableItemIndex = wearableList.indexOf(wearable);
                 manager.addItem(wearables, wearableItemIndex, bag);
+                this.getPrincipalController().setWearables();
             } catch (ContainerUnacceptedItemException e) {
                 this.getPrincipalController().showErrorAlert("This item can't be saved in this container");
             } catch (ContainerFullException e) {
@@ -287,9 +290,10 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 this.getPrincipalController().showErrorAlert("Wearable is full");
             }
         }
+        this.getPrincipalController().setWearables();
     }
 
-    public void clearSelection(ActionEvent actionEvent) {
+    public void clearSelection() {
         listViewChest.getSelectionModel().clearSelection();
         listViewJewelryBag.getSelectionModel().clearSelection();
         listViewWearing.getSelectionModel().clearSelection();

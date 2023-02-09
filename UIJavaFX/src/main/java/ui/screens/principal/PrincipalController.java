@@ -35,6 +35,8 @@ import game.demiurge.Demiurge;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -322,14 +324,18 @@ public class PrincipalController extends BaseScreenController implements Initial
             maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
             energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
             maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
-            setHUDWeapon();
-            setHUDNecklace();
-            //TODO: WEARABLES
-
+            setWearables();
         }
     }
 
+    public void setWearables(){
+        setHUDWeapon();
+        setHUDNecklace();
+        setHUDRings();
+    }
+
     public void setHUDWeapon(){
+        weaponInfoBotHud.setText("none");
         if (demiurge != null && actualWizard != null){
             actualWizard.getWearables().iterator().forEachRemaining(item -> {
                 if (item instanceof Weapon){
@@ -340,6 +346,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     public void setHUDNecklace(){
+        necklaceInfoBotHud.setText("none");
         if (demiurge != null && actualWizard != null){
             actualWizard.getWearables().iterator().forEachRemaining(item -> {
                 if (item instanceof Necklace){
@@ -350,13 +357,22 @@ public class PrincipalController extends BaseScreenController implements Initial
         }
     }
 
-    public void setHUDRing1(){
+    public void setHUDRings(){
+        ringInfoBotHud.setText("none");
+        ringInfoBotHudTwo.setText("none");
         if (demiurge != null && actualWizard != null){
+            List<Ring> rings = new ArrayList<>();
             actualWizard.getWearables().iterator().forEachRemaining(item -> {
                 if (item instanceof Ring){
-                    ringInfoBotHud.setText("Level " + ((Ring) item).getValue());
+                    rings.add((Ring) item);
                 }
             });
+            if (rings.get(0) != null) {
+                ringInfoBotHud.setText("Level " + rings.get(0).getValue());
+            }
+            if (rings.get(1) != null){
+                ringInfoBotHudTwo.setText("Level " + rings.get(1).getValue());
+            }
         }
     }
 }
