@@ -118,7 +118,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         if (wizardItemsListView.getSelectionModel().getSelectedItem() != null) {
             String itemName = wizardItemsListView.getSelectionModel().getSelectedItem();
             Item item;
-
             wizard.getCrystalCarrier().iterator().forEachRemaining(o -> {
                 if (o.toString().equals(itemName)) {
 
@@ -191,6 +190,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void performPhysicalAttack(ActionEvent actionEvent) {
+        demiurge.getWizard().checkWeapon();
     }
 
     @FXML
