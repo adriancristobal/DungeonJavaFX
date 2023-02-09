@@ -12,6 +12,7 @@ import game.dungeon.Room;
 import game.object.SingaCrystal;
 import game.objectContainer.exceptions.ContainerEmptyException;
 import game.objectContainer.exceptions.ContainerErrorException;
+import game.spell.Spell;
 import game.util.ValueOverMaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javafx.scene.text.Text;
 import ui.common.BaseScreenController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -373,5 +375,16 @@ public class HomeController extends BaseScreenController implements Initializabl
             alert("Error","You don't have enough Singa", Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    private void seeLearntSpells(MouseEvent mouseEvent) {
+        //crear cuadro de texto con hechizos aprendidos
+        ArrayList<Spell> learntSpells = new ArrayList<>();
+        demiurgeHomeManager.getLibrary().iterator().forEachRemaining(item -> {
+            learntSpells.add((Spell)item);
+        });
+
+        alert("Learnt spells...","These are the spells you know: "+ learntSpells, Alert.AlertType.INFORMATION);
     }
 }
