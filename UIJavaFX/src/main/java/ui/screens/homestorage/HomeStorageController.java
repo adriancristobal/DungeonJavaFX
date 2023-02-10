@@ -24,13 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeStorageController extends BaseScreenController implements Initializable {
-    private final DungeonLoader loader;
-    //TODO: Añadir nuestro loader a la carga de Mario
-
-    @Inject
-    public HomeStorageController(DungeonLoader loader) {
-        this.loader = loader;
-    }
+    //TODO: REVISAR INDEX
 
     private Chest chest;
     private Wearables wearables;
@@ -69,13 +63,10 @@ public class HomeStorageController extends BaseScreenController implements Initi
     public void principalCargado() {
         Demiurge demiurge = this.getPrincipalController().getDemiurge();
         if (demiurge != null) {
-            demiurge.loadEnvironment(loader);
-            manager = demiurge.getContainerManager();
             chest = (Chest) demiurge.getHome().getContainer();
             wearables = (Wearables) demiurge.getWizard().getWearables();
             bag = (JewelryBag) demiurge.getWizard().getJewelryBag();
-
-            manager = demiurge.getContainerManager();
+            manager = new DemiurgeContainerManager(wearables, bag, chest);
 
             chest.iterator().forEachRemaining(item -> chestList.add((Item) item));
             listViewChest.getItems().addAll(chestList);
@@ -121,7 +112,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             try {
                 int chestItemIndex = chestList.indexOf(chestItem);
                 int wearableItemIndex = wearableList.indexOf(wearingItem);
-                manager.exchangeItem(chest, chestItemIndex, wearables, wearableItemIndex);
+                manager.exchangeItem(wearables, wearableItemIndex, chest, chestItemIndex);
                 showJewelryBagList();
                 showWearableList();
                 this.getPrincipalController().setWearables();
@@ -142,7 +133,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
             try {
                 int bagItemIndex = chestList.indexOf(jewel);
                 int wearableItemIndex = wearableList.indexOf(wearingItem);
-                manager.exchangeItem(bag, bagItemIndex, wearables, wearableItemIndex);
+                manager.exchangeItem(wearables, wearableItemIndex, bag, bagItemIndex);
                 showChestList();
                 showJewelryBagList();
                 this.getPrincipalController().setWearables();
@@ -166,7 +157,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 showChestList();
                 showWearableList();
             } catch (ContainerInvalidExchangeException e) {
-                this.getPrincipalController().showErrorAlert("These items can't be exchange");
+                this.getPrincipalController().showErrorAlert("Only jewels are allowed");
             }
         }
     }
@@ -194,7 +185,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
         } else {
             int wearableItemIndex = wearableList.indexOf(item);
             wearables.remove(wearableItemIndex);
-            showChestList();
+            showWearableList();
             this.getPrincipalController().setWearables();
         }
     }
@@ -206,7 +197,7 @@ public class HomeStorageController extends BaseScreenController implements Initi
         } else {
             int jewelItemIndex = bagList.indexOf(item);
             bag.remove(jewelItemIndex);
-            showChestList();
+            showJewelryBagList();
         }
     }
 
@@ -236,6 +227,9 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 this.getPrincipalController().showErrorAlert("Chest is full");
             }
         }
+        showWearableList();
+        showChestList();
+        showJewelryBagList();
     }
 
     public void saveInBag() {
@@ -264,6 +258,9 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 this.getPrincipalController().showErrorAlert("Jewelry bag is full");
             }
         }
+        showWearableList();
+        showChestList();
+        showJewelryBagList();
     }
 
     public void saveAsWearable() {
@@ -291,6 +288,9 @@ public class HomeStorageController extends BaseScreenController implements Initi
                 this.getPrincipalController().showErrorAlert("Wearable is full");
             }
         }
+        showWearableList();
+        showChestList();
+        showJewelryBagList();
         this.getPrincipalController().setWearables();
     }
 

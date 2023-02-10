@@ -2,11 +2,17 @@ package ui.screens.principal;
 
 import game.DungeonLoaderXML;
 import game.character.Wizard;
+import game.demiurge.DemiurgeContainerManager;
 import game.demiurge.DungeonConfiguration;
 import game.dungeon.Room;
+import game.object.ItemCreationErrorException;
 import game.object.Necklace;
 import game.object.Ring;
 import game.object.Weapon;
+import game.objectContainer.exceptions.ContainerFullException;
+import game.objectContainer.exceptions.ContainerUnacceptedItemException;
+import game.spell.SpellUnknowableException;
+import game.util.ValueOverMaxException;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import javafx.event.ActionEvent;
@@ -46,13 +52,31 @@ import java.util.ResourceBundle;
 public class PrincipalController extends BaseScreenController implements Initializable {
 
     private final DungeonLoaderXML loader;
+    private final DungeonConfiguration config;
 
     private Demiurge demiurge;
+
+    @Inject
+    public PrincipalController(Instance<Object> instance, DungeonLoaderXML loader) {
+        this.loader = loader;
+        this.instance = instance;
+        this.demiurge = new Demiurge();
+        this.config = new DungeonConfiguration();
+        alert = new Alert(Alert.AlertType.NONE);
+    }
+
+
+    private DemiurgeContainerManager manager;
+
+    public DemiurgeContainerManager getManager() {
+        return manager;
+    }
+
     private int currentRoomId;
+
     public int getRoomId() {
         return currentRoomId;
     }
-
 
     @FXML
     public MenuItem goToMainMenu;
@@ -92,6 +116,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     public ImageView imgRingBotHud;
     @FXML
     public ImageView imgRingBotHudTwo;
+
     @FXML
     private ImageView imgLifeBotHud;
 
@@ -103,7 +128,6 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     @FXML
     private ImageView imgWeaponBotHud;
-
     @FXML
     private Menu principalMenu;
     @FXML
@@ -118,18 +142,26 @@ public class PrincipalController extends BaseScreenController implements Initial
     private Alert alert;
     @FXML
     private BorderPane root;
-    public Wizard actualWizard;
-    public Room actualRoom;
+    public Wizard currentWizard;
+
+    public Room currentRoom;
+
+    public void loadManagers(File file) {
+        demiurge.loadEnvironment((demiurge, dungeonConfiguration) -> {
+            try {
+                loader.load(demiurge, dungeonConfiguration, file);
+                currentWizard = demiurge.getWizard();
+                goHome();
+            } catch (Exception | ContainerUnacceptedItemException | SpellUnknowableException |
+                     ValueOverMaxException |
+                     ContainerFullException | ItemCreationErrorException e) {
+                showErrorAlert("Error al cargar el XML");
+            }
+        });
+    }
 
     public Demiurge getDemiurge() {
         return demiurge;
-    }
-
-    //ESTE SET SOLO SE USA AL CARGAR LA MAZMORRA DEL XML O LA BASE DE DATOS
-    public void setDemiurgeFromLoad(Demiurge loadedDemiurge) {
-        demiurge = loadedDemiurge;
-        getWizard();
-        this.goHome();
     }
 
     public void setDemiurge(Demiurge demiurge) {
@@ -138,14 +170,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     public void getWizard() {
-        actualWizard = this.demiurge.getWizard();
-    }
-
-    @Inject
-    public PrincipalController(Instance<Object> instance, DungeonLoaderXML loader) {
-        this.loader = loader;
-        this.instance = instance;
-        alert = new Alert(Alert.AlertType.NONE);
+        currentWizard = this.demiurge.getWizard();
     }
 
     public void setStage(Stage stage) {
@@ -216,7 +241,6 @@ public class PrincipalController extends BaseScreenController implements Initial
     @FXML
     public void saveGame(ActionEvent actionEvent) {
         try {
-            DungeonConfiguration config = new DungeonConfiguration();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Load Game (.xml)");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
@@ -313,42 +337,42 @@ public class PrincipalController extends BaseScreenController implements Initial
         dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
     }
 
-    public void fillTexts(){
+    public void fillTexts() {
 
-        if (actualWizard != null) {
+        if (currentWizard != null) {
             dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
-            crystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getValue()));
-            maxCrystalsAmountBotHud.setText(String.valueOf(actualWizard.getCrystalCarrier().getMaximum()));
-            lifeAmountBotHud.setText(String.valueOf(actualWizard.getLife()));
-            maxLifeAmountBotHud.setText(String.valueOf(actualWizard.getLifeMax()));
-            energyAmountBotHud.setText(String.valueOf(actualWizard.getEnergy()));
-            maxEnergyAmountBotHud.setText(String.valueOf(actualWizard.getEnergyMax()));
+            crystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().getValue()));
+            maxCrystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().getMaximum()));
+            lifeAmountBotHud.setText(String.valueOf(currentWizard.getLife()));
+            maxLifeAmountBotHud.setText(String.valueOf(currentWizard.getLifeMax()));
+            energyAmountBotHud.setText(String.valueOf(currentWizard.getEnergy()));
+            maxEnergyAmountBotHud.setText(String.valueOf(currentWizard.getEnergyMax()));
             setWearables();
         }
     }
 
-    public void setWearables(){
+    public void setWearables() {
         setHUDWeapon();
         setHUDNecklace();
         setHUDRings();
     }
 
-    public void setHUDWeapon(){
+    public void setHUDWeapon() {
         weaponInfoBotHud.setText("none");
-        if (demiurge != null && actualWizard != null){
-            actualWizard.getWearables().iterator().forEachRemaining(item -> {
-                if (item instanceof Weapon){
+        if (demiurge != null && currentWizard != null) {
+            currentWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Weapon) {
                     weaponInfoBotHud.setText("Level " + ((Weapon) item).getValue());
                 }
             });
         }
     }
 
-    public void setHUDNecklace(){
+    public void setHUDNecklace() {
         necklaceInfoBotHud.setText("none");
-        if (demiurge != null && actualWizard != null){
-            actualWizard.getWearables().iterator().forEachRemaining(item -> {
-                if (item instanceof Necklace){
+        if (demiurge != null && currentWizard != null) {
+            currentWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Necklace) {
                     //TODO: añadir tipo de collar
                     necklaceInfoBotHud.setText("Level " + ((Necklace) item).getValue());
                 }
@@ -356,20 +380,20 @@ public class PrincipalController extends BaseScreenController implements Initial
         }
     }
 
-    public void setHUDRings(){
+    public void setHUDRings() {
         ringInfoBotHud.setText("none");
         ringInfoBotHudTwo.setText("none");
-        if (demiurge != null && actualWizard != null){
+        if (demiurge != null && currentWizard != null) {
             List<Ring> rings = new ArrayList<>();
-            actualWizard.getWearables().iterator().forEachRemaining(item -> {
-                if (item instanceof Ring){
+            currentWizard.getWearables().iterator().forEachRemaining(item -> {
+                if (item instanceof Ring) {
                     rings.add((Ring) item);
                 }
             });
             if (rings.get(0) != null) {
                 ringInfoBotHud.setText("Level " + rings.get(0).getValue());
             }
-            if (rings.get(1) != null){
+            if (rings.get(1) != null) {
                 ringInfoBotHudTwo.setText("Level " + rings.get(1).getValue());
             }
         }
