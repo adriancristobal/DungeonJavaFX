@@ -2,7 +2,8 @@ package ui.screens.dungeon;
 
 import game.actions.Attack;
 import game.character.Wizard;
-import game.demiurge.Demiurge;
+import game.character.exceptions.CharacterKilledException;
+import game.demiurge.*;
 import game.dungeon.Room;
 import game.dungeon.Site;
 import game.object.Item;
@@ -71,6 +72,10 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     @FXML
     private Text werableLabel;
 
+
+    private DemiurgeDungeonManager demiurgeDungeonManager;
+    private DemiurgeContainerManager containerManager;
+    private DemiurgeEndChecker endChecker;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO:comprobar los wearables
@@ -86,6 +91,13 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         if (demiurge != null) {
             roomId = this.getPrincipalController().getRoomId();
             wizard = demiurge.getWizard();
+            //TODO: comprobaciones
+            DungeonConfiguration dc = new DungeonConfiguration();
+            Site site = new Room(roomId, "", null);
+            containerManager = new DemiurgeContainerManager(demiurge.getWizard().getWearables(), demiurge.getWizard().getJewelryBag(), demiurge.getDungeon().getRoom(roomId).getContainer());
+            endChecker = new DemiurgeEndChecker();
+            demiurgeDungeonManager = new DemiurgeDungeonManager(dc, wizard, site , containerManager, endChecker);
+            //
             List<Room> rooms = new ArrayList<>();
             demiurge.getDungeon().iterator().forEachRemaining(room -> rooms.add(room));
             List<Integer> roomIds = rooms.stream().map(Site::getID).toList();
@@ -190,7 +202,13 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void performPhysicalAttack(ActionEvent actionEvent) {
+
         demiurge.getWizard().checkWeapon();
+        //demiurgeDungeonManager.wizardAttack()
+
+
+        //demiurge.getDungeon().getRoom(roomId).getMonster().receivePhysicalAttack(demiurge.getWizard().getWeapon().getDamage());
+        //demiurge.getDungeon().getRoom(roomId/).ge().receivePhysicalAttack(demiurge.getWizard().ge().getDamage());
     }
 
     @FXML

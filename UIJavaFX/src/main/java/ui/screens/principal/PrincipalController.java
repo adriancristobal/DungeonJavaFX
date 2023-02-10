@@ -162,7 +162,6 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fillHud();
         goMainMenu();
     }
 
