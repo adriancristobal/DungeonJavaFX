@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.home.HomeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.home.HomeController">
          <Text layoutX="51.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
             <font>
                <Font size="27.0" />
@@ -42,7 +47,7 @@
                <Text fx:id="totalChestAmountHomeHud" fill="#7df262" layoutX="546.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             </children>
          </Pane>
-         <Button layoutX="13.0" layoutY="154.0" mnemonicParsing="false" onAction="#mergeCrystalsAction" prefHeight="44.0" prefWidth="153.0" text="Merge crystals">
+         <Button layoutX="13.0" layoutY="122.0" mnemonicParsing="false" onAction="#mergeCrystalsAction" prefHeight="44.0" prefWidth="153.0" text="Merge crystals">
             <font>
                <Font size="16.0" />
             </font>
@@ -58,10 +63,10 @@
          <Font size="16.0" />
       </font>
    </Button>
-   <ComboBox fx:id="crystalSelectionHomeComboBox" disable="true" layoutX="180.0" layoutY="163.0" onAction="#enableButtonMerge" prefHeight="26.0" prefWidth="73.0" />
-   <Text layoutX="182.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose crystal" />
-   <Text layoutX="192.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to merge" />
-    <Button fx:id="mergeButton" disable="true" layoutX="273.0" layoutY="156.0" mnemonicParsing="false" onAction="#mergeAction" prefHeight="39.0" prefWidth="74.0" text="Merge" />
+   <ComboBox fx:id="crystalSelectionHomeComboBox" disable="true" layoutX="180.0" layoutY="131.0" onAction="#enableButtonMerge" prefHeight="26.0" prefWidth="73.0" />
+   <Text layoutX="182.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose crystal" />
+   <Text layoutX="192.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to merge" />
+    <Button fx:id="mergeButton" disable="true" layoutX="273.0" layoutY="124.0" mnemonicParsing="false" onAction="#mergeAction" prefHeight="39.0" prefWidth="74.0" text="Merge" />
 
     <ImageView fx:id="imgImproveLifeHealth" fitHeight="58.0" fitWidth="58.0" layoutX="630.0" layoutY="271.0" onMouseClicked="#recoverLife" pickOnBounds="true" preserveRatio="true" />
     <Text layoutX="614.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input life to recover" wrappingWidth="120.045654296875">
@@ -70,16 +75,26 @@
         </font>
     </Text>
    <TextField fx:id="tfLifePointsToRecover" layoutX="584.0" layoutY="336.0" prefHeight="25.0" prefWidth="26.0" />
-    <ImageView fx:id="imgBedHome" fitHeight="132.0" fitWidth="132.0" layoutX="219.0" layoutY="223.0" onMouseClicked="#sleepAction" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="imgBedHome" fitHeight="132.0" fitWidth="132.0" layoutX="233.0" layoutY="224.0" onMouseClicked="#sleepAction" pickOnBounds="true" preserveRatio="true" />
     <ImageView fx:id="imgSpellBookHome" fitHeight="86.0" fitWidth="90.0" layoutX="436.0" layoutY="75.0" onMouseClicked="#seeLearntSpells" pickOnBounds="true" preserveRatio="true" />
     <Text layoutX="440.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learned spells" wrappingWidth="90.0">
         <font>
             <Font size="13.0" />
         </font>
     </Text>
-    <Text layoutX="251.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go to sleep" wrappingWidth="67.5999755859375">
+    <Text layoutX="265.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go to sleep" wrappingWidth="67.5999755859375">
         <font>
             <Font size="13.0" />
         </font>
     </Text>
+   <ListView fx:id="listViewSpells" layoutX="408.0" layoutY="189.0" prefHeight="132.0" prefWidth="154.0" />
+   <ComboBox fx:id="spellComboBox" layoutX="13.0" layoutY="213.0" prefHeight="26.0" prefWidth="154.0" />
+   <Text layoutX="30.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose a spell to learn" />
+   <Button fx:id="learnSpellBtnHome" layoutX="176.0" layoutY="213.0" mnemonicParsing="false" onAction="#learnSpell" prefHeight="26.0" prefWidth="49.0" text="Learn" />
+   <ImageView fx:id="imgLevelUpSpellHome" fitHeight="36.0" fitWidth="35.0" layoutX="530.0" layoutY="330.0" onMouseClicked="#upgradeSpell" pickOnBounds="true" preserveRatio="true" />
+   <Text layoutX="446.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Improve spell" wrappingWidth="77.66015625">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Text>
 </AnchorPane>
