@@ -470,6 +470,9 @@ public class HomeController extends BaseScreenController implements Initializabl
         } catch (Exception e) {
             alert("Warning!", "You didn't select any spell", Alert.AlertType.WARNING);
         } catch (WizardTiredException e) {
+            demiurge.nextDay();
+            getPrincipalController().refreshDay();
+            getPrincipalController().fillTexts();
             alert("Ups!", "You are tired and need to go to sleep", Alert.AlertType.INFORMATION);
         } catch (WizardNotEnoughEnergyException e) {
             alert("Error", "You don't have enough energy to perform this action", Alert.AlertType.ERROR);
