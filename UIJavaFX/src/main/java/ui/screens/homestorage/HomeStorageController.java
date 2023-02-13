@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 public class HomeStorageController extends BaseScreenController implements Initializable {
     //TODO: REVISAR INDEX
 
+
     private Chest chest;
     private Wearables wearables;
     private JewelryBag bag;

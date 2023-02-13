@@ -101,13 +101,12 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             wizard = demiurge.getWizard();
             //TODO: comprobaciones
             DungeonConfiguration dc = new DungeonConfiguration();
-            Site site = new Room(roomId, "", null);
             containerManager = new DemiurgeContainerManager(demiurge.getWizard().getWearables(), demiurge.getWizard().getJewelryBag(), demiurge.getDungeon().getRoom(roomId).getContainer());
             endChecker = new DemiurgeEndChecker();
-            demiurgeDungeonManager = new DemiurgeDungeonManager(dc, wizard, site , containerManager, endChecker);
+            demiurgeDungeonManager = new DemiurgeDungeonManager(dc, wizard, room, containerManager, endChecker);
             //
             List<Room> rooms = new ArrayList<>();
-            demiurge.getDungeon().iterator().forEachRemaining(room -> rooms.add(room));
+            demiurge.getDungeon().iterator().forEachRemaining(room1 -> rooms.add(room1));
             List<Integer> roomIds = rooms.stream().map(Site::getID).toList();
             roomMoveComboBox.setItems(FXCollections.observableArrayList(roomIds));
         }
