@@ -33,10 +33,15 @@ import java.util.stream.Collectors;
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
     private int roomId;
+    private Room room;
 
     private boolean hasMonster;
     private Demiurge demiurge;
     private Wizard wizard;
+    @FXML
+    private ImageView imgExit;
+    @FXML
+    private Label lblExit;
     @FXML
     private Pane battleMenuPane;
     @FXML
@@ -81,6 +86,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         //TODO:comprobar los wearables
         crystalLabel.setVisible(false);
         werableLabel.setVisible(false);
+        lblExit.setVisible(false);
+        imgExit.setVisible(false);
     }
 
     //HUD solo hay en Home y Principal
@@ -90,6 +97,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         demiurge = this.getPrincipalController().getDemiurge();
         if (demiurge != null) {
             roomId = this.getPrincipalController().getRoomId();
+            room = demiurge.getDungeon().getRoom(roomId);
             wizard = demiurge.getWizard();
             //TODO: comprobaciones
             DungeonConfiguration dc = new DungeonConfiguration();
@@ -117,6 +125,10 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         } else {
             explorersMenuPane.setVisible(true);
             battleMenuPane.setVisible(false);
+            if (room.isExit()){
+                lblExit.setVisible(true);
+                imgExit.setVisible(true);
+            }
         }
     }
 

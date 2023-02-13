@@ -103,13 +103,6 @@ public class DungeonLoaderManualXML implements DungeonLoaderXML {
             , ContainerUnacceptedItemException
             , ItemCreationErrorException
             , SpellUnknowableException {
-//        final File XMLFILE = new File("xml/dungeon-V.02.xml"); <-- Fichero de prueba
-        final File XSDFILE = new File("xml/dungeon_schema.xsd");
-
-
-        validateAgainstSchema(xmlFile, XSDFILE);
-
-
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document baseXML = dBuilder.parse(xmlFile);
@@ -182,18 +175,6 @@ public class DungeonLoaderManualXML implements DungeonLoaderXML {
                 }
             }
 
-        }
-    }
-
-    private static void validateAgainstSchema(File XMLFILE, File XSDFILE) {
-        try {
-            SchemaFactory factory =
-                    SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = factory.newSchema(XSDFILE);
-            Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(XMLFILE));
-        } catch (IOException | SAXException e) {
-            System.out.println("Exception: " + e);
         }
     }
 

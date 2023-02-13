@@ -289,25 +289,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         cargarPantalla(Pantallas.DUNGEON);
     }
 
-
-    private void closeWindowEvent(WindowEvent event) {
-        Alert alertDialog = new Alert(Alert.AlertType.INFORMATION);
-        alertDialog.getButtonTypes().remove(ButtonType.OK);
-        alertDialog.getButtonTypes().add(ButtonType.CANCEL);
-        alertDialog.getButtonTypes().add(ButtonType.YES);
-//        alert.setTitle(ScreenConstants.QUIT_GAME);
-//        alert.setContentText(ScreenConstants.CLOSE_GAME);
-        alertDialog.initOwner(primaryStage.getOwner());
-        Optional<ButtonType> res = alertDialog.showAndWait();
-
-
-        res.ifPresent(buttonType -> {
-            if (buttonType == ButtonType.CANCEL) {
-                event.consume();
-            }
-        });
-    }
-
     //BOTTOM CHARACTER HUD
     public void hideHud() {
         characterBotHud.setVisible(false);
@@ -338,7 +319,6 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     public void fillTexts() {
-
         if (currentWizard != null) {
             dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
             crystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().getValue()));
@@ -390,10 +370,10 @@ public class PrincipalController extends BaseScreenController implements Initial
                     rings.add((Ring) item);
                 }
             });
-            if (rings.get(0) != null) {
+            if (!rings.isEmpty()) {
                 ringInfoBotHud.setText("Level " + rings.get(0).getValue());
             }
-            if (rings.get(1) != null) {
+            if (rings.size() >= 2) {
                 ringInfoBotHudTwo.setText("Level " + rings.get(1).getValue());
             }
         }

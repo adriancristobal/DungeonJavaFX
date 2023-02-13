@@ -89,4 +89,6 @@
             <ImageView fx:id="exchangeItemRoomBagBtn" fitHeight="64.0" fitWidth="85.0" layoutX="430.0" layoutY="114.0" onMouseClicked="#exchangeItemRoomBag" pickOnBounds="true" preserveRatio="true" />
         </children>
     </Pane>
+   <ImageView fx:id="imgExit" fitHeight="150.0" fitWidth="157.0" layoutX="294.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+   <Label fx:id="lblExit" layoutX="358.0" layoutY="229.0" text="EXIT" />
 </AnchorPane>

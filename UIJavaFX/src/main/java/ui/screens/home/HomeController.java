@@ -32,7 +32,16 @@ import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
+    //TODO: En hechizos aprender, no se borra de la lista
+    //TODO: Al mejorar hechizo, no se actualiza la lista
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        alerta = new Alert(Alert.AlertType.NONE);
+        loadComboBoxesUpgrade();
+        listViewSpells.setVisible(false);
+        //loadCrystalForMergeComboBox();
+    }
     @FXML
     public ListView<Spell> listViewSpells;
     @FXML
@@ -75,13 +84,14 @@ public class HomeController extends BaseScreenController implements Initializabl
     private ImageView imgChestHomeHud;
     @FXML
     private ImageView imgComfortHomeHud;
+
     @FXML
     private ImageView imgSingaHomeHud;
-
     private Demiurge demiurge;
     private Home home;
     private Wizard wizard;
     private DemiurgeHomeManager demiurgeHomeManager;
+
     Alert alerta;
 
 
@@ -235,15 +245,6 @@ public class HomeController extends BaseScreenController implements Initializabl
     }
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        alerta = new Alert(Alert.AlertType.NONE);
-        loadComboBoxesUpgrade();
-        listViewSpells.setVisible(false);
-        spellComboBox.setDisable(true);
-        //loadCrystalForMergeComboBox();
-    }
-
     private void alert(String titulo, String texto, Alert.AlertType tipo) {
         alerta.setTitle(titulo);
         alerta.setContentText(texto);
@@ -263,6 +264,7 @@ public class HomeController extends BaseScreenController implements Initializabl
             demiurgeHomeManager = new DemiurgeHomeManager(dc, wizard, home, null);
             fillHud();
             fillImagesHome();
+            loadSpellComboBox();
         }
 //        if (this.getPrincipalController().getDemiurge() != null) {
 //            home = this.getPrincipalController().getDemiurge().getHome();
@@ -408,44 +410,52 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void seeLearntSpells(MouseEvent mouseEvent) {
         try {
             loadListViewSpells();
-            if (!listViewSpells.isVisible()) {
-                listViewSpells.setVisible(true);
-
-            } else {
-                listViewSpells.setVisible(false);
-            }
+            listViewSpells.setVisible(!listViewSpells.isVisible());
         } catch (Exception e) {
             alert("Error!", "You don't know any spells yet!", Alert.AlertType.ERROR);
-            throw new RuntimeException(e);
         }
     }
 
     @FXML
     private void learnSpell(ActionEvent actionEvent) {
+        boolean spellWasLearnt = false;
+        try {
+            Spell spellToLearn = spellComboBox.getSelectionModel().getSelectedItem();
 
-        if (spellComboBox.isDisabled()) {
-            spellComboBox.setDisable(false);
-            loadSpellComboBox();
-        } else {
-            try {
+            if (listViewSpells.getItems().isEmpty()){
                 demiurgeHomeManager.learnSpell(spellComboBox.getSelectionModel().getSelectedIndex());
+                loadSpellComboBox();
+                setTextViews();
+                getPrincipalController().fillTexts();
                 alert("Success!", "The spell was learnt successfully", Alert.AlertType.INFORMATION);
-            } catch (Exception e) {
-                alert("Warning!", "You didn't select any spell", Alert.AlertType.WARNING);
-                throw new RuntimeException(e);
-            } catch (WizardTiredException e) {
-                alert("Ups!", "You are tired and need to go to sleep", Alert.AlertType.INFORMATION);
-                throw new RuntimeException(e);
-            } catch (WizardSpellKnownException e) {
-                alert("Error", "You already know this spell", Alert.AlertType.ERROR);
-                throw new RuntimeException(e);
-            } catch (WizardNotEnoughEnergyException e) {
-                alert("Error", "Tou don't have enough energy to perform this action", Alert.AlertType.ERROR);
-                throw new RuntimeException(e);
-            } catch (HomeNotEnoughSingaException e) {
-                alert("Error", "Tou don't have enough singa to perform this action", Alert.AlertType.ERROR);
-                throw new RuntimeException(e);
+            } else {
+                for (Spell spellLeart : listViewSpells.getItems()) {
+                    if (spellToLearn == spellLeart) {
+                        spellWasLearnt = true;
+                        break;
+                    }
+                }
+                if (spellWasLearnt) {
+                     alert("Ups!","You had already learned the spell before", Alert.AlertType.INFORMATION);
+                } else {
+                    demiurgeHomeManager.learnSpell(spellComboBox.getSelectionModel().getSelectedIndex());
+                    loadSpellComboBox();
+                    alert("Success!", "The spell was learnt successfully", Alert.AlertType.INFORMATION);
+                }
+
+
             }
+
+        } catch (Exception e) {
+            alert("Warning!", "You didn't select any spell", Alert.AlertType.WARNING);
+        } catch (WizardTiredException e) {
+            alert("Ups!", "You are tired and need to go to sleep", Alert.AlertType.INFORMATION);
+        } catch (WizardSpellKnownException e) {
+            alert("Error", "You already know this spell", Alert.AlertType.ERROR);
+        } catch (WizardNotEnoughEnergyException e) {
+            alert("Error", "You don't have enough energy to perform this action", Alert.AlertType.ERROR);
+        } catch (HomeNotEnoughSingaException e) {
+            alert("Error", "You don't have enough singa to perform this action", Alert.AlertType.ERROR);
         }
     }
 
@@ -453,22 +463,20 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void upgradeSpell(MouseEvent mouseEvent) {
         try {
             demiurgeHomeManager.improveSpell(listViewSpells.getSelectionModel().getSelectedIndex());
+            loadListViewSpells();
+            setTextViews();
+            getPrincipalController().fillTexts();
             alert("Success!", "The spell was improved successfully", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
             alert("Warning!", "You didn't select any spell", Alert.AlertType.WARNING);
-            throw new RuntimeException(e);
         } catch (WizardTiredException e) {
             alert("Ups!", "You are tired and need to go to sleep", Alert.AlertType.INFORMATION);
-            throw new RuntimeException(e);
         } catch (WizardNotEnoughEnergyException e) {
-            alert("Error", "Tou don't have enough energy to perform this action", Alert.AlertType.ERROR);
-            throw new RuntimeException(e);
+            alert("Error", "You don't have enough energy to perform this action", Alert.AlertType.ERROR);
         } catch (ValueOverMaxException e) {
             alert("Error", "This spell has already been improved to its maximum level", Alert.AlertType.ERROR);
-            throw new RuntimeException(e);
         } catch (HomeNotEnoughSingaException e) {
-            alert("Error", "Tou don't have enough singa to perform this action", Alert.AlertType.ERROR);
-            throw new RuntimeException(e);
+            alert("Error", "You don't have enough singa to perform this action", Alert.AlertType.ERROR);
         }
     }
 
