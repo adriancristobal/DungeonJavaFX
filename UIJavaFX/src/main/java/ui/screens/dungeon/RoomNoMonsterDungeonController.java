@@ -1,8 +1,11 @@
 package ui.screens.dungeon;
 
 import game.actions.Attack;
+import game.actions.PhysicalAttack;
 import game.character.Wizard;
 import game.character.exceptions.CharacterKilledException;
+import game.character.exceptions.WizardNotEnoughEnergyException;
+import game.character.exceptions.WizardTiredException;
 import game.demiurge.*;
 import game.dungeon.Room;
 import game.dungeon.Site;
@@ -28,7 +31,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
@@ -51,7 +53,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     @FXML
     private Button physicalAttackBtn;
     @FXML
-    private ComboBox spellComboBox;
+    private ComboBox<Attack> spellComboBox;
     @FXML
     private ImageView imgCrystal;
     @FXML
@@ -86,6 +88,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     private DemiurgeDungeonManager demiurgeDungeonManager;
     private DemiurgeContainerManager containerManager;
     private DemiurgeEndChecker endChecker;
+    private DungeonConfiguration dungeonConfiguration;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO:comprobar los wearables
@@ -142,20 +146,25 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             hasRun = true;
             explorersMenuPane.setVisible(true);
             battleMenuPane.setVisible(false);
-            if (room.isExit()){
+            if (room.isExit()) {
                 lblExit.setVisible(true);
                 imgExit.setVisible(true);
+                if (endChecker.check()) {
+                    imgExit.setImage(new Image(getClass().getResource("/images/exit_open.jpg").toExternalForm()));
+                } else {
+                    imgExit.setImage(new Image(getClass().getResource("/images/exit_closed.jpg").toExternalForm()));
+                }
             }
         }
     }
 
     @FXML
-    void exchangeItemRoomBag(MouseEvent mouseEvent) {
+    void exchangeItemRoomBag() {
 
     }
 
     @FXML
-    void removeAction(ActionEvent actionEvent) {
+    void removeAction() {
         if (wizardItemsListView.getSelectionModel().getSelectedItem() != null) {
             Item item = wizardItemsListView.getSelectionModel().getSelectedItem();
             int index = wizardItemsListView.getSelectionModel().getSelectedIndex();
@@ -186,7 +195,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     }
 
     @FXML
-    void lookForItems(ActionEvent actionEvent) {
+    void lookForItems() {
         crystalLabel.setVisible(true);
         if (demiurge.getDungeon().getRoom(roomId).isEmpty()) {
             imgCrystal.setVisible(false);
@@ -218,7 +227,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     }
 
     @FXML
-    void pickWearable(MouseEvent mouseEvent) {
+    void pickWearable() {
         try {
             Item item = demiurge.getDungeon().getRoom(roomId).getContainer().get(0);
             wizard.getWearables().add(item);
@@ -239,32 +248,82 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         saveAll();
     }
 
+    //TODO: poner botón de ataque con arma
+
     @FXML
-    void performPhysicalAttack(ActionEvent actionEvent) {
-
-        demiurge.getWizard().checkWeapon();
-        //demiurgeDungeonManager.wizardAttack()
-
-
-        //demiurge.getDungeon().getRoom(roomId).getMonster().receivePhysicalAttack(demiurge.getWizard().getWeapon().getDamage());
-        //demiurge.getDungeon().getRoom(roomId/).ge().receivePhysicalAttack(demiurge.getWizard().ge().getDamage());
+    void performPhysicalAttack() {
+        demiurge.getWizard().getAttacksIterator().forEachRemaining(attack -> {
+            if (attack instanceof PhysicalAttack) {
+                battle(attack);
+            }
+        });
     }
 
     @FXML
-    void castSpell(ActionEvent actionEvent) {
-        //Una cosa, aqui no tendria que haber un combox cvon los hechizos aprendidos del mago?
-        //Cosas por hacer:
-        //Esta pantalla.
+    void castSpell() {
         ArrayList<Attack> attackList = new ArrayList<>();
         wizard.getAttacksIterator().forEachRemaining(attackList::add);
         spellComboBox.getItems().addAll(FXCollections.observableArrayList(attackList));
+
+        //TODO: comprobar si peta
+        // si no peta, qué elemento devuelve el combo box... coge el tipo de hechizo?
+        Attack attack = spellComboBox.getSelectionModel().getSelectedItem();
+        if (attack != null) {
+            battle(attack);
+        } else {
+            this.getPrincipalController().showErrorAlert("Choose a spell");
+        }
+    }
+
+    private void battle(Attack attack) {
+        boolean fightFinished = false;
+        while (!fightFinished) {
+            try {
+                if (demiurgeDungeonManager.wizardAttack(attack)) {
+                    this.getPrincipalController().fillHud();
+                    //TODO: comprobar si se entiende sin mostrar mensaje?
+                } else {
+                    this.getPrincipalController().showInfoAlert("Attack failed. It's the monster's turn.");
+                }
+
+                fightFinished = monsterAttack();
+            } catch (CharacterKilledException killedException) {
+                this.getPrincipalController().showInfoAlert("You kill the monster!");
+                fightFinished = true;
+            } catch (WizardTiredException tiredException) {
+                this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
+                this.getPrincipalController().goHome();
+            } catch (WizardNotEnoughEnergyException energyException) {
+                this.getPrincipalController().showErrorAlert("You don't have enough energy to attack!");
+            }
+        }
+    }
+
+    private boolean monsterAttack() {
+        boolean fightFinished = false;
+        try {
+            if (demiurgeDungeonManager.creatureAttack()) {
+                this.getPrincipalController().fillHud();
+            } else {
+                this.getPrincipalController().showInfoAlert("Monster's attack failed. It's your turn!");
+            }
+        } catch (CharacterKilledException killedException) {
+            this.getPrincipalController().showInfoAlert("The monster killed you!");
+            fightFinished = true;
+        }
+        return fightFinished;
     }
 
     @FXML
-    void runAway(ActionEvent actionEvent) {
-        explorersMenuPane.setVisible(true);
-        battleMenuPane.setVisible(false);
-        imgMonster.setVisible(false);
+    void runAway() {
+        if (demiurgeDungeonManager.canRunAway()) {
+            explorersMenuPane.setVisible(true);
+            battleMenuPane.setVisible(false);
+            imgMonster.setVisible(false);
+            hasRun = true;
+        } else {
+            this.getPrincipalController().showInfoAlert("You can't run away.\nFIGHT!");
+        }
     }
 
     private void saveAll() {
