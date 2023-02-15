@@ -4,91 +4,122 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.dungeon.RoomNoMonsterDungeonController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.screens.dungeon.RoomNoMonsterDungeonController">
     <Text layoutX="307.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUNGEON">
         <font>
-            <Font size="27.0" />
+            <Font size="27.0"/>
         </font>
     </Text>
-    <Pane fx:id="battleMenuPane" layoutY="274.0" prefHeight="200.0" prefWidth="744.0" style="-fx-background-color: lightblue;">
-        <Button fx:id="runBtn" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#runAway" prefHeight="30.0" prefWidth="49.0" text="Run">
+    <Pane fx:id="battleMenuPane" layoutY="274.0" prefHeight="200.0" prefWidth="744.0"
+          style="-fx-background-color: lightblue;">
+        <Button fx:id="runBtn" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#runAway"
+                prefHeight="30.0" prefWidth="49.0" text="Run">
             <font>
-                <Font size="15.0" />
+                <Font size="15.0"/>
             </font>
         </Button>
-        <Button fx:id="castSpellBtn" layoutX="458.0" layoutY="100.0" mnemonicParsing="false" onAction="#castSpell" prefHeight="30.0" prefWidth="98.0" text="Cast Spell">
+        <Button fx:id="castSpellBtn" layoutX="458.0" layoutY="100.0" mnemonicParsing="false" onAction="#castSpell"
+                prefHeight="30.0" prefWidth="98.0" text="Cast Spell">
             <font>
-                <Font size="15.0" />
+                <Font size="15.0"/>
             </font>
         </Button>
-        <Button fx:id="physicalAttackBtn" layoutX="162.0" layoutY="77.0" mnemonicParsing="false" onAction="#performPhysicalAttack" prefHeight="47.0" prefWidth="122.0" text="Physical Attack">
+        <Button fx:id="physicalAttackBtn" layoutX="162.0" layoutY="77.0" mnemonicParsing="false"
+                onAction="#performPhysicalAttack" prefHeight="47.0" prefWidth="122.0" text="Physical Attack">
             <font>
-                <Font size="15.0" />
+                <Font size="15.0"/>
             </font>
         </Button>
-        <ComboBox fx:id="spellComboBox" layoutX="432.0" layoutY="73.0" prefWidth="150.0" />
-        <Text fill="WHITE" layoutX="429.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Choose a spelll to cast...">
+        <ComboBox fx:id="spellComboBox" layoutX="432.0" layoutY="73.0" prefWidth="150.0"/>
+        <Text fx:id="spellToCastLabel" fill="WHITE" layoutX="429.0" layoutY="67.0" strokeType="OUTSIDE"
+              strokeWidth="0.0"
+              style="-fx-font-weight: bold;" text="Choose a spell to cast...">
             <font>
-                <Font size="14.0" />
+                <Font size="14.0"/>
             </font>
         </Text>
-        <Text fill="WHITE" layoutX="310.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BATTLE MENU">
+        <Text fill="WHITE" layoutX="310.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              style="-fx-font-weight: bold;" text="BATTLE MENU">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Text>
+        <Button fx:id="startFightButton" layoutX="458.0" layoutY="159.0" mnemonicParsing="false" onAction="#startFight"
+                prefHeight="30.0" prefWidth="98.0" text="Start Battle">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Button>
     </Pane>
-    <ImageView fx:id="imgMonster" fitHeight="165.0" fitWidth="166.0" layoutX="289.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
-    <Pane fx:id="explorersMenuPane" layoutY="275.0" prefHeight="200.0" prefWidth="744.0" style="-fx-background-color: lightblue;">
+    <ImageView fx:id="imgMonster" fitHeight="165.0" fitWidth="166.0" layoutX="289.0" layoutY="107.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <Pane fx:id="explorersMenuPane" layoutY="275.0" prefHeight="200.0" prefWidth="744.0"
+          style="-fx-background-color: lightblue;">
         <children>
-            <Button fx:id="lookForItemsBtn" layoutX="80.0" layoutY="37.0" mnemonicParsing="false" onAction="#lookForItems" prefHeight="17.0" prefWidth="122.0" text="Look for items">
+            <Button fx:id="lookForItemsBtn" layoutX="80.0" layoutY="37.0" mnemonicParsing="false"
+                    onAction="#lookForItems" prefHeight="17.0" prefWidth="122.0" text="Look for items">
                 <font>
-                    <Font size="15.0" />
+                    <Font size="15.0"/>
                 </font>
             </Button>
-           <ImageView fx:id="imgCrystal" fitHeight="64.0" fitWidth="78.0" layoutX="333.0" layoutY="79.0" onMouseClicked="#pickCrystal" pickOnBounds="true" preserveRatio="true" />
-           <Text fx:id="crystalLabel" layoutX="337.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crystal label">
-               <font>
-                   <Font size="13.0" />
-               </font>
-           </Text>
-           <ImageView fx:id="imgWearable" fitHeight="64.0" fitWidth="78.0" layoutX="228.0" layoutY="79.0" onMouseClicked="#pickWearable" pickOnBounds="true" preserveRatio="true" />
-           <Text fx:id="werableLabel" layoutX="224.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wearable label">
-               <font>
-                   <Font size="13.0" />
-               </font>
-           </Text>
-            <ComboBox fx:id="roomMoveComboBox" layoutX="66.0" layoutY="111.0" prefWidth="150.0" />
-            <Text fill="WHITE" layoutX="291.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="EXPLORER'S MENU">
+            <ImageView fx:id="imgCrystal" fitHeight="64.0" fitWidth="78.0" layoutX="333.0" layoutY="79.0"
+                       onMouseClicked="#pickCrystal" pickOnBounds="true" preserveRatio="true"/>
+            <Text fx:id="crystalLabel" layoutX="337.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Crystal label">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="13.0"/>
                 </font>
             </Text>
-            <Button fx:id="moveThereBtn" layoutX="80.0" layoutY="146.0" mnemonicParsing="false" onAction="#moveThere" prefHeight="17.0" prefWidth="122.0" text="Move There">
+            <ImageView fx:id="imgWearable" fitHeight="64.0" fitWidth="78.0" layoutX="228.0" layoutY="79.0"
+                       onMouseClicked="#pickWearable" pickOnBounds="true" preserveRatio="true"/>
+            <Text fx:id="werableLabel" layoutX="224.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Wearable label">
                 <font>
-                    <Font size="15.0" />
+                    <Font size="13.0"/>
+                </font>
+            </Text>
+            <ComboBox fx:id="roomMoveComboBox" layoutX="66.0" layoutY="111.0" prefWidth="150.0"/>
+            <Text fill="WHITE" layoutX="291.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  style="-fx-font-weight: bold;" text="EXPLORER'S MENU">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Text>
+            <Button fx:id="moveThereBtn" layoutX="80.0" layoutY="146.0" mnemonicParsing="false" onAction="#moveThere"
+                    prefHeight="17.0" prefWidth="122.0" text="Move There">
+                <font>
+                    <Font size="15.0"/>
                 </font>
             </Button>
-            <Text fill="WHITE" layoutX="66.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Choose a room to go...">
+            <Text fill="WHITE" layoutX="66.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  style="-fx-font-weight: bold;" text="Choose a room to go...">
                 <font>
-                    <Font size="14.0" />
+                    <Font size="14.0"/>
                 </font>
             </Text>
-            <ListView fx:id="wizardItemsListView" layoutX="529.0" layoutY="30.0" prefHeight="148.0" prefWidth="182.0" />
-            <Button fx:id="removeBtn" layoutX="689.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removeAction" prefHeight="19.0" prefWidth="20.0" style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
+            <ListView fx:id="wizardItemsListView" layoutX="529.0" layoutY="30.0" prefHeight="148.0" prefWidth="182.0"/>
+            <Button fx:id="removeBtn" layoutX="689.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity"
+                    mnemonicParsing="false" onAction="#removeAction" prefHeight="19.0" prefWidth="20.0"
+                    style="-fx-background-color: red; -fx-font-weight: bold;" text="X" textFill="WHITE">
                 <font>
-                    <Font size="10.0" />
+                    <Font size="10.0"/>
                 </font>
             </Button>
-            <Text fill="WHITE" layoutX="607.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="BAG">
+            <Text fill="WHITE" layoutX="607.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  style="-fx-font-weight: bold;" text="BAG">
                 <font>
-                    <Font size="13.0" />
+                    <Font size="13.0"/>
                 </font>
             </Text>
-            <ImageView fx:id="exchangeItemRoomBagBtn" fitHeight="64.0" fitWidth="85.0" layoutX="430.0" layoutY="114.0" onMouseClicked="#exchangeItemRoomBag" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="exchangeItemRoomBagBtn" fitHeight="64.0" fitWidth="85.0" layoutX="430.0" layoutY="114.0"
+                       onMouseClicked="#exchangeItemRoomBag" pickOnBounds="true" preserveRatio="true"/>
         </children>
     </Pane>
-   <ImageView fx:id="imgExit" fitHeight="150.0" fitWidth="157.0" layoutX="294.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-   <Label fx:id="lblExit" layoutX="358.0" layoutY="229.0" text="EXIT" />
+    <ImageView fx:id="imgExit" onMouseClicked="#runAway" fitHeight="150.0" fitWidth="157.0" layoutX="294.0"
+               layoutY="74.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <Label fx:id="lblExit" layoutX="358.0" layoutY="229.0" text="EXIT"/>
 </AnchorPane>

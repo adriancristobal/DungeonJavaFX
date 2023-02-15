@@ -43,7 +43,7 @@ public abstract class Container extends Item {
      * @return true if the storage is full
      */
     public boolean isFull() { return getValue()==items.size(); }
-    public boolean isEmpty() { return getValue()==0; }
+    public boolean isEmpty() { return items.size()==0; }
 
     /**
      * Allows the iteration of the collection

@@ -134,9 +134,6 @@ public class PrincipalController extends BaseScreenController implements Initial
     private MenuItem generateImportMenuItem;
     @FXML
     private MenuItem saveGameMenuItem;
-    @FXML
-    private MenuItem exitToDesktopMenuItem;
-    //private Wizard actualWizard;
     Instance<Object> instance;
     private Stage primaryStage;
     private Alert alert;
@@ -210,14 +207,12 @@ public class PrincipalController extends BaseScreenController implements Initial
     public void showMenuItems() {
         generateImportMenuItem.setVisible(true);
         saveGameMenuItem.setVisible(true);
-        exitToDesktopMenuItem.setVisible(true);
         goToMainMenu.setVisible(true);
     }
 
     public void hideMenuItems() {
         generateImportMenuItem.setVisible(false);
         saveGameMenuItem.setVisible(false);
-        exitToDesktopMenuItem.setVisible(true);
         goToMainMenu.setVisible(false);
     }
 
