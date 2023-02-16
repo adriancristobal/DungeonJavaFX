@@ -228,6 +228,12 @@ public class PrincipalController extends BaseScreenController implements Initial
         alert.showAndWait();
     }
 
+    public void showWarningAlert(String message) {
+        alert.setAlertType(Alert.AlertType.WARNING);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     public void generateImport(ActionEvent actionEvent) {
 

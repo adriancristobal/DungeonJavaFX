@@ -190,6 +190,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             wizard.drainEnergy(dungeonConfiguration.getBasicEnergyConsumption());
             getPrincipalController().fillTexts();
         } catch (WizardTiredException e) {
+            this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
+            this.getPrincipalController().goHome();
             throw new RuntimeException(e);
         }
     }
@@ -233,8 +235,11 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             wizard.getWearables().add(item);
             demiurge.getDungeon().getRoom(roomId).getContainer().remove(0);
             imgWearable.setVisible(false);
-        } catch (ContainerUnacceptedItemException | ContainerFullException e) {
-            throw new RuntimeException(e);
+            updateWizardItems();
+        } catch (ContainerUnacceptedItemException e) {
+            this.getPrincipalController().showErrorAlert("That is not a valid item");
+        } catch (ContainerFullException e) {
+            this.getPrincipalController().showErrorAlert("Your bag is full, you can't pick up items");
         }
         saveAll();
     }
