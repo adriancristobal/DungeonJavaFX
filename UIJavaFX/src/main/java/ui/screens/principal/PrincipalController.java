@@ -2,8 +2,12 @@ package ui.screens.principal;
 
 import game.DungeonLoaderXML;
 import game.character.Wizard;
+import game.character.exceptions.WizardTiredException;
 import game.demiurge.DemiurgeContainerManager;
+import game.demiurge.DemiurgeDungeonManager;
 import game.demiurge.DungeonConfiguration;
+import game.demiurge.exceptions.EndGameException;
+import game.demiurge.exceptions.GoHomekException;
 import game.dungeon.Room;
 import game.object.ItemCreationErrorException;
 import game.object.Necklace;
@@ -67,6 +71,7 @@ public class PrincipalController extends BaseScreenController implements Initial
 
 
     private DemiurgeContainerManager manager;
+    private DemiurgeDungeonManager dungeonManager;
 
     public DemiurgeContainerManager getManager() {
         return manager;
@@ -147,6 +152,7 @@ public class PrincipalController extends BaseScreenController implements Initial
         demiurge.loadEnvironment((demiurge, dungeonConfiguration) -> {
             try {
                 loader.load(demiurge, dungeonConfiguration, file);
+                dungeonManager = new DemiurgeDungeonManager(dungeonConfiguration, demiurge.getWizard(), demiurge.getHome(), manager, demiurge.getEndChecker());
                 currentWizard = demiurge.getWizard();
                 goHome();
             } catch (Exception | ContainerUnacceptedItemException | SpellUnknowableException |
@@ -282,12 +288,22 @@ public class PrincipalController extends BaseScreenController implements Initial
         hideHud();
     }
 
+    //TODO: puede que la roomId no haga falta
     public void goToRoom(int roomId) {
-        currentRoomId = roomId;
-        showMenuItems();
-        fillHud();
-        revealHud();
-        cargarPantalla(Pantallas.DUNGEON);
+        try {
+            dungeonManager.openDoor(0);
+            currentRoomId = roomId;
+            showMenuItems();
+            fillHud();
+            revealHud();
+            cargarPantalla(Pantallas.DUNGEON);
+        } catch (WizardTiredException e) {
+            showErrorAlert("You don't have enough energy.\nGoing to sleep");
+        } catch (GoHomekException e) {
+            showErrorAlert("You are already home");
+        } catch (EndGameException e) {
+            showInfoAlert("YOU WON!");
+        }
     }
 
     //BOTTOM CHARACTER HUD
@@ -371,6 +387,8 @@ public class PrincipalController extends BaseScreenController implements Initial
                     rings.add((Ring) item);
                 }
             });
+
+            //TODO: añadir tipo de anillos
             if (!rings.isEmpty()) {
                 ringInfoBotHud.setText("Level " + rings.get(0).getValue());
             }
