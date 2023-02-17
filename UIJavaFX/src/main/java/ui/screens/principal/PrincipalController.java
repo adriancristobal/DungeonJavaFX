@@ -270,7 +270,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     @FXML
-    public void goToHome(ActionEvent actionEvent) {
+    public void goToMainMenu(ActionEvent actionEvent) {
         goMainMenu();
     }
 
@@ -340,12 +340,13 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     public void refreshDay() {
         dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
+        fillTexts();
     }
 
     public void fillTexts() {
         if (currentWizard != null) {
             dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));
-            crystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().getValue()));
+            crystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().size()));
             maxCrystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().getMaximum()));
             lifeAmountBotHud.setText(String.valueOf(currentWizard.getLife()));
             maxLifeAmountBotHud.setText(String.valueOf(currentWizard.getLifeMax()));

@@ -100,9 +100,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private void sleepAction(MouseEvent actionEvent) {
         try {
-            demiurge.nextDay();
-            getPrincipalController().refreshDay();
-            getPrincipalController().fillTexts();
+            getPrincipalController().tired();
             getPrincipalController().showInfoAlert("You slept successfully");
         } catch (Exception e) {
             getPrincipalController().showErrorAlert("Unable to sleep. There was an error");
@@ -141,6 +139,7 @@ public class HomeController extends BaseScreenController implements Initializabl
         } catch (Exception e) {
             getPrincipalController().showErrorAlert("Value is wrong");
         } catch (WizardTiredException e) {
+            getPrincipalController().tired();
             getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
         } catch (ContainerErrorException e) {
             getPrincipalController().showErrorAlert("Error to merge crystal");
@@ -159,9 +158,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                     demiurgeHomeManager.upgradeLifeMax();
                 } catch (WizardTiredException e) {
                     characterSelectionFilterComboBox.setValue(null);
-                    demiurge.nextDay();
-                    getPrincipalController().refreshDay();
-                    getPrincipalController().fillTexts();
+                    getPrincipalController().tired();
                     setTextViews();
                     getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
                 } catch (WizardNotEnoughEnergyException e) {
@@ -175,9 +172,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                 } catch (WizardTiredException e) {
                     getPrincipalController().fillTexts();
                     characterSelectionFilterComboBox.setValue(null);
-                    demiurge.nextDay();
-                    getPrincipalController().refreshDay();
-                    getPrincipalController().fillTexts();
+                    getPrincipalController().tired();
                     setTextViews();
                     getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
                 } catch (WizardNotEnoughEnergyException e) {
@@ -207,6 +202,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                     getPrincipalController().fillTexts();
                     getPrincipalController().showInfoAlert("You have successfully upgraded your home");
                 } catch (WizardTiredException e) {
+                    getPrincipalController().tired();
                     getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
                 } catch (WizardNotEnoughEnergyException e) {
                     getPrincipalController().showErrorAlert("You don't have enough energy to perform this action");
@@ -219,9 +215,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                 } catch (WizardTiredException e) {
                     setTextViews();
                     homeSelectionFilterComboBox.setValue(null);
-                    demiurge.nextDay();
-                    getPrincipalController().refreshDay();
-                    getPrincipalController().fillTexts();
+                    getPrincipalController().tired();
                     getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
                 } catch (WizardNotEnoughEnergyException e) {
                     getPrincipalController().showErrorAlert("You don't have enough energy to upgrade your singa capacity");
@@ -383,9 +377,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                 getPrincipalController().showWarningAlert("Please, enter a valid number");
             }
         } catch (WizardTiredException e) {
-            demiurge.nextDay();
-            getPrincipalController().refreshDay();
-            getPrincipalController().fillTexts();
+            getPrincipalController().tired();
             getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
         } catch (ValueOverMaxException e) {
             getPrincipalController().showErrorAlert("Your life is already at a maximum");
@@ -437,6 +429,7 @@ public class HomeController extends BaseScreenController implements Initializabl
         } catch (Exception e) {
             getPrincipalController().showWarningAlert("You didn't select any spell");
         } catch (WizardTiredException e) {
+            getPrincipalController().tired();
             getPrincipalController().showInfoAlert("You are tired and need to go to sleep");
         } catch (WizardSpellKnownException e) {
             getPrincipalController().showErrorAlert("You already know this spell");
@@ -458,9 +451,7 @@ public class HomeController extends BaseScreenController implements Initializabl
         } catch (Exception e) {
             getPrincipalController().showWarningAlert("You didn't select any spell");
         } catch (WizardTiredException e) {
-            demiurge.nextDay();
-            getPrincipalController().refreshDay();
-            getPrincipalController().fillTexts();
+            getPrincipalController().tired();
             getPrincipalController().showInfoAlert("You are tired, you need to go to sleep");
         } catch (WizardNotEnoughEnergyException e) {
             getPrincipalController().showErrorAlert("You don't have enough energy to perform this action");

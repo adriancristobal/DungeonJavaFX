@@ -85,15 +85,16 @@ public class DemiurgeDungeonManager {
         }
     }
 
-    public void gatherCrystals()  {
+    public void gatherCrystals() throws ContainerFullException {
         Room currentRoom = (Room) site;
         while (true) {
-            try {
-                if (currentRoom.isEmpty() || wizard.getCrystalCarrier().isFull())
+                if (currentRoom.isEmpty())
                     return;
-                wizard.getCrystalCarrier().add(currentRoom.gather());
-            } catch (ContainerUnacceptedItemException | ContainerFullException ignored) {
-            }
+                try {
+                    wizard.getCrystalCarrier().add(currentRoom.gather());
+                } catch (ContainerUnacceptedItemException e) {
+                    throw new ContainerFullException();
+                }
         }
     }
 

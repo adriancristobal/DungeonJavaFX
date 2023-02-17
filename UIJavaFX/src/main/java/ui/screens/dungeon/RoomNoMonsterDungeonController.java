@@ -10,6 +10,7 @@ import game.demiurge.*;
 import game.dungeon.Room;
 import game.dungeon.Site;
 import game.object.Item;
+import game.object.Weapon;
 import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 import game.spell.Spell;
@@ -49,6 +50,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     private Pane battleMenuPane;
     @FXML
     private Button runBtn;
+    @FXML
+    public Button swordAttackBtn;
     @FXML
     private Button castSpellBtn;
     @FXML
@@ -131,6 +134,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             battleMenuPane.setVisible(true);
             imgMonster.setImage(new Image(getClass().getResource("/images/monster.png").toExternalForm()));
             physicalAttackBtn.setVisible(false);
+            swordAttackBtn.setVisible(false);
             castSpellBtn.setVisible(false);
             spellComboBox.setVisible(false);
             spellToCastLabel.setVisible(false);
@@ -258,7 +262,11 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void pickCrystal() {
-        demiurgeDungeonManager.gatherCrystals();
+        try {
+            demiurgeDungeonManager.gatherCrystals();
+        } catch (ContainerFullException e) {
+            getPrincipalController().showErrorAlert("Your carrier is already full. You can't pick the crystal.");
+        }
         imgCrystal.setVisible(false);
         crystalLabel.setVisible(false);
         updateWizardItems();
@@ -351,6 +359,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     @FXML
     void startFight() {
         physicalAttackBtn.setVisible(true);
+        swordAttackBtn.setVisible(true);
         castSpellBtn.setVisible(true);
         spellComboBox.setVisible(true);
         startFightButton.setVisible(false);

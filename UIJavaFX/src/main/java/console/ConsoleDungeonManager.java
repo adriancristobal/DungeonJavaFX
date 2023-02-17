@@ -9,6 +9,7 @@ import game.demiurge.exceptions.EndGameException;
 import game.demiurge.exceptions.ExitException;
 import game.demiurge.exceptions.GoHomekException;
 import game.dungeon.Door;
+import game.objectContainer.exceptions.ContainerFullException;
 
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -68,6 +69,8 @@ public class ConsoleDungeonManager {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Only numbers.");
+            } catch (ContainerFullException e) {
+                throw new RuntimeException(e);
             }
         }
     }
