@@ -7,6 +7,7 @@ import game.character.exceptions.WizardTiredException;
 import game.demiurge.Demiurge;
 import game.demiurge.DemiurgeHomeManager;
 import game.demiurge.DungeonConfiguration;
+import game.dungeon.Door;
 import game.dungeon.Home;
 import game.dungeon.HomeNotEnoughSingaException;
 import game.dungeon.Room;
@@ -345,7 +346,8 @@ public class HomeController extends BaseScreenController implements Initializabl
     private void goDungeonAction(ActionEvent actionEvent) {
         saveAll();
         Room room = demiurge.getDungeon().iterator().next();
-        getPrincipalController().goToRoom(room.getID());
+        Door door = this.getPrincipalController().getDungeonManager().getDoorsIterator().next();
+        getPrincipalController().goToRoom(0);
     }
 
     @FXML

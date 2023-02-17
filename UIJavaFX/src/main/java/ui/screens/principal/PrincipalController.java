@@ -59,6 +59,14 @@ public class PrincipalController extends BaseScreenController implements Initial
     private final DungeonConfiguration config;
 
     private Demiurge demiurge;
+    private DemiurgeDungeonManager dungeonManager;
+    public DemiurgeDungeonManager getDungeonManager(){
+        return dungeonManager;
+    }
+
+    private DemiurgeContainerManager manager;
+
+
 
     @Inject
     public PrincipalController(Instance<Object> instance, DungeonLoaderXML loader) {
@@ -68,10 +76,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         this.config = new DungeonConfiguration();
         alert = new Alert(Alert.AlertType.NONE);
     }
-
-
-    private DemiurgeContainerManager manager;
-    private DemiurgeDungeonManager dungeonManager;
 
     public DemiurgeContainerManager getManager() {
         return manager;
@@ -152,8 +156,9 @@ public class PrincipalController extends BaseScreenController implements Initial
         demiurge.loadEnvironment((demiurge, dungeonConfiguration) -> {
             try {
                 loader.load(demiurge, dungeonConfiguration, file);
-                dungeonManager = new DemiurgeDungeonManager(dungeonConfiguration, demiurge.getWizard(), demiurge.getHome(), manager, demiurge.getEndChecker());
                 currentWizard = demiurge.getWizard();
+                manager = new DemiurgeContainerManager(currentWizard.getWearables(), currentWizard.getJewelryBag(), demiurge.getHome().getContainer());
+                dungeonManager = new DemiurgeDungeonManager(dungeonConfiguration, demiurge.getWizard(), demiurge.getHome(), manager, demiurge.getEndChecker());
                 goHome();
             } catch (Exception | ContainerUnacceptedItemException | SpellUnknowableException |
                      ValueOverMaxException |
@@ -291,11 +296,11 @@ public class PrincipalController extends BaseScreenController implements Initial
     //TODO: puede que la roomId no haga falta
     public void goToRoom(int roomId) {
         try {
-            dungeonManager.openDoor(0);
             currentRoomId = roomId;
             showMenuItems();
             fillHud();
             revealHud();
+            dungeonManager.openDoor(roomId);
             cargarPantalla(Pantallas.DUNGEON);
         } catch (WizardTiredException e) {
             showErrorAlert("You don't have enough energy.\nGoing to sleep");
@@ -303,6 +308,8 @@ public class PrincipalController extends BaseScreenController implements Initial
             showErrorAlert("You are already home");
         } catch (EndGameException e) {
             showInfoAlert("YOU WON!");
+        } catch (Exception e){
+            showErrorAlert(e.getMessage());
         }
     }
 

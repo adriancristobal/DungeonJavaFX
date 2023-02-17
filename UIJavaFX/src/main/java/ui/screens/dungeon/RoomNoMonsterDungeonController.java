@@ -12,7 +12,10 @@ import game.dungeon.Site;
 import game.object.Item;
 import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerUnacceptedItemException;
+import game.spell.Spell;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -93,6 +96,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         //TODO:comprobar los wearables
         crystalLabel.setVisible(false);
         werableLabel.setVisible(false);
+        imgWearable.setDisable(true);
+        imgCrystal.setDisable(true);
         lblExit.setVisible(false);
         imgExit.setVisible(false);
     }
@@ -110,17 +115,16 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             containerManager = new DemiurgeContainerManager(demiurge.getWizard().getWearables(), demiurge.getWizard().getJewelryBag(), demiurge.getDungeon().getRoom(roomId).getContainer());
             endChecker = new DemiurgeEndChecker();
             demiurgeDungeonManager = new DemiurgeDungeonManager(dc, wizard, room, containerManager, endChecker);
+            demiurgeDungeonManager = this.getPrincipalController().getDungeonManager();
 
-            List<Room> rooms = new ArrayList<>();
-            demiurge.getDungeon().iterator().forEachRemaining(rooms::add);
-            List<String> roomIds;
-            roomIds = rooms.stream().map(room1 -> String.valueOf(room1.getID())).toList();
-            roomIds = roomIds.stream().filter(id -> !id.equals(String.valueOf(roomId))).toList();
-            roomMoveComboBox.setItems(FXCollections.observableArrayList(roomIds));
+            List<String> doors = new ArrayList<>();
+            this.getPrincipalController().getDungeonManager().getDoorsIterator().forEachRemaining(door -> {
+                doors.add(door.showFrom(room).getDescription());
+            });
+            roomMoveComboBox.setItems(FXCollections.observableArrayList(doors));
         }
         updateWizardItems();
 
-//        hasMonster = demiurge.getDungeon().getRoom(roomId).isAlive();
         hasMonster = demiurgeDungeonManager.hasCreature();
         if (hasMonster && !hasRun) {
             explorersMenuPane.setVisible(false);
@@ -190,6 +194,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             this.getPrincipalController().goToRoom(Integer.parseInt(roomMoveComboBox.getSelectionModel().getSelectedItem().toString()));
         }
         try {
+            int id = roomMoveComboBox.getSelectionModel().getSelectedIndex();
+            this.getPrincipalController().goToRoom(id);
             // con el open door no hace falta bajar energía
             wizard.drainEnergy(dc.getBasicEnergyConsumption());
             getPrincipalController().fillTexts();
@@ -208,6 +214,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             crystalLabel.setText("No crystals in Room " + roomId);
         } else {
             imgCrystal.setVisible(true);
+            imgCrystal.setDisable(false);
             crystalLabel.setText("Crystal");
             imgCrystal.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
         }
@@ -218,6 +225,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             werableLabel.setText("No objects in Room " + roomId);
         } else {
             imgWearable.setVisible(true);
+            imgWearable.setDisable(false);
             werableLabel.setVisible(true);
             Item item = demiurge.getDungeon().getRoom(roomId).getContainer().get(0);
             item.getClass().getSimpleName();
@@ -347,5 +355,15 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         spellComboBox.setVisible(true);
         startFightButton.setVisible(false);
         spellToCastLabel.setVisible(true);
+    }
+
+    @FXML
+    public void performSwordAttack(ActionEvent actionEvent) {
+        demiurgeDungeonManager.checkWeapon();
+        demiurge.getWizard().getAttacksIterator().forEachRemaining(attack -> {
+            if (attack instanceof Weapon) {
+                battle(attack);
+            }
+        });
     }
 }
