@@ -269,6 +269,12 @@ public class PrincipalController extends BaseScreenController implements Initial
 
     }
 
+    public void tired() {
+        demiurge.nextDay();
+        goHome();
+        refreshDay();
+    }
+
     @FXML
     public void goToMainMenu(ActionEvent actionEvent) {
         goMainMenu();

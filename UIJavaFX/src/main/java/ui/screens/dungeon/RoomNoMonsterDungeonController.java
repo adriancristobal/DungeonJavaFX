@@ -7,6 +7,8 @@ import game.character.exceptions.CharacterKilledException;
 import game.character.exceptions.WizardNotEnoughEnergyException;
 import game.character.exceptions.WizardTiredException;
 import game.demiurge.*;
+import game.dungeon.Door;
+import game.dungeon.Home;
 import game.dungeon.Room;
 import game.dungeon.Site;
 import game.object.Item;
@@ -33,6 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
@@ -130,6 +133,17 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
         hasMonster = demiurgeDungeonManager.hasCreature();
         if (hasMonster && !hasRun) {
+            //cargar lista spell
+            ArrayList<Attack> attackList = new ArrayList<>();
+            wizard.getAttacksIterator().forEachRemaining(attackList::add);
+//            attackList.stream().map()
+            spellComboBox.getItems().addAll(FXCollections.observableArrayList(attackList));
+//            attackList.forEach(attack -> {
+//                if (!(attack instanceof Spell)) {
+//                    attackList.remove(attack);
+//                }
+//            });
+            spellComboBox.setItems((FXCollections.observableArrayList(attackList)));
             explorersMenuPane.setVisible(false);
             battleMenuPane.setVisible(true);
             imgMonster.setImage(new Image(getClass().getResource("/images/monster.png").toExternalForm()));
@@ -205,7 +219,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             getPrincipalController().fillTexts();
         } catch (WizardTiredException e) {
             this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
-            this.getPrincipalController().goHome();
+            this.getPrincipalController().tired();
             throw new RuntimeException(e);
         }
     }
@@ -317,7 +331,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
                 fightFinished = true;
             } catch (WizardTiredException tiredException) {
                 this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
-                this.getPrincipalController().goHome();
+                this.getPrincipalController().tired();
             } catch (WizardNotEnoughEnergyException energyException) {
                 this.getPrincipalController().showErrorAlert("You don't have enough energy to attack!");
             }
