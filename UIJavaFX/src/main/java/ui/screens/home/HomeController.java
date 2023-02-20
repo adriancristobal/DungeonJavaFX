@@ -340,8 +340,6 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private void goDungeonAction(ActionEvent actionEvent) {
         saveAll();
-        Room room = demiurge.getDungeon().iterator().next();
-        Door door = this.getPrincipalController().getDungeonManager().getDoorsIterator().next();
         getPrincipalController().goToRoom(0);
     }
 

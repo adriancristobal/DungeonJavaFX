@@ -7,17 +7,16 @@ import game.character.exceptions.CharacterKilledException;
 import game.character.exceptions.WizardNotEnoughEnergyException;
 import game.character.exceptions.WizardTiredException;
 import game.demiurge.*;
+import game.demiurge.exceptions.EndGameException;
+import game.demiurge.exceptions.GoHomekException;
 import game.dungeon.Door;
-import game.dungeon.Home;
 import game.dungeon.Room;
-import game.dungeon.Site;
 import game.object.Item;
 import game.object.Weapon;
 import game.objectContainer.exceptions.ContainerFullException;
 import game.objectContainer.exceptions.ContainerUnacceptedItemException;
 import game.spell.Spell;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,14 +34,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RoomNoMonsterDungeonController extends BaseScreenController implements Initializable {
 
     private int roomId;
     private Room room;
 
-    private boolean hasMonster;
     private Demiurge demiurge;
     private Wizard wizard;
     @FXML
@@ -131,19 +129,15 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         }
         updateWizardItems();
 
-        hasMonster = demiurgeDungeonManager.hasCreature();
-        if (hasMonster && !hasRun) {
+        if (demiurgeDungeonManager.hasCreature() && demiurgeDungeonManager.isAlive()) {
             //cargar lista spell
-            ArrayList<Attack> attackList = new ArrayList<>();
-            wizard.getAttacksIterator().forEachRemaining(attackList::add);
-//            attackList.stream().map()
-            spellComboBox.getItems().addAll(FXCollections.observableArrayList(attackList));
-//            attackList.forEach(attack -> {
-//                if (!(attack instanceof Spell)) {
-//                    attackList.remove(attack);
-//                }
-//            });
-            spellComboBox.setItems((FXCollections.observableArrayList(attackList)));
+            ArrayList<Attack> spells = new ArrayList<>();
+            wizard.getAttacksIterator().forEachRemaining(attack -> {
+                if (attack instanceof Spell) {
+                    spells.add(attack);
+                }
+            });
+            spellComboBox.getItems().addAll(FXCollections.observableArrayList(spells));
             explorersMenuPane.setVisible(false);
             battleMenuPane.setVisible(true);
             imgMonster.setImage(new Image(getClass().getResource("/images/monster.png").toExternalForm()));
@@ -204,24 +198,15 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     @FXML
     void moveThere() {
         saveAll();
-        if (roomMoveComboBox.getSelectionModel().getSelectedItem() == "Home") {
-            this.getPrincipalController().goHome();
-        } else {
-            //TODO: cambiar por dungeonManager.openDoor(*);
-            // * la puerta seleccionada
-            this.getPrincipalController().goToRoom(Integer.parseInt(roomMoveComboBox.getSelectionModel().getSelectedItem().toString()));
-        }
-        try {
-            int id = roomMoveComboBox.getSelectionModel().getSelectedIndex();
-            this.getPrincipalController().goToRoom(id);
-            // con el open door no hace falta bajar energía
-            wizard.drainEnergy(dc.getBasicEnergyConsumption());
-            getPrincipalController().fillTexts();
-        } catch (WizardTiredException e) {
-            this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
-            this.getPrincipalController().tired();
-            throw new RuntimeException(e);
-        }
+        AtomicReference<Door> doorSelected = new AtomicReference<>();
+        demiurgeDungeonManager.getDoorsIterator().forEachRemaining(door -> {
+            if (door.showFrom(room).getDescription().equals(roomMoveComboBox.getSelectionModel().getSelectedItem())) {
+                doorSelected.set(door);
+            }
+        });
+        doorSelected.get().openFrom(room);
+        this.getPrincipalController().goHome();
+        getPrincipalController().fillTexts();
     }
 
     @FXML
@@ -290,8 +275,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         getPrincipalController().refreshCrystalsHud();
     }
 
-    //TODO: poner botón de ataque con arma
-
     @FXML
     void performPhysicalAttack() {
         demiurge.getWizard().getAttacksIterator().forEachRemaining(attack -> {
@@ -303,12 +286,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @FXML
     void castSpell() {
-        ArrayList<Attack> attackList = new ArrayList<>();
-        wizard.getAttacksIterator().forEachRemaining(attackList::add);
-        spellComboBox.getItems().addAll(FXCollections.observableArrayList(attackList));
-
-        //TODO: comprobar si peta
-        // si no peta, qué elemento devuelve el combo box... coge el tipo de hechizo?
         Attack attack = spellComboBox.getSelectionModel().getSelectedItem();
         if (attack != null) {
             battle(attack);
@@ -318,31 +295,28 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
     }
 
     private void battle(Attack attack) {
-        boolean fightFinished = false;
-        while (!fightFinished) {
-            try {
-                if (demiurgeDungeonManager.wizardAttack(attack)) {
-                    this.getPrincipalController().fillHud();
-                    //TODO: comprobar si se entiende sin mostrar mensaje?
-                } else {
-                    this.getPrincipalController().showInfoAlert("Attack failed. It's the monster's turn.");
-                }
-
-                fightFinished = monsterAttack();
-            } catch (CharacterKilledException killedException) {
-                this.getPrincipalController().showInfoAlert("You kill the monster!");
-                fightFinished = true;
-            } catch (WizardTiredException tiredException) {
-                this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
-                this.getPrincipalController().tired();
-            } catch (WizardNotEnoughEnergyException energyException) {
-                this.getPrincipalController().showErrorAlert("You don't have enough energy to attack!");
+        try {
+            if (demiurgeDungeonManager.wizardAttack(attack)) {
+                this.getPrincipalController().fillHud();
+                //TODO: mostrar mensaje
+            } else {
+                this.getPrincipalController().showInfoAlert("Attack failed. It's the monster's turn.");
             }
+
+            monsterAttack();
+        } catch (CharacterKilledException killedException) {
+            this.getPrincipalController().showInfoAlert("You kill the monster!");
+            explorersMenuPane.setVisible(true);
+            battleMenuPane.setVisible(false);
+        } catch (WizardTiredException tiredException) {
+            this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
+            this.getPrincipalController().tired();
+        } catch (WizardNotEnoughEnergyException energyException) {
+            this.getPrincipalController().showErrorAlert("You don't have enough energy to attack!");
         }
     }
 
-    private boolean monsterAttack() {
-        boolean fightFinished = false;
+    private void monsterAttack() {
         try {
             if (demiurgeDungeonManager.creatureAttack()) {
                 this.getPrincipalController().fillHud();
@@ -351,9 +325,9 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             }
         } catch (CharacterKilledException killedException) {
             this.getPrincipalController().showInfoAlert("The monster killed you!");
-            fightFinished = true;
+            this.getPrincipalController().tired();
+            //TODO: va a la casa?
         }
-        return fightFinished;
     }
 
     @FXML
