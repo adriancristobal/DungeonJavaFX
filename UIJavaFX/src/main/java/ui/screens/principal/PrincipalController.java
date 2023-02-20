@@ -349,6 +349,10 @@ public class PrincipalController extends BaseScreenController implements Initial
         fillTexts();
     }
 
+    public void refreshCrystalsHud() {
+        crystalsAmountBotHud.setText(String.valueOf(currentWizard.getCrystalCarrier().size()));
+    }
+
     public void fillTexts() {
         if (currentWizard != null) {
             dayInfoBotHud.setText(String.valueOf(this.demiurge.getDay()));

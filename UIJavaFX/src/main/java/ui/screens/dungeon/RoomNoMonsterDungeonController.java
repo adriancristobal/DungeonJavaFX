@@ -280,11 +280,14 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             demiurgeDungeonManager.gatherCrystals();
         } catch (ContainerFullException e) {
             getPrincipalController().showErrorAlert("Your carrier is already full. You can't pick the crystal.");
+        } catch (ContainerUnacceptedItemException e) {
+            getPrincipalController().showErrorAlert("You can't put that in there.");
         }
         imgCrystal.setVisible(false);
         crystalLabel.setVisible(false);
         updateWizardItems();
         saveAll();
+        getPrincipalController().refreshCrystalsHud();
     }
 
     //TODO: poner botón de ataque con arma

@@ -134,6 +134,7 @@ public class HomeController extends BaseScreenController implements Initializabl
                     crystalSelectionHomeComboBox.setDisable(true);
                     mergeButton.setDisable(true);
                     setTextViews();
+                    getPrincipalController().refreshCrystalsHud();
                 }
             }
         } catch (Exception e) {
