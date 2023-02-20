@@ -273,6 +273,23 @@ public class PrincipalController extends BaseScreenController implements Initial
         demiurge.nextDay();
         goHome();
         refreshDay();
+        try {
+            dungeonManager.openDoor(-1);
+        } catch (WizardTiredException e) {
+            throw new RuntimeException(e);
+        } catch (GoHomekException e) {
+            cargarPantalla(Pantallas.HOME);
+            showMenuItems();
+            fillHud();
+            revealHud();
+            throw new RuntimeException(e);
+        } catch (EndGameException e) {
+            throw new RuntimeException(e);
+        }
+        cargarPantalla(Pantallas.HOME);
+        showMenuItems();
+        fillHud();
+        revealHud();
     }
 
     @FXML

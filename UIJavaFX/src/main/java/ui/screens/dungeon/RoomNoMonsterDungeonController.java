@@ -153,6 +153,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             hasRun = true;
             explorersMenuPane.setVisible(true);
             battleMenuPane.setVisible(false);
+            //Falta mostrar esto cuando el mounstruo
             if (room.isExit()) {
                 lblExit.setVisible(true);
                 imgExit.setVisible(true);
