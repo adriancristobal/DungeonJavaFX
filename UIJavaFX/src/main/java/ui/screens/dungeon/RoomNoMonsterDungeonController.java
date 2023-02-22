@@ -7,8 +7,6 @@ import game.character.exceptions.CharacterKilledException;
 import game.character.exceptions.WizardNotEnoughEnergyException;
 import game.character.exceptions.WizardTiredException;
 import game.demiurge.*;
-import game.demiurge.exceptions.EndGameException;
-import game.demiurge.exceptions.GoHomekException;
 import game.dungeon.Door;
 import game.dungeon.Home;
 import game.dungeon.Room;
