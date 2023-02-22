@@ -236,12 +236,13 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             werableLabel.setVisible(true);
             Item item = room.getContainer().get(0);
             item.getClass().getSimpleName();
-            if (item.getClass().getSimpleName().equals("Necklace")) {
-                imgWearable.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
-            } else if (item.getClass().getSimpleName().equals("Weapon")) {
-                imgWearable.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
-            } else if (item.getClass().getSimpleName().equals("Ring")) {
-                imgWearable.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
+            switch (item.getClass().getSimpleName()) {
+                case "Necklace" ->
+                        imgWearable.setImage(new Image(getClass().getResource("/images/necklace.png").toExternalForm()));
+                case "Weapon" ->
+                        imgWearable.setImage(new Image(getClass().getResource("/images/sword.png").toExternalForm()));
+                case "Ring" ->
+                        imgWearable.setImage(new Image(getClass().getResource("/images/ring.png").toExternalForm()));
             }
             werableLabel.setText(item.toString());
         }
