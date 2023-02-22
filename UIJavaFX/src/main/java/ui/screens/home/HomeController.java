@@ -340,7 +340,7 @@ public class HomeController extends BaseScreenController implements Initializabl
     @FXML
     private void goDungeonAction(ActionEvent actionEvent) {
         saveAll();
-        getPrincipalController().goToRoom(0);
+        getPrincipalController().goToRoom(0, null);
     }
 
     @FXML

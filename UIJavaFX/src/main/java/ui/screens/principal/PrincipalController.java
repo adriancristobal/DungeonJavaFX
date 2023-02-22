@@ -8,7 +8,9 @@ import game.demiurge.DemiurgeDungeonManager;
 import game.demiurge.DungeonConfiguration;
 import game.demiurge.exceptions.EndGameException;
 import game.demiurge.exceptions.GoHomekException;
+import game.dungeon.Home;
 import game.dungeon.Room;
+import game.dungeon.Site;
 import game.object.ItemCreationErrorException;
 import game.object.Necklace;
 import game.object.Ring;
@@ -24,7 +26,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -34,7 +35,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import lombok.Getter;
 import lombok.Setter;
 import ui.common.BaseScreenController;
@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 //@Log4j2
@@ -56,16 +55,16 @@ import java.util.ResourceBundle;
 public class PrincipalController extends BaseScreenController implements Initializable {
 
     private final DungeonLoaderXML loader;
-    private final DungeonConfiguration config;
+    private DungeonConfiguration config;
 
     private Demiurge demiurge;
     private DemiurgeDungeonManager dungeonManager;
-    public DemiurgeDungeonManager getDungeonManager(){
+
+    public DemiurgeDungeonManager getDungeonManager() {
         return dungeonManager;
     }
 
     private DemiurgeContainerManager manager;
-
 
 
     @Inject
@@ -82,6 +81,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     private int currentRoomId;
+
 
     public int getRoomId() {
         return currentRoomId;
@@ -150,15 +150,21 @@ public class PrincipalController extends BaseScreenController implements Initial
     private BorderPane root;
     public Wizard currentWizard;
 
-    public Room currentRoom;
+    public Site currentRoom;
+
+    public void setCurrentSite(Site site) {
+        currentRoom = site;
+    }
 
     public void loadManagers(File file) {
         demiurge.loadEnvironment((demiurge, dungeonConfiguration) -> {
             try {
-                loader.load(demiurge, dungeonConfiguration, file);
+                config = dungeonConfiguration;
+                loader.load(demiurge, config, file);
                 currentWizard = demiurge.getWizard();
                 manager = new DemiurgeContainerManager(currentWizard.getWearables(), currentWizard.getJewelryBag(), demiurge.getHome().getContainer());
-                dungeonManager = new DemiurgeDungeonManager(dungeonConfiguration, demiurge.getWizard(), demiurge.getHome(), manager, demiurge.getEndChecker());
+                setCurrentSite(demiurge.getHome());
+                dungeonManager = setDungeonManager(demiurge.getHome());
                 goHome();
             } catch (Exception | ContainerUnacceptedItemException | SpellUnknowableException |
                      ValueOverMaxException |
@@ -166,6 +172,10 @@ public class PrincipalController extends BaseScreenController implements Initial
                 showErrorAlert("Error al cargar el XML");
             }
         });
+    }
+
+    private DemiurgeDungeonManager setDungeonManager(Site site) {
+        return new DemiurgeDungeonManager(config, demiurge.getWizard(), site, manager, demiurge.getEndChecker());
     }
 
     public Demiurge getDemiurge() {
@@ -208,8 +218,7 @@ public class PrincipalController extends BaseScreenController implements Initial
             pantallaController.setPrincipalController(this);
             pantallaController.principalCargado();
         } catch (IOException e) {
-            throw new RuntimeException(e);
-//            log.error("Error al cargar la pantalla: " + ruta, e);
+            showErrorAlert("Error loading screen");
         }
         return panePantalla;
     }
@@ -317,21 +326,26 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     //TODO: puede que la roomId no haga falta
-    public void goToRoom(int roomId) {
+    public void goToRoom(int roomId, Site site) {
         try {
             currentRoomId = roomId;
             showMenuItems();
             fillHud();
             revealHud();
+            dungeonManager = new DemiurgeDungeonManager(config, demiurge.getWizard(), currentRoom, manager, demiurge.getEndChecker());
             dungeonManager.openDoor(roomId);
-            cargarPantalla(Pantallas.DUNGEON);
+            if (site instanceof Home) {
+                goHome();
+            } else {
+                cargarPantalla(Pantallas.DUNGEON);
+            }
         } catch (WizardTiredException e) {
             showErrorAlert("You don't have enough energy.\nGoing to sleep");
         } catch (GoHomekException e) {
             showErrorAlert("You are already home");
         } catch (EndGameException e) {
             showInfoAlert("YOU WON!");
-        } catch (Exception e){
+        } catch (Exception e) {
             showErrorAlert(e.getMessage());
         }
     }

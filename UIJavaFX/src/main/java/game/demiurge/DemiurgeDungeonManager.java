@@ -76,7 +76,7 @@ public class DemiurgeDungeonManager {
             throw new EndGameException();
 
         if (site instanceof Home) {
-            throw new GoHomekException();
+//            throw new GoHomekException();
         } else {
             Room currentRoom = (Room) site;
             creature = currentRoom.getCreature();
