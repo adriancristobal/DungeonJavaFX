@@ -302,7 +302,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         try {
             if (demiurgeDungeonManager.wizardAttack(attack)) {
                 this.getPrincipalController().fillHud();
-                //TODO: mostrar mensaje
+                this.getPrincipalController().showInfoAlert("You attacked successfully. It's the monster's turn");
             } else {
                 this.getPrincipalController().showInfoAlert("Attack failed. It's the monster's turn.");
             }
