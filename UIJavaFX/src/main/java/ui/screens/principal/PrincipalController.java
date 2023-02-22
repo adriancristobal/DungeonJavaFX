@@ -9,7 +9,6 @@ import game.demiurge.DungeonConfiguration;
 import game.demiurge.exceptions.EndGameException;
 import game.demiurge.exceptions.GoHomekException;
 import game.dungeon.Home;
-import game.dungeon.Room;
 import game.dungeon.Site;
 import game.object.ItemCreationErrorException;
 import game.object.Necklace;
@@ -39,7 +38,6 @@ import lombok.Getter;
 import lombok.Setter;
 import ui.common.BaseScreenController;
 import ui.common.Pantallas;
-//import ui.common.ScreenConstants;
 import game.demiurge.Demiurge;
 
 import java.io.File;
@@ -49,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//@Log4j2
 @Getter
 @Setter
 public class PrincipalController extends BaseScreenController implements Initializable {
@@ -223,7 +220,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         return panePantalla;
     }
 
-    //TOP OPTIONS MENU
     public void showMenuItems() {
         generateImportMenuItem.setVisible(true);
         saveGameMenuItem.setVisible(true);
@@ -302,7 +298,7 @@ public class PrincipalController extends BaseScreenController implements Initial
     }
 
     @FXML
-    public void goToMainMenu(ActionEvent actionEvent) {
+    public void goToMainMenu() {
         goMainMenu();
     }
 
@@ -325,7 +321,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         hideHud();
     }
 
-    //TODO: puede que la roomId no haga falta
     public void goToRoom(int roomId, Site site) {
         try {
             currentRoomId = roomId;
@@ -350,7 +345,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         }
     }
 
-    //BOTTOM CHARACTER HUD
     public void hideHud() {
         characterBotHud.setVisible(false);
     }
@@ -359,12 +353,9 @@ public class PrincipalController extends BaseScreenController implements Initial
         characterBotHud.setVisible(true);
     }
 
-    //FILL + REFRESH HUD
     public void fillHud() {
-        //TEXT
         fillTexts();
 
-        //IMAGES
         imgCrystalBotHud.setImage(new Image(getClass().getResource("/images/crystal.png").toExternalForm()));
         imgEnergyBotHud.setImage(new Image(getClass().getResource("/images/energy.png").toExternalForm()));
         imgLifeBotHud.setImage(new Image(getClass().getResource("/images/life.png").toExternalForm()));
@@ -419,7 +410,6 @@ public class PrincipalController extends BaseScreenController implements Initial
         if (demiurge != null && currentWizard != null) {
             currentWizard.getWearables().iterator().forEachRemaining(item -> {
                 if (item instanceof Necklace) {
-                    //TODO: añadir tipo de collar
                     necklaceInfoBotHud.setText("Level " + ((Necklace) item).getValue());
                 }
             });
@@ -437,7 +427,6 @@ public class PrincipalController extends BaseScreenController implements Initial
                 }
             });
 
-            //TODO: añadir tipo de anillos
             if (!rings.isEmpty()) {
                 ringInfoBotHud.setText("Level " + rings.get(0).getValue());
             }

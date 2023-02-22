@@ -96,7 +96,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO:comprobar los wearables
         crystalLabel.setVisible(false);
         werableLabel.setVisible(false);
         imgWearable.setDisable(true);
@@ -118,8 +117,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             wizard = demiurge.getWizard();
             containerManager = new DemiurgeContainerManager(demiurge.getWizard().getWearables(), demiurge.getWizard().getJewelryBag(), room.getContainer());
             endChecker = new DemiurgeEndChecker();
-//            demiurgeDungeonManager = new DemiurgeDungeonManager(dc, wizard, room, containerManager, endChecker);
-            //SIN ESTO NO CARGA LA CRIATURA INICIAL
             demiurgeDungeonManager = this.getPrincipalController().getDungeonManager();
 
             List<String> doors = new ArrayList<>();
@@ -152,6 +149,25 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             }
         } else {
             exit();
+        }
+    }
+
+    private void exit() {
+        hasRun = true;
+        explorersMenuPane.setVisible(true);
+        battleMenuPane.setVisible(false);
+        if (room.isExit()) {
+            lblExit.setVisible(true);
+            imgExit.setVisible(true);
+            if (endChecker.check()) {
+                imgExit.setImage(new Image(getClass().getResource("/images/exit_open.jpg").toExternalForm()));
+                imgExit.setOnMouseClicked(event -> {
+                    getPrincipalController().showInfoAlert("Congratulations, you win!");
+                    getPrincipalController().goMainMenu();
+                });
+            } else {
+                imgExit.setImage(new Image(getClass().getResource("/images/exit_closed.jpg").toExternalForm()));
+            }
         }
     }
 
@@ -194,23 +210,8 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         demiurgeDungeonManager.getDoorsIterator().forEachRemaining(list::add);
         Door door = list.get(doorIndex);
         getPrincipalController().fillTexts();
-//        Site site = doorSelected.get().showFrom(room);
-//        if (site instanceof Home) {
-//
-//            doorSelected.get().openFrom(room);
-//            this.getPrincipalController().goHome();
-//        } else {
-//            AtomicInteger index = new AtomicInteger();
-//            index.set(0);
-//            Map<Integer, Integer> list = new HashMap<>();
-//            demiurge.getDungeon().iterator().forEachRemaining(room1 -> {
-//                list.put(room1.getID(), index.get());
-//                index.addAndGet(1);
-//            });
         Site nextRoom = door.showFrom(room);
-//            int roomIndex = list.get(nextRoom.getID());
         this.getPrincipalController().goToRoom(doorIndex, nextRoom);
-//        }
     }
 
     @FXML
@@ -311,8 +312,7 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
             monsterAttack();
         } catch (CharacterKilledException killedException) {
             this.getPrincipalController().showInfoAlert("You kill the monster!");
-            explorersMenuPane.setVisible(true);
-            battleMenuPane.setVisible(false);
+            exit();
         } catch (WizardTiredException tiredException) {
             this.getPrincipalController().showErrorAlert("You are too tired!\nGoing back home to sleep");
             this.getPrincipalController().tired();
@@ -331,7 +331,6 @@ public class RoomNoMonsterDungeonController extends BaseScreenController impleme
         } catch (CharacterKilledException killedException) {
             this.getPrincipalController().showInfoAlert("The monster killed you!");
             this.getPrincipalController().tired();
-            //TODO: va a la casa?
         }
     }
 

@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeStorageController extends BaseScreenController implements Initializable {
-    //TODO: REVISAR INDEX
 
 
     private Chest chest;

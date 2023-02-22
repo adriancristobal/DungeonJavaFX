@@ -33,15 +33,11 @@ import java.util.ResourceBundle;
 
 public class HomeController extends BaseScreenController implements Initializable {
 
-    //TODO: En hechizos aprender, no se borra de la lista
-    //TODO: Al mejorar hechizo, no se actualiza la lista
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         alerta = new Alert(Alert.AlertType.NONE);
         loadComboBoxesUpgrade();
         listViewSpells.setVisible(false);
-        //loadCrystalForMergeComboBox();
     }
 
     @FXML
@@ -251,10 +247,6 @@ public class HomeController extends BaseScreenController implements Initializabl
             fillImagesHome();
             loadSpellComboBox();
         }
-//        if (this.getPrincipalController().getDemiurge() != null) {
-//            home = this.getPrincipalController().getDemiurge().getHome();
-//            wizard = this.getPrincipalController().getDemiurge().getWizard();
-//        }
     }
 
     private void fillImagesHome() {
@@ -265,13 +257,9 @@ public class HomeController extends BaseScreenController implements Initializabl
 
     }
 
-    //FILLS HOME HUD
-
     private void fillHud() {
-        //TEXT
         setTextViews();
 
-        //IMAGES
         imgChestHomeHud.setImage(new Image(getClass().getResource("/images/treasure.png").toExternalForm()));
         imgComfortHomeHud.setImage(new Image(getClass().getResource("/images/sofa.png").toExternalForm()));
         imgSingaHomeHud.setImage(new Image(getClass().getResource("/images/singa.png").toExternalForm()));
@@ -461,7 +449,6 @@ public class HomeController extends BaseScreenController implements Initializabl
         }
     }
 
-    //Saca la lista de hechizos que sabe el mago
     private ArrayList<Spell> getWizardMemory() {
         ArrayList<Spell> learntSpells = new ArrayList<>();
         demiurgeHomeManager.getMemory().iterator().forEachRemaining(item -> {
@@ -470,7 +457,6 @@ public class HomeController extends BaseScreenController implements Initializabl
         return learntSpells;
     }
 
-    //Saca la lista de hechizos que el mago puede aprender
     private ArrayList<Spell> getHomeLibrary() {
         ArrayList<Spell> unlearntSpells = new ArrayList<>();
         demiurgeHomeManager.getLibrary().iterator().forEachRemaining(item -> {
